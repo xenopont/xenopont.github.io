@@ -1,9 +1,18 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Hello World!</title>
+<style type="text/css">
+  #hello.world {
+    color: #444 !important;
+  }
+</style>
+<script type="text/javascript">
+  (() => { const hello = "world!" })()
+</script>
 </head>
 <body>
-<h1>Hello World!</h1>
-
+<h1 id="hello" class="world">Hello World!</h1>
+<!-- Hello World! -->
 </body>
 </html>
