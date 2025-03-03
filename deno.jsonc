@@ -1,0 +1,6 @@
+{
+  "workspace": [
+    "./packages/website",
+    "./packages/x-element"
+  ]
+}
