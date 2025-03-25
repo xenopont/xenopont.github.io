@@ -5,7 +5,10 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "compile": "node ./node_modules/.bin/tsc"
+    "build": "npm run type-check && npm run bundle",
+    "bundle": "./node_modules/.bin/esbuild ./src/app.ts --bundle --sourcemap --minify --outfile=./src/dist/app.js",
+    "compile": "./node_modules/.bin/tsc",
+    "type-check": "./node_modules/.bin/tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   "devDependencies": {
     "@tsconfig/node22": "22.0.1",
     "@tsconfig/strictest": "2.0.5",
+    "esbuild": "0.25.1",
     "typescript": "5.8.2"
   }
 }
