@@ -1,0 +1,20 @@
+{
+  "name": "xenopont.github.io",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "xenopont.github.io",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xenopont/xenopont.github.io.git"
+  },
+  "author": "Sergei Kovalenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xenopont/xenopont.github.io/issues"
+  },
+  "homepage": "https://github.com/xenopont/xenopont.github.io#readme"
+}
