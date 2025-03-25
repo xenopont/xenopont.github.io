@@ -5,7 +5,7 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "test": "test"
+    "compile": "node ./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/xenopont/xenopont.github.io/issues"
   },
-  "homepage": "https://github.com/xenopont/xenopont.github.io#readme"
+  "homepage": "https://github.com/xenopont/xenopont.github.io#readme",
+  "devDependencies": {
+    "@tsconfig/node22": "22.0.1",
+    "@tsconfig/strictest": "2.0.5",
+    "typescript": "5.8.2"
+  }
 }
