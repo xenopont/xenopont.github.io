@@ -1,3 +1,3 @@
 export const log = (msg: string) => {
-    console.log(msg)
-}
+  console.log(`${Date.now().toLocaleString()}: ${msg}\n`);
+};
