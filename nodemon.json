@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ignore": ["src/public"],
+  "ext": "ts",
+  "exec": "npm run dev"
+}

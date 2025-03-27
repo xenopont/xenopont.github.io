@@ -9,5 +9,5 @@
     "outDir": "ts-compiled"
   },
   "include": ["src/**/*"],
-  "exclude": ["**/*.test.ts", "src/dist/**/*"]
+  "exclude": ["**/*.test.ts", "src/public/**/*"]
 }
