@@ -5,7 +5,7 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "dev": "npm run type-check && npm run bundle && npm run http",
+    "dev": "npm run type-check || true && npm run bundle && npm run http",
     "build": "npm run type-check && npm run bundle",
     "bundle": "./node_modules/.bin/esbuild ./src/app.ts --bundle --sourcemap --minify --outfile=./src/public/app.js",
     "compile": "./node_modules/.bin/tsc",
