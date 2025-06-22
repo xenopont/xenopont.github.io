@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../log.ts", "../app.ts"],
-  "sourcesContent": ["export const log = (msg: string) => {\n  // biome-ignore lint/suspicious/noConsole: it is allowed here for logging\n  console.log(`${Date()}: ${msg}`);\n};\n", "import { log } from \"./log.js\";\n\nlog(\"APP STARTED\");\n"],
-  "mappings": "mBAAO,IAAMA,EAAOC,GAAgB,CAElC,QAAQ,IAAI,GAAG,KAAK,CAAC,KAAKA,CAAG,EAAE,CACjC,ECDAC,EAAI,aAAa",
-  "names": ["log", "msg", "log"]
+  "sources": ["../utils/log.ts", "../x-element/markup.ts", "../app.ts"],
+  "sourcesContent": ["export const log = (msg: string) => {\n  // biome-ignore lint/suspicious/noConsole: it is allowed here for logging\n  console.log(`${new Date().toISOString().substring(0, 19)} ${msg}`);\n};\n", "export const xElement = (tagName: keyof HTMLElementTagNameMap): HTMLElement => {\n  return document.createElement(tagName);\n};\n", "import { log } from \"./utils/log.js\";\nimport { xElement } from \"./x-element/markup.js\";\n\nlog(\"APP STARTED\");\n\nconst buildMarkup = () => {\n  document.body.appendChild(xElement(\"div\"));\n};\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  buildMarkup();\n});\n"],
+  "mappings": "mBAAO,IAAMA,EAAOC,GAAgB,CAElC,QAAQ,IAAI,GAAG,IAAI,KAAK,EAAE,YAAY,EAAE,UAAU,EAAG,EAAE,CAAC,IAAIA,CAAG,EAAE,CACnE,ECHO,IAAMC,EAAYC,GAChB,SAAS,cAAcA,CAAO,ECEvCC,EAAI,aAAa,EAEjB,IAAMC,EAAc,IAAM,CACxB,SAAS,KAAK,YAAYC,EAAS,KAAK,CAAC,CAC3C,EAEA,SAAS,iBAAiB,mBAAoB,IAAM,CAClDD,EAAY,CACd,CAAC",
+  "names": ["log", "msg", "xElement", "tagName", "log", "buildMarkup", "xElement"]
 }
