@@ -5,7 +5,9 @@ log("APP STARTED");
 
 const buildMarkup = () => {
   document.body.appendChild(
-    xElement("div", { style: { border: "1px solid #c00" }, id: "test" }),
+    xElement("div", { style: { border: "1px solid #c00" }, id: "test" }, [
+      xElement("h1", {}, ["Hello World!"]),
+    ]),
   );
 };
 

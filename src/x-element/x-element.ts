@@ -1,16 +1,8 @@
 type StyleKey = keyof CSSStyleDeclaration;
-type StyleValue = string;
+type StyleValue = string | number;
 type StyleObject = Partial<Record<StyleKey, StyleValue>>;
 
-type AttributeName = Exclude<string, "style">;
-type AttributeValue = string | boolean | number | undefined | null;
-type NonStyleAttributes = {
-  [key in AttributeName]?: AttributeValue;
-};
-type StyleAttribute = { style?: StyleObject };
-type Attributes = {
-  [key in string]: key extends "style" ? StyleObject | string : AttributeValue;
-};
+type Attributes = { [attributeName: string]: string | StyleObject };
 
 type Element = HTMLElement | HTMLUnknownElement;
 type ChildElement = Element | string;
@@ -35,7 +27,7 @@ const applyStyle = (element: Element, style: StyleObject | string): void => {
     if (!Object.prototype.hasOwnProperty.call(style, property)) {
       continue;
     }
-    element.style.setProperty(property, style[property] ?? null);
+    element.style.setProperty(property, style[property]?.toString() ?? null);
   }
 };
 
@@ -50,17 +42,8 @@ const applyAttributes = (element: Element, attributes: Attributes): void => {
       continue;
     }
 
-    if (
-      attributes[key] === false ||
-      attributes[key] === undefined ||
-      attributes[key] === null
-    ) {
+    if (attributes[key] === undefined || attributes[key] === null) {
       element.removeAttribute(key);
-      continue;
-    }
-
-    if (attributes[key] === true) {
-      element.setAttribute(key, "");
       continue;
     }
 
