@@ -1,4 +1,6 @@
 .idea
 .vscode
 node_modules
-ts-compiled
+
+public
+!public/index.html

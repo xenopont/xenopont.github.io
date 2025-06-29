@@ -2,12 +2,13 @@ type StyleKey = keyof CSSStyleDeclaration;
 type StyleValue = string | number;
 type StyleObject = Partial<Record<StyleKey, StyleValue>>;
 
-type Attributes = { [attributeName: string]: string | StyleObject };
+export type Attributes = { [attributeName: string]: string | StyleObject };
+export type ChildElement = HTMLElement | string;
 
-type Element = HTMLElement | HTMLUnknownElement;
-type ChildElement = Element | string;
-
-const attachChildren = (element: Element, children: ChildElement[]): void => {
+const attachChildren = (
+  element: HTMLElement,
+  children: ChildElement[],
+): void => {
   for (const child of children) {
     if (typeof child === "string") {
       element.appendChild(document.createTextNode(child));
@@ -17,7 +18,10 @@ const attachChildren = (element: Element, children: ChildElement[]): void => {
   }
 };
 
-const applyStyle = (element: Element, style: StyleObject | string): void => {
+const applyStyle = (
+  element: HTMLElement,
+  style: StyleObject | string,
+): void => {
   if (typeof style === "string") {
     element.style.cssText = style;
 
@@ -31,7 +35,10 @@ const applyStyle = (element: Element, style: StyleObject | string): void => {
   }
 };
 
-const applyAttributes = (element: Element, attributes: Attributes): void => {
+const applyAttributes = (
+  element: HTMLElement,
+  attributes: Attributes,
+): void => {
   for (const key in attributes) {
     if (!Object.prototype.hasOwnProperty.call(attributes, key)) {
       continue;
@@ -55,7 +62,7 @@ export const xElement = (
   tagName: string,
   attributes: Attributes = {},
   children: ChildElement[] = [],
-): Element => {
+): HTMLElement => {
   const element = document.createElement(tagName);
   applyAttributes(element, attributes);
   attachChildren(element, children);
