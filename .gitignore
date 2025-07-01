@@ -1,4 +1,6 @@
 .idea
 .vscode
 node_modules
-ts-compiled
+
+/src/public/app.js
+/src/public/app.js.map
