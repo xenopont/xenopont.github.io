@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "npm run type-check || true && npm run bundle && npm run http",
     "build": "npm run type-check && npm run bundle",
-    "bundle": "./node_modules/.bin/esbuild ./src/app.ts --bundle --sourcemap --minify --outfile=./src/public/app.js",
+    "bundle": "./node_modules/.bin/esbuild ./src/app.ts --bundle --sourcemap --minify --outdir=./src/public/ --format=esm --splitting --target=esnext",
     "compile": "./node_modules/.bin/tsc",
     "http": "./node_modules/.bin/http-server ./src/public/",
     "type-check": "./node_modules/.bin/tsc --noEmit",
