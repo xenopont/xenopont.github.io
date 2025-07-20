@@ -1,5 +1,5 @@
-import { logger } from "../../utils/logger.js";
 import type { TPath } from "../types/path.js";
+import { logger } from "../utils/logger.js";
 
 const allowedCharacters = new Set([
   ..."abcdefghijklmnopqrstuvwxyz",

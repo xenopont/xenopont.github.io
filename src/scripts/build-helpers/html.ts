@@ -1,4 +1,4 @@
-import type { TPage } from "../../pages/types/page.js";
+import type { TPage } from "../../types/page.js";
 
 export const generateHead = (page: TPage, buildId: string): string => {
   const title = `<title>${page.title}</title>`;

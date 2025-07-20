@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { build } from "esbuild";
 import { publicPages } from "../pages/public.js";
-import type { TPage } from "../pages/types/page.js";
+import type { TPage } from "../types/page.js";
 import { buildId } from "../utils/build-id.js";
 import { logger } from "../utils/logger.js";
 import { generateHead } from "./build-helpers/html.js";

@@ -1,6 +1,6 @@
-import { convertStringToFilename } from "../converters/string-to-filename.js";
-import { convertStringToPath } from "../converters/string-to-path.js";
-import type { TPartialPage } from "../types/partial-page.js";
+import { convertStringToFilename } from "../../converters/string-to-filename.js";
+import { convertStringToPath } from "../../converters/string-to-path.js";
+import type { TPartialPage } from "../../types/partial-page.js";
 
 export const page404: TPartialPage = {
   excludeGlobalApp: true,
