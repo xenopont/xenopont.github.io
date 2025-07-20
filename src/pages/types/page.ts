@@ -6,6 +6,7 @@ export type TPage = {
   excludeGlobalStylesheet: boolean;
   filename: TFilename;
   isPublic: boolean;
+  language: string;
   path: TPath;
   title: string;
 };

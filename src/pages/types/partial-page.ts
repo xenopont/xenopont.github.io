@@ -8,5 +8,6 @@ export type TPartialPage = {
   excludeGlobalApp?: boolean; // false
   excludeGlobalStylesheet?: boolean; // false
   filename?: TFilename;
+  language?: string;
   isPublic?: boolean; // true
 };

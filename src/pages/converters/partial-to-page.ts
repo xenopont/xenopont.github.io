@@ -9,5 +9,6 @@ export const convertPartialToPage = (partial: TPartialPage): TPage => {
     excludeGlobalStylesheet: partial.excludeGlobalStylesheet ?? false,
     filename: partial.filename ?? convertStringToFilename("index.html"),
     isPublic: partial.isPublic ?? true,
+    language: partial.language ?? "en-US",
   };
 };
