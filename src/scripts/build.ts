@@ -5,6 +5,7 @@ import { publicPages } from "../pages/public.js";
 import type { TPage } from "../pages/types/page.js";
 import { buildId } from "../utils/build-id.js";
 import { logger } from "../utils/logger.js";
+import { generateHead } from "./build-helpers/html.js";
 
 const distFolder = "dist";
 const sourceAssets = "src/global-assets";
@@ -31,15 +32,11 @@ const buildGlobalApp = (buildId: string): void => {
 };
 
 const createHtmlPage = (page: TPage, buildId: string): string => {
-  const globalApp = page.excludeGlobalApp
-    ? ""
-    : `\n  <script src="/assets-${buildId}/js/global.js"></script>`;
+  const head = generateHead(page, buildId);
 
   return `<!doctype html>
 <html lang="${page.language}">
-<head>
-  <title>${page.title}</title>${globalApp}
-</head>
+${head}
 <body></body>
 </html>`;
 };
