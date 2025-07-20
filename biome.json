@@ -22,9 +22,12 @@
       "recommended": true,
       "suspicious": {
         "noConsole": "error"
+      },
+      "nursery": {
+        "useExplicitType": "error"
       }
     },
-    "ignore": ["./src/dist", "./ts-compiled"]
+    "ignore": ["./src/dist"]
   },
   "javascript": {
     "formatter": {
