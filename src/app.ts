@@ -1,3 +1,3 @@
-import { logger } from "./utils/log.js";
+import { logger } from "./utils/logger.js";
 
 logger.log("Global App Started");

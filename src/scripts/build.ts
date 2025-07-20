@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
+import { publicPages } from "../pages/public.js";
 import { buildId } from "../utils/build-id.js";
-import { logger } from "../utils/log.js";
+import { logger } from "../utils/logger.js";
 
 const distFolder = "dist";
 const sourceAssets = "src/global-assets";
@@ -21,6 +22,10 @@ const createDistFolder = (): boolean => {
       fs.cpSync(sourceAssets, `${distFolder}/assets-${buildId}`, {
         recursive: true,
       });
+    }
+    // create public pages
+    for (const page of publicPages) {
+      //
     }
   } catch (error) {
     return false;
