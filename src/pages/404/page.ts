@@ -3,6 +3,7 @@ import { convertStringToPath } from "../../converters/string-to-path.js";
 import type { TPartialPage } from "../../types/partial-page.js";
 
 export const page404: TPartialPage = {
+  content: "Not Found",
   excludeGlobalApp: true,
   filename: convertStringToFilename("404.html"),
   path: convertStringToPath(""),

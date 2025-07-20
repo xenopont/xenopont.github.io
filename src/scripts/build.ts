@@ -37,7 +37,9 @@ const createHtmlPage = (page: TPage, buildId: string): string => {
   return `<!doctype html>
 <html lang="${page.language}">
 ${head}
-<body></body>
+<body>
+${page.content}
+</body>
 </html>`;
 };
 
