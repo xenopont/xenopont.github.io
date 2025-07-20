@@ -8,7 +8,13 @@ const distFolder = "dist";
 const sourceAssets = "src/global-assets";
 
 const createHtmlPage = (page: TPage): string => {
-  return "";
+  return `<!doctype html />
+<html>
+<head>
+  <title>${page.title}</title>
+</head>
+<body></body>
+</html>`;
 };
 
 const createDistFolder = (): boolean => {
@@ -32,7 +38,8 @@ const createDistFolder = (): boolean => {
     for (const page of publicPages) {
       const html = createHtmlPage(page);
       logger.log(`Created ${page.title}`);
-      logger.log(html);
+      console.log(html);
+      console.log();
     }
   } catch (error) {
     return false;
