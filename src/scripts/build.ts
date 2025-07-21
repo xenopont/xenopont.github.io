@@ -4,14 +4,28 @@ import { publicPages } from "../pages/public.js";
 import type { TPage } from "../types/page.js";
 import { buildId } from "../utils/build-id.js";
 import { logger } from "../utils/logger.js";
-import { buildGlobalApp } from "./build-helpers/global-app.js";
-import { generateHead } from "./build-helpers/head.js";
+import { buildApp } from "./html/build-app.js";
+import { generateHead } from "./html/head.js";
 
 const distFolder = "dist";
 const sourceAssets = "src/global-assets";
 const globalApplication = "src/app.ts";
 
 const createHtmlPage = (page: TPage, buildId: string): string => {
+  let missingResources = false;
+  // local app
+  if (page.localApp !== "") {
+    if (!fs.existsSync(page.localApp)) {
+      missingResources = true;
+      logger.error(`Local app "${page.localApp}" not found`);
+    }
+  }
+  // local stylesheet
+
+  if (missingResources) {
+    throw new Error("Missing resources");
+  }
+  // head
   const head = generateHead(page, buildId);
 
   return `<!doctype html>
@@ -54,7 +68,7 @@ const main = (): void => {
   }
 
   // global application
-  buildGlobalApp(
+  buildApp(
     globalApplication,
     `${distFolder}/assets-${buildId}/js/global.js`,
   ).then();

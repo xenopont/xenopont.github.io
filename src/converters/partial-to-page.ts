@@ -10,5 +10,7 @@ export const convertPartialToPage = (partial: TPartialPage): TPage => {
     filename: partial.filename ?? convertStringToFilename("index.html"),
     isPublic: partial.isPublic ?? true,
     language: partial.language ?? "en-US",
+    localApp: partial.localApp ?? "",
+    localStylesheet: partial.localStylesheet ?? "",
   };
 };

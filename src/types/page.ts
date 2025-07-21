@@ -8,6 +8,8 @@ export type TPage = {
   filename: TFilename;
   isPublic: boolean;
   language: string;
+  localApp: string;
+  localStylesheet: string;
   path: TPath;
   title: string;
 };

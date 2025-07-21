@@ -9,13 +9,7 @@ export const generateHead = (page: TPage, buildId: string): string => {
     ? ""
     : `<link rel="stylesheet" href="/assets-${buildId}/css/global.css">`;
 
-  const content = [title];
-  if (globalApp !== "") {
-    content.push(globalApp);
-  }
-  if (globalStylesheet !== "") {
-    content.push(globalStylesheet);
-  }
+  const content = [title, globalApp, globalStylesheet];
 
-  return `<head>\n${content.join("\n  ")}\n</head>`;
+  return `<head>\n${content.filter((tag) => tag !== "").join("\n  ")}\n</head>`;
 };

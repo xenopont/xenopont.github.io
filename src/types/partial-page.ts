@@ -8,7 +8,9 @@ export type TPartialPage = {
   // optional
   excludeGlobalApp?: boolean; // false
   excludeGlobalStylesheet?: boolean; // false
-  filename?: TFilename; // index.html
-  language?: string; // en-US
+  filename?: TFilename; // "index.html"
+  language?: string; // "en-US"
+  localApp?: string; // ""
+  localStylesheet?: string; // ""
   isPublic?: boolean; // true
 };
