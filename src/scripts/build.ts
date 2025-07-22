@@ -5,7 +5,7 @@ import type { TPage } from "../types/page.js";
 import { buildId } from "../utils/build-id.js";
 import { logger } from "../utils/logger.js";
 import { buildApp } from "./html/build-app.js";
-import { generateHead } from "./html/head.js";
+import { generateId } from "../utils/generate-id.js";
 
 const distFolder = "dist";
 const sourceAssets = "src/global-assets";
@@ -13,11 +13,28 @@ const globalApplication = "src/app.ts";
 
 const createHtmlPage = (page: TPage, buildId: string): string => {
   let missingResources = false;
+  const headTags: string[] = [];
+
+  headTags.push(`<title>${page.title}</title>`);
+  if (!page.excludeGlobalApp) {
+    headTags.push(`<script src="/assets-${buildId}/js/global.js"></script>`);
+  }
+  if (!page.excludeGlobalStylesheet) {
+    headTags.push(
+      `<link rel="stylesheet" href="/assets-${buildId}/css/global.css">`,
+    );
+  }
   // local app
   if (page.localApp !== "") {
     if (!fs.existsSync(page.localApp)) {
       missingResources = true;
-      logger.error(`Local app "${page.localApp}" not found`);
+      logger.error(`❌ Local app "${page.localApp}" not found`);
+    } else {
+      const localAppUri = `assets-${buildId}/js/${generateId()}.js`;
+      headTags.push(`<script src="/${localAppUri}"></script>`);
+      buildApp(page.localApp, `${distFolder}/${localAppUri}`).then(() =>
+        logger.log(`Local app for ${page.title} built successfully`),
+      );
     }
   }
   // local stylesheet
@@ -25,12 +42,10 @@ const createHtmlPage = (page: TPage, buildId: string): string => {
   if (missingResources) {
     throw new Error("Missing resources");
   }
-  // head
-  const head = generateHead(page, buildId);
 
   return `<!doctype html>
 <html lang="${page.language}">
-${head}
+<head>\n${headTags.join("\n  ")}</head>
 <body>
 ${page.content}
 </body>
@@ -68,10 +83,9 @@ const main = (): void => {
   }
 
   // global application
-  buildApp(
-    globalApplication,
-    `${distFolder}/assets-${buildId}/js/global.js`,
-  ).then();
+  buildApp(globalApplication, `${distFolder}/assets-${buildId}/js/global.js`)
+    .then(() => logger.log("Global application built successfully"))
+    .catch(() => logger.error("❌ Global application build failed"));
 
   // create public pages
   for (const page of publicPages) {
