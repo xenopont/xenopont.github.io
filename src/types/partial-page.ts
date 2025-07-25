@@ -1,4 +1,4 @@
-import type { THtmlFile } from "./html-file.js";
+import type { THtmlFilename } from "./html-filename.js";
 import type { TPath } from "./path.js";
 
 export type TPartialPage = {
@@ -8,7 +8,7 @@ export type TPartialPage = {
   // optional
   excludeGlobalApp?: boolean; // false
   excludeGlobalStylesheet?: boolean; // false
-  filename?: THtmlFile; // "index.html"
+  filename?: THtmlFilename; // "index.html"
   language?: string; // "en-US"
   localApp?: string; // ""
   localStylesheet?: string; // ""

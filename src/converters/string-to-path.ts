@@ -1,13 +1,6 @@
 import type { TPath } from "../types/path.js";
 import { logger } from "../utils/logger.js";
-
-const allowedCharacters = new Set([
-  ..."abcdefghijklmnopqrstuvwxyz",
-  ..."0123456789",
-  ..."абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
-  ..."-",
-  ..."äöüè",
-]);
+import { allowedCharacters } from "./allowed-path-characters.js";
 
 export const convertStringToPath = (source: string): TPath => {
   const lowercase = source.toLocaleLowerCase();
