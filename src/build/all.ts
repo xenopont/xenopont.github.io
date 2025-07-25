@@ -6,7 +6,7 @@ import { createAssetsFolder } from "./util/create-assets-folder.js";
 import { createDistFolderSync } from "./util/create-dist-folder-sync.js";
 import { createHtmlPage } from "./util/create-html-page.js";
 
-const main = async (): Promise<void> => {
+const main = async (): Promise<PromiseSettledResult<void>[]> => {
   const promises: Promise<void>[] = [];
 
   createDistFolderSync();
@@ -17,10 +17,14 @@ const main = async (): Promise<void> => {
     promises.push(...createHtmlPage(page));
   }
 
-  await Promise.all(promises);
+  return Promise.allSettled(promises);
 };
 
 const startTime = Date.now();
-main().then(() =>
-  logger.log(`✅ Build finished in ${(Date.now() - startTime) / 1000} s.`),
-);
+main().then((buildResult) => {
+  if (buildResult.some((r) => r.status === "rejected")) {
+    logger.error("❌ Build failed.");
+    return;
+  }
+  logger.log(`✅ Build finished in ${(Date.now() - startTime) / 1000} s.`);
+});
