@@ -1,9 +1,3 @@
-import * as m from "./x-element/markup.js";
+import { logger } from "./utils/logger.js";
 
-const buildMarkup = () => {
-  document.body.appendChild(m.div({}, [m.h1({}, ["DevXL"])]));
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  buildMarkup();
-});
+logger.log("Global App Started");
