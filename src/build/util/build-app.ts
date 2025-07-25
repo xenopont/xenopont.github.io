@@ -4,7 +4,7 @@ import { logger } from "../../utils/logger.js";
 export const buildApp = async (
   entryFile: string,
   outFile: string,
-): Promise<boolean> => {
+): Promise<void> => {
   return build({
     entryPoints: [entryFile],
     bundle: true,
@@ -14,9 +14,10 @@ export const buildApp = async (
     sourcemap: true,
     minify: true,
   })
-    .then(() => true)
+    .then(() => {
+      logger.log(`✅ Build of application ${entryFile} succeeded.`);
+    })
     .catch((error) => {
-      logger.error(`Build of ${entryFile} failed:`, error);
-      return false;
+      logger.error(`❌ Build of application ${entryFile} failed:`, error);
     });
 };
