@@ -5,12 +5,9 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "dev": "npm run type-check || true && npm run bundle && npm run http",
+    "dev": "npm run type-check || true && npm run build && npm run http",
     "build": "./node_modules/.bin/tsx src/build/all.ts",
-    "build1": "npm run type-check && npm run bundle",
-    "bundle": "./node_modules/.bin/esbuild ./src/app.ts --bundle --sourcemap --minify --outdir=./src/public/ --format=esm --splitting --target=esnext",
-    "compile": "./node_modules/.bin/tsc",
-    "http": "./node_modules/.bin/http-server ./src/public/",
+    "http": "./node_modules/.bin/http-server ./dist/",
     "type-check": "./node_modules/.bin/tsc --noEmit",
     "watch": "./node_modules/.bin/nodemon"
   },
