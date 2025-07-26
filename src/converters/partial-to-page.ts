@@ -5,6 +5,7 @@ import { stringToHtmlFilename } from "./string-to-html-filename.js";
 export const convertPartialToPage = (partial: TPartialPage): TPage => {
   return {
     ...partial,
+    createdAt: partial.createdAt ?? new Date(),
     excludeGlobalApp: partial.excludeGlobalApp ?? false,
     excludeGlobalStylesheet: partial.excludeGlobalStylesheet ?? false,
     filename: partial.filename ?? stringToHtmlFilename("index.html"),
