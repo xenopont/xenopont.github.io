@@ -5,6 +5,6 @@ type TImageAttributes = {
   alt: string;
 };
 
-export const image = ({ src, alt }: TImageAttributes): string => {
+export const img = ({ src, alt }: TImageAttributes): string => {
   return `<img src="${src}" alt="${alt}">`;
 };

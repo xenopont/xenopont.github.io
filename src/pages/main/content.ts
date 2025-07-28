@@ -1,7 +1,13 @@
-import { image } from "../../render/image.js";
-import { image1 } from "./image-1.jpg.js";
+import { a } from "../../render/a.js";
+import { h1 } from "../../render/h1.js";
+import { li } from "../../render/li.js";
+import { ul } from "../../render/ul.js";
+import { articles } from "../articles.js";
+
+const articleList: string[] = articles.map((article) => {
+  return li({ content: a({ href: article.path, content: article.title }) });
+});
 
 export const generateMainPageContent = (): string => {
-  return `<h1>Dev XL</h1>
-  ${image({ src: image1, alt: "test image number one" })}`;
+  return h1({ content: "Dev XL" }) + ul({ items: articleList });
 };

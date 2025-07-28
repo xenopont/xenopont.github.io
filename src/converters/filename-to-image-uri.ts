@@ -10,6 +10,6 @@ export const filenameToImageUri = (sourceFilename: string): TImageUri => {
     allowedExtensions,
     `${imagesFolder}`,
     "TImageUri",
-    "image",
+    "img",
   );
 };
