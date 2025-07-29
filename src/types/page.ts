@@ -13,4 +13,5 @@ export type TPage = {
   localStylesheet: string;
   path: TPath;
   title: string;
+  uri: () => string;
 };
