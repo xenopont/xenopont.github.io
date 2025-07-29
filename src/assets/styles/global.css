@@ -1,3 +1,13 @@
-html {
-  font-size: 65.2%;
+body {
+  background: #1e1f22;
+  color: #b9b9aa;
+  font-family: sans-serif;
+  padding: 16px 24px;
+}
+
+a {
+  color: #d9d9ca;
+}
+a:visited {
+  color: #99998a;
 }

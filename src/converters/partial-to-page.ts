@@ -2,7 +2,7 @@ import type { TPage } from "../types/page.js";
 import type { TPartialPage } from "../types/partial-page.js";
 import { stringToHtmlFilename } from "./string-to-html-filename.js";
 
-export const convertPartialToPage = (partial: TPartialPage): TPage => {
+export const partialToPage = (partial: TPartialPage): TPage => {
   return {
     ...partial,
     createdAt: partial.createdAt ?? new Date(),

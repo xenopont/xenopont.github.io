@@ -7,13 +7,13 @@
  * And always public.
  */
 
-import { convertStringToPath } from "../../converters/string-to-path.js";
+import { stringToPath } from "../../converters/string-to-path.js";
 import type { TPartialPage } from "../../types/partial-page.js";
 import { generateMainPageContent } from "./content.js";
 
 export const MainPage: TPartialPage = {
   content: generateMainPageContent(),
   localApp: `${import.meta.dirname}/app.ts`,
-  path: convertStringToPath(""),
+  path: stringToPath(""),
   title: "Dev XL",
 };

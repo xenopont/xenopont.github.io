@@ -5,7 +5,7 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "dev": "npm run type-check || true && npm run build && npm run http",
+    "dev": "(npm run type-check || true) && npm run build && npm run http",
     "build": "./node_modules/.bin/tsx src/build/all.ts",
     "http": "./node_modules/.bin/http-server ./dist/",
     "type-check": "./node_modules/.bin/tsc --noEmit",
