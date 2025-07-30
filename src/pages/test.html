@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev XL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0e0e0e;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      position: relative;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    .background-other-title {
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20vw;
+      font-weight: 900;
+      color: #0e0e0e;
+      pointer-events: none;
+      user-select: none;
+      background-size: 200% 100%;
+      z-index: 1;
+      white-space: nowrap;
+    }
+    .background-title {
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20vw;
+      font-weight: 900;
+      color: #ffffff10;
+      pointer-events: none;
+      user-select: none;
+      filter: blur(8px);
+      background: linear-gradient(
+        120deg,
+        #ffffff08 30%,
+        #ffffff40 50%,
+        #ffffff08 70%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      animation: revealLight 5s ease-in-out infinite alternate;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    @keyframes revealLight {
+      0% {
+        background-position: 100% 0;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.25rem;
+    }
+
+    .content-lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .content-lists {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #1a1a1a;
+      opacity: 0.45;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .card:hover {
+      background: #262626;
+      opacity: 1;
+    }
+
+    .card a {
+      color: #e0e0e0;
+      text-decoration: none;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card .date {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+
+    .card .excerpt {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+<div class="background-title">Dev XL</div>
+<div class="background-other-title">Dev XL</div>
+
+<main>
+  <section class="content-lists">
+    <div class="articles">
+      <h2>Tech Articles</h2>
+      <div class="card">
+        <a href="#">
+          <h3>Writing better APIs</h3>
+          <p class="date">July 20, 2025</p>
+          <p class="excerpt">Design principles for readable and stable service boundaries.</p>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#">
+          <h3>Why I avoid decorators</h3>
+          <p class="date">July 5, 2025</p>
+          <p class="excerpt">A deep dive into TypeScript ergonomics without magic.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="posts">
+      <h2>Blog Posts</h2>
+      <div class="card">
+        <a href="#">
+          <h3>Meetings that don’t suck</h3>
+          <p class="date">July 18, 2025</p>
+          <p class="excerpt">Notes on running short, effective syncs that give people time back.</p>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#">
+          <h3>Ownership vs Control</h3>
+          <p class="date">June 28, 2025</p>
+          <p class="excerpt">Reflections on team culture and how to foster real responsibility.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
