@@ -9,5 +9,9 @@ const articleList: THtmlElementMarkup[] = articles
   });
 
 export const generateMainPageContent = (): string => {
-  return [m.h1(m.text("Dev XL")), m.ul(articleList)].join("\n");
+  return [
+    m.div(m.text("Dev XL"), { class: "main-page-title shadow" }),
+    m.div(m.text("Dev XL"), { class: "main-page-title text" }),
+    m.ul(articleList),
+  ].join("\n");
 };

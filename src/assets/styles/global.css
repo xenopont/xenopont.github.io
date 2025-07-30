@@ -11,3 +11,44 @@ a {
 a:visited {
   color: #99998a;
 }
+
+.main-page-title {
+  font-family: "Georgia", "Calibri", serif;
+  font-size: 25vw;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  animation: main-page-title-appear 25s 1 normal ease-in-out;
+}
+.main-page-title.text {
+  color: #1e1f22;
+}
+.main-page-title.shadow {
+  filter: blur(1px);
+  background: linear-gradient(0deg, #ff00bc 0%, #006dff 50%, #006dff00 81%);
+  background-size: 10% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes main-page-title-appear {
+  0% {
+    font-size: 22vw;
+  }
+  100% {
+    font-size: 25vw;
+  }
+}
+
+@keyframes main-page-title-fire {
+  0% {
+    background-size: 1000% 100%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+}

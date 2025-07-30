@@ -132,6 +132,18 @@ export const br = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "br", attributes });
 
+export const div = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "div",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
 export const h1 = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
