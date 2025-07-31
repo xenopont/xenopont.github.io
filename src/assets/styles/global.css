@@ -22,17 +22,27 @@ a:visited {
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  animation: main-page-title-appear 25s 1 normal ease-in-out;
 }
 .main-page-title.text {
   color: #1e1f22;
+  animation: main-page-title-appear 25s 1 normal ease-in-out;
 }
 .main-page-title.shadow {
   filter: blur(1px);
-  background: linear-gradient(0deg, #ff00bc 0%, #006dff 50%, #006dff00 81%);
-  background-size: 10% 100%;
+  background: linear-gradient(
+    0deg,
+    #ff0000 0%,
+    #ff00bc 50%,
+    #006dff 75%,
+    #006dff00 95%
+  );
+  background-size: 100% 10%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  animation:
+    main-page-title-appear 25s 1 normal ease-in-out,
+    main-page-title-fire 30s infinite alternate ease-in-out;
 }
 
 @keyframes main-page-title-appear {
@@ -46,9 +56,13 @@ a:visited {
 
 @keyframes main-page-title-fire {
   0% {
-    background-size: 1000% 100%;
+    background-size: 100% 500%;
+    filter: blur(4px);
+    opacity: 0.2;
   }
   100% {
     background-size: 100% 100%;
+    filter: blur(1px);
+    opacity: 1;
   }
 }
