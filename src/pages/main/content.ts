@@ -50,6 +50,7 @@ export const generateMainPageContent = (): string => {
     m.div(mainPageTitle, { class: "main-page-title shadow" }),
     m.div(mainPageTitle, { class: "main-page-title text" }),
     articleList(articles),
+    m.div(m.text(""), { id: "article-section-overlay" }),
   ]
     .filter((element) => element !== "")
     .join("\n");

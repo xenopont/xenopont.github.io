@@ -140,7 +140,7 @@ export const div = (
     tagName: "div",
     attributes,
     children: contentToChildren(content),
-    separator: "",
+    separator: "\n",
   });
 };
 
