@@ -78,9 +78,19 @@ a:visited {
   position: fixed;
   left: 0;
   top: 0;
-  width: 35%;
+  width: 80vw;
   height: 100%;
   padding: 1rem;
+}
+@media (min-width: 768px) {
+  #article-section {
+    width: 50%;
+  }
+}
+@media (min-width: 1024px) {
+  #article-section {
+    width: 32%;
+  }
 }
 #article-section header {
   margin: 0 0 0.4rem 0;
