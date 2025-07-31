@@ -32,6 +32,7 @@ a:visited {
   background: linear-gradient(
     0deg,
     #ff0000 0%,
+    #ff00bc 25%,
     #ff00bc 50%,
     #006dff 75%,
     #006dff00 95%
@@ -48,17 +49,19 @@ a:visited {
 @keyframes main-page-title-appear {
   0% {
     font-size: 22vw;
+    filter: blur(4px);
   }
   100% {
     font-size: 25vw;
+    filter: blur(0px);
   }
 }
 
 @keyframes main-page-title-fire {
   0% {
     background-size: 100% 500%;
-    filter: blur(4px);
-    opacity: 0.2;
+    filter: blur(8px);
+    opacity: 0.1;
   }
   100% {
     background-size: 100% 100%;
