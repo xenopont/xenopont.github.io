@@ -156,6 +156,42 @@ export const h1 = (
   });
 };
 
+export const h2 = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "h2",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const h3 = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "h3",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const header = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "header",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
+
 export const hr = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "hr", attributes });
@@ -166,6 +202,42 @@ export const li = (
 ): THtmlElementMarkup => {
   return containerHtmlElement({
     tagName: "li",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const menu = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "menu",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
+
+export const section = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "section",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
+
+export const span = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "span",
     attributes,
     children: contentToChildren(content),
     separator: "",

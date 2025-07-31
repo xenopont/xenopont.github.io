@@ -16,6 +16,7 @@ export const partialToPage = (partial: TPartialPage): TPage => {
     language: partial.language ?? "en-US",
     localApp: partial.localApp ?? "",
     localStylesheet: partial.localStylesheet ?? "",
+    summary: partial.summary ?? "",
     uri: (): string =>
       `/${partial.path}/${partial.filename === defaultFilename ? "" : partial.filename}`,
   };

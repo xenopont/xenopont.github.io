@@ -6,4 +6,6 @@ export const randomArticle: TPartialPage = {
   path: stringToPath("random-article"),
   title: "Random Article",
   createdAt: new Date("2025-07-01"),
+  summary: `This is a random article that should be shown as the first element
+  in the article list.`,
 };

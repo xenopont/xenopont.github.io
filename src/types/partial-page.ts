@@ -14,4 +14,5 @@ export type TPartialPage = {
   localApp?: string; // ""
   localStylesheet?: string; // ""
   isPublic?: boolean; // true
+  summary?: string;
 };

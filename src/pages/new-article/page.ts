@@ -6,4 +6,5 @@ export const newerArticle: TPartialPage = {
   path: stringToPath("newer-article"),
   title: "The Newer Article",
   createdAt: new Date("2025-06-10"),
+  summary: "", //"This is a new article (but actually, it's old)",
 };
