@@ -154,11 +154,11 @@ a:visited {
   border-radius: 0.4rem;
   margin: 0.4rem 0;
   padding: 0.8rem;
-  background: #00000020;
+  background: #00000000;
   transition: background 0.2s ease;
 }
 .card:hover {
-  background: #00000080;
+  background: #00000020;
   cursor: pointer;
 }
 .card a {
@@ -168,17 +168,31 @@ a:visited {
   font-family: "Segoe UI Light", sans-serif;
   font-size: 1.5rem;
   font-weight: 100;
-  color: #b9b9aa;
+  color: #d5b778;
   margin: 0 0 0.4rem 0;
   padding: 0;
 }
+.card .date-value::before {
+  content: "\"";
+}
 .card .date-value {
-  background: #b9b9aa;
-  color: #1e1f22;
-  padding: 0.1rem 0.8rem;
-  margin: 0 -0.8rem;
+  font-family: "Courier New", "Lucida Console", monospace;
+  color: #6aab73;
+}
+.card .date-value::after {
+  content: "\"";
+}
+.card .summary::before {
+  font-family: "Courier New", "Lucida Console", monospace;
+  content: "/** ";
 }
 .card .summary {
+  font-size: 1rem;
+  font-style: italic;
   margin: 0.4rem 0 0 0;
-  color: #54544d;
+  color: #0d54c7;
+}
+.card .summary::after {
+  font-family: "Courier New", "Lucida Console", monospace;
+  content: " */";
 }
