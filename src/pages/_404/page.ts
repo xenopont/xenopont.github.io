@@ -1,5 +1,5 @@
 /**
- * This is the main page of the website and should belong to the technical
+ * This is the _404 error page of the website and should belong to the technical
  * or service pages.
  * That will allow this page to include and process the data of the other pages
  * not making circular dependencies.
@@ -7,13 +7,14 @@
  * And always public.
  */
 
+import { stringToHtmlFilename } from "../../converters/string-to-html-filename.js";
 import { stringToPath } from "../../converters/string-to-path.js";
 import type { TPartialPage } from "../../types/partial-page.js";
-import { generateMainPageContent } from "./content.js";
 
-export const MainPage: TPartialPage = {
-  content: generateMainPageContent(),
-  localApp: `${import.meta.dirname}/app.ts`,
+export const page404: TPartialPage = {
+  content: "Not Found",
+  excludeGlobalApp: true,
+  filename: stringToHtmlFilename("404.html"),
   path: stringToPath(""),
-  title: "Dev XL",
+  title: "Not Found",
 };
