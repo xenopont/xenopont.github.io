@@ -66,8 +66,8 @@ const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
 
 export const generateMainPageContent = (): string => {
   return [
-    m.div(mainPageTitle, { class: "_main-page-title shadow" }),
-    m.div(mainPageTitle, { class: "_main-page-title text" }),
+    m.div(mainPageTitle, { class: "main-page-title shadow" }),
+    m.div(mainPageTitle, { class: "main-page-title text" }),
     articleList(articles),
     m.div(m.text(""), { id: "article-section-overlay" }),
     blogpostList(blog),

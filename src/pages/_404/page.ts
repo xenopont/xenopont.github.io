@@ -1,5 +1,5 @@
 /**
- * This is the _404 error page of the website and should belong to the technical
+ * This is the 404 error page of the website and should belong to the technical
  * or service pages.
  * That will allow this page to include and process the data of the other pages
  * not making circular dependencies.

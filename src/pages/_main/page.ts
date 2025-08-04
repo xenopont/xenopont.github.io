@@ -1,5 +1,5 @@
 /**
- * This is the _main page of the website and should belong to the technical
+ * This is the main page of the website and should belong to the technical
  * or service pages.
  * That will allow this page to include and process the data of the other pages
  * not making circular dependencies.
