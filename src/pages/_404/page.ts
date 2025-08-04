@@ -9,10 +9,13 @@
 
 import { stringToHtmlFilename } from "../../converters/string-to-html-filename.js";
 import { stringToPath } from "../../converters/string-to-path.js";
+import * as m from "../../render/markup.js";
 import type { TPartialPage } from "../../types/partial-page.js";
 
 export const page404: TPartialPage = {
-  content: "Not Found",
+  content: m.div([m.h1(m.text("Not Found")), m.a("/", m.text("Main Page"))], {
+    class: "page-404",
+  }),
   excludeGlobalApp: true,
   filename: stringToHtmlFilename("404.html"),
   path: stringToPath(""),

@@ -262,3 +262,13 @@ a:visited {
   font-family: "Courier New", "Lucida Console", monospace;
   content: " */";
 }
+
+/********************* 404 *************************************/
+.page-404 h1 {
+  font-family: "Segoe UI Light", sans-serif;
+  font-weight: 100;
+  border-bottom: 1px solid #b9b9aa;
+  max-width: 25%;
+  margin: 0 0 1rem 0;
+  padding: 0 0 0.4rem 0;
+}
