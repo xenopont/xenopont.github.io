@@ -151,15 +151,19 @@ a:visited {
 }
 
 .card {
-  border-radius: 0.4rem;
+  border-radius: 0.2rem;
+  border: 1px solid transparent;
   margin: 0.4rem 0;
   padding: 0.8rem;
   background: #00000000;
-  transition: background 0.2s ease;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    border-color 0.2s ease;
 }
 .card:hover {
-  background: #00000020;
-  cursor: pointer;
+  background: #00000040;
+  border: 1px solid #ffffff40;
 }
 .card a {
   text-decoration: none;
@@ -173,14 +177,14 @@ a:visited {
   padding: 0;
 }
 .card .date-value::before {
-  content: "\"";
+  content: '"';
 }
 .card .date-value {
   font-family: "Courier New", "Lucida Console", monospace;
   color: #6aab73;
 }
 .card .date-value::after {
-  content: "\"";
+  content: '"';
 }
 .card .summary::before {
   font-family: "Courier New", "Lucida Console", monospace;
@@ -190,7 +194,7 @@ a:visited {
   font-size: 1rem;
   font-style: italic;
   margin: 0.4rem 0 0 0;
-  color: #0d54c7;
+  color: #0d64c7;
 }
 .card .summary::after {
   font-family: "Courier New", "Lucida Console", monospace;
