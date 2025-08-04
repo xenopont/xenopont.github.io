@@ -3,6 +3,7 @@ import type { TPath } from "./path.js";
 
 export type TPage = {
   content: string;
+  createdAt: Date;
   excludeGlobalApp: boolean;
   excludeGlobalStylesheet: boolean;
   filename: THtmlFilename;
@@ -11,5 +12,7 @@ export type TPage = {
   localApp: string;
   localStylesheet: string;
   path: TPath;
+  summary: string;
   title: string;
+  uri: () => string;
 };

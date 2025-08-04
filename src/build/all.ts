@@ -1,5 +1,5 @@
 import { startCopyQueue } from "../converters/copy-queue.js";
-import { publicPages } from "../pages/public.js";
+import { allPages } from "../pages/all.js";
 import { logger } from "../utils/logger.js";
 import { buildGlobalApp } from "./util/build-global-app.js";
 import { copyGlobalAssets } from "./util/copy-global-assets.js";
@@ -18,14 +18,14 @@ const main = async (): Promise<PromiseSettledResult<void>[]> => {
   promises.push(...startCopyQueue());
   promises.push(copyGlobalAssets());
   promises.push(buildGlobalApp());
-  for (const page of publicPages) {
+  for (const page of allPages) {
     promises.push(...createHtmlPage(page));
   }
 
   return Promise.allSettled(promises);
 };
 
-const startTime = Date.now();
+const startTime: number = Date.now();
 main().then((buildResult) => {
   logger.log("");
   if (buildResult.some((r) => r.status === "rejected")) {

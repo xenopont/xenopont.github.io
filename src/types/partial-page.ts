@@ -6,6 +6,7 @@ export type TPartialPage = {
   path: TPath;
   title: string;
   // optional
+  createdAt?: Date;
   excludeGlobalApp?: boolean; // false
   excludeGlobalStylesheet?: boolean; // false
   filename?: THtmlFilename; // "index.html"
@@ -13,4 +14,5 @@ export type TPartialPage = {
   localApp?: string; // ""
   localStylesheet?: string; // ""
   isPublic?: boolean; // true
+  summary?: string;
 };

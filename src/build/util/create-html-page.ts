@@ -5,6 +5,7 @@ import { generateId } from "../../utils/generate-id.js";
 import { logger } from "../../utils/logger.js";
 import { buildApp } from "./build-app.js";
 import {
+  assetsFolder,
   distFolder,
   globalAppFile,
   globalCssFile,
@@ -18,6 +19,16 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 
   // title
   headTags.push(`<title>${page.title}</title>`);
+
+  // meta
+  headTags.push(
+    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+  );
+
+  // icon
+  headTags.push(
+    `<link rel="shortcut icon" href="/${assetsFolder}/favicon.ico">`,
+  );
 
   // global app
   if (!page.excludeGlobalApp) {

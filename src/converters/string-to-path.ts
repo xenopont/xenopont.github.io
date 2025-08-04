@@ -2,7 +2,7 @@ import type { TPath } from "../types/path.js";
 import { logger } from "../utils/logger.js";
 import { allowedCharacters } from "./allowed-path-characters.js";
 
-export const convertStringToPath = (source: string): TPath => {
+export const stringToPath = (source: string): TPath => {
   const lowercase = source.toLocaleLowerCase();
   if (lowercase !== source) {
     logger.warn(
