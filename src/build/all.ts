@@ -25,7 +25,7 @@ const main = async (): Promise<PromiseSettledResult<void>[]> => {
   return Promise.allSettled(promises);
 };
 
-const startTime = Date.now();
+const startTime: number = Date.now();
 main().then((buildResult) => {
   logger.log("");
   if (buildResult.some((r) => r.status === "rejected")) {
