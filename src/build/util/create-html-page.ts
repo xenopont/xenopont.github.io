@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { writeFile } from "node:fs/promises";
+import * as m from "../../render/markup.js";
 import type { TPage } from "../../types/page.js";
 import { generateId } from "../../utils/generate-id.js";
 import { logger } from "../../utils/logger.js";
@@ -12,13 +13,31 @@ import {
   jsFolder,
 } from "./constants.js";
 
+const prepareBody = (page: TPage): string => {
+  if (page.excludeGlobalChrome) {
+    return Array.isArray(page.content) ? page.content.join("\n") : page.content;
+  }
+
+  return m.div(
+    [
+      m.header(m.menu(m.li(m.a("/", m.text("Dev XL")))), {
+        id: "global-chrome-header",
+      }),
+      m.div(page.content, { id: "content-root" }),
+    ],
+    {
+      id: "global-chrome",
+    },
+  );
+};
+
 export const createHtmlPage = (page: TPage): Promise<void>[] => {
   const headTags: string[] = [];
   let missingResources = false;
   const promises: Promise<void>[] = [];
 
   // title
-  headTags.push(`<title>${page.title}</title>`);
+  headTags.push(m.title(page.title));
 
   // meta
   headTags.push(
@@ -26,9 +45,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   );
 
   // icon
-  headTags.push(
-    `<link rel="shortcut icon" href="/${assetsFolder}/favicon.ico">`,
-  );
+  headTags.push(m.link("shortcut icon", `/${assetsFolder}/favicon.ico`));
 
   // global app
   if (!page.excludeGlobalApp) {
@@ -37,7 +54,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 
   // global styles
   if (!page.excludeGlobalStylesheet) {
-    headTags.push(`<link rel="stylesheet" href="/${globalCssFile}">`);
+    headTags.push(m.link("stylesheet", `/${globalCssFile}`));
   }
 
   // local app
@@ -62,7 +79,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 <html lang="${page.language}">
 <head>\n${headTags.join("\n  ")}</head>
 <body>
-${page.content}
+${prepareBody(page)}
 </body>
 </html>`;
 

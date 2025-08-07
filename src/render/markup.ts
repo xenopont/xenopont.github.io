@@ -70,11 +70,27 @@ const voidHtmlElement = ({
   return `${startTag(tagName, attributes)}` as THtmlElementMarkup;
 };
 
+type TContainerElementContent =
+  | undefined
+  | THtmlElementMarkup
+  | THtmlElementMarkup[];
+const contentToChildren = (
+  content: TContainerElementContent,
+): THtmlElementMarkup[] => {
+  if (content === undefined) {
+    return [];
+  }
+  if (Array.isArray(content)) {
+    return content;
+  }
+  return [content];
+};
+
 type TChildrenSeparator = "" | "\n";
 type TContainerHtmlElementCreateParams = {
   tagName: string;
   attributes: THtmlElementAttributes;
-  children: string[];
+  children: THtmlElementMarkup[];
   separator: TChildrenSeparator;
 };
 const containerHtmlElement = ({
@@ -91,20 +107,6 @@ const containerHtmlElement = ({
   parts.push(endTag(tagName));
 
   return parts.join(separator) as THtmlElementMarkup;
-};
-
-type TContainerElementContent =
-  | undefined
-  | THtmlElementMarkup
-  | THtmlElementMarkup[];
-const contentToChildren = (content: TContainerElementContent): string[] => {
-  if (content === undefined) {
-    return [];
-  }
-  if (Array.isArray(content)) {
-    return content;
-  }
-  return [content];
 };
 
 // TODO: add text manipulations and options to cancel them
@@ -208,6 +210,13 @@ export const li = (
   });
 };
 
+export const link = (rel: string, href: string): THtmlElementMarkup => {
+  return voidHtmlElement({
+    tagName: "link",
+    attributes: { rel, href },
+  });
+};
+
 export const menu = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -240,6 +249,17 @@ export const span = (
     tagName: "span",
     attributes,
     children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const title = (content: string): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "title",
+    attributes: {},
+    // a pure `string` is allowed here, as the <title> tag doesn't support
+    // HTML entities
+    children: [content as THtmlElementMarkup],
     separator: "",
   });
 };

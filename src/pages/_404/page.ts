@@ -17,6 +17,7 @@ export const page404: TPartialPage = {
     class: "page-404",
   }),
   excludeGlobalApp: true,
+  excludeGlobalChrome: true,
   filename: stringToHtmlFilename("404.html"),
   path: stringToPath(""),
   title: "Not Found",

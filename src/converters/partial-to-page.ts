@@ -10,6 +10,7 @@ export const partialToPage = (partial: TPartialPage): TPage => {
     ...partial,
     createdAt: partial.createdAt ?? new Date(),
     excludeGlobalApp: partial.excludeGlobalApp ?? false,
+    excludeGlobalChrome: partial.excludeGlobalChrome ?? false,
     excludeGlobalStylesheet: partial.excludeGlobalStylesheet ?? false,
     filename: partial.filename ?? defaultFilename,
     isPublic: partial.isPublic ?? true,
