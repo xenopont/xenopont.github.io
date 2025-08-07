@@ -96,13 +96,12 @@ a:visited {
 #blog-section {
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #00000040 #00000020;
+  scrollbar-color: #00000020 #00000000;
   transition: scrollbar-color 0.4s ease;
 }
 #article-section:hover,
 #blog-section:hover {
-  scrollbar-width: auto;
-  scrollbar-color: #00000080 #00000040;
+  scrollbar-color: #00000080 #00000020;
 }
 #article-section {
   text-align: left;
@@ -110,26 +109,6 @@ a:visited {
 #blog-section {
   text-align: right;
 }
-/*#article-section::-webkit-scrollbar,
-#blog-section::-webkit-scrollbar {
-  width: 8px;
-  background: transparent;
-  transition: background-color 1s ease;
-}*/
-/*#article-section::-webkit-scrollbar-thumb,
-#blog-section::-webkit-scrollbar-thumb {
-  width: 8px;
-  background: transparent;
-  transition: background-color 1s ease;
-}*/
-/*#article-section:hover::-webkit-scrollbar,
-#blog-section:hover::-webkit-scrollbar {
-  background: #00000020;
-}
-#article-section:hover::-webkit-scrollbar-thumb,
-#blog-section:hover::-webkit-scrollbar-thumb {
-  background: #00000080;
-}*/
 #article-section-overlay {
   pointer-events: none;
   background: linear-gradient(
