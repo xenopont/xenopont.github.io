@@ -20,9 +20,18 @@ const prepareBody = (page: TPage): string => {
 
   return m.div(
     [
-      m.header(m.menu(m.li(m.a("/", m.text("Dev XL")))), {
-        id: "global-chrome-header",
-      }),
+      m.header(
+        m.menu(
+          m.li(
+            m.a("/", m.span(m.none, { id: "home-link-chevron" }), {
+              id: "home-link",
+            }),
+          ),
+        ),
+        {
+          id: "global-chrome-header",
+        },
+      ),
       m.div(page.content, { id: "content-root" }),
     ],
     {

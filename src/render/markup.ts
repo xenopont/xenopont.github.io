@@ -117,6 +117,8 @@ export const text = (str: string): THtmlElementMarkup =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;") as THtmlElementMarkup;
 
+export const none = "" as THtmlElementMarkup;
+
 export const a = (
   href: string,
   content: TContainerElementContent,
