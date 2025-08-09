@@ -7,6 +7,7 @@ export type TPartialPage = {
   path: TPath;
   title: string;
   // optional
+  author?: string;
   createdAt?: Date;
   excludeGlobalApp?: boolean; // false
   excludeGlobalChrome?: boolean; // false
