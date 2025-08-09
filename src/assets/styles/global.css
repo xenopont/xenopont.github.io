@@ -66,6 +66,19 @@ a:visited {
   transform: rotate(45deg);
 }
 
+/************************** Article *******************************************/
+
+#article {
+  margin: 0 auto;
+  max-width: 65ex;
+}
+
+#article header h1 {
+  font-family: "Segoe UI Light", sans-serif;
+  font-weight: 100;
+  font-size: 2rem;
+}
+
 /************************** Main Page Title ***********************************/
 
 .main-page-title {

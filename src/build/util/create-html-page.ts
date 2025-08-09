@@ -35,21 +35,22 @@ const prepareBody = (page: TPage): string => {
       ),
       m.article(
         [
-          m.header(m.h1(m.text(page.title))),
-          m.section(
-            [
-              m.time(m.text(dateToIso8601(page.createdAt)), {
-                datetime: dateToIso8601(page.createdAt),
-              }),
-            ],
-            {
-              id: "article-properties",
-            },
-          ),
+          m.header([
+            m.h1(m.text(page.title)),
+            m.section(
+              [
+                m.time(m.text(dateToIso8601(page.createdAt)), {
+                  datetime: dateToIso8601(page.createdAt),
+                }),
+                m.span(m.text(`by ${page.author}`), { id: "author" }),
+              ],
+              { id: "article-properties" },
+            ),
+          ]),
+          m.div(page.content, { id: "article-content" }),
         ],
         { id: "article" },
       ),
-      m.div(page.content, { id: "page-content" }),
     ],
     {
       id: "global-chrome",
