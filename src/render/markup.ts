@@ -20,7 +20,7 @@ type THtmlElementTagName = string;
 
 // TODO: split the type to global, aria-* and data-* attributes
 // TODO: limit the type by the allowed for exact element ones
-type THtmlElementAttributes = Record<string, string>;
+type THtmlElementAttributes = Record<string, string | undefined>;
 
 type TVoidElementTagName =
   | "area"
@@ -129,6 +129,18 @@ export const a = (
     attributes: { href, ...attributes },
     children: contentToChildren(content),
     separator: "",
+  });
+};
+
+export const article = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "article",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
   });
 };
 
@@ -250,6 +262,19 @@ export const span = (
   return containerHtmlElement({
     tagName: "span",
     attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const time = (
+  content: TContainerElementContent,
+  datetime?: Date,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "time",
+    attributes: { datetime: datetime?.toISOString(), ...attributes },
     children: contentToChildren(content),
     separator: "",
   });

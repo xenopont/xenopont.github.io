@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { writeFile } from "node:fs/promises";
+import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
 import * as m from "../../render/markup.js";
 import type { TPage } from "../../types/page.js";
 import { generateId } from "../../utils/generate-id.js";
@@ -32,7 +33,16 @@ const prepareBody = (page: TPage): string => {
           id: "global-chrome-header",
         },
       ),
-      m.div(page.content, { id: "content-root" }),
+      m.article(
+        [
+          m.header(m.h1(m.text(page.title))),
+          m.section([m.time(m.text(dateToIso8601(page.createdAt)))], {
+            id: "article-properties",
+          }),
+        ],
+        { id: "article" },
+      ),
+      m.div(page.content, { id: "page-content" }),
     ],
     {
       id: "global-chrome",

@@ -1,3 +1,4 @@
+import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
 import type { THtmlElementMarkup } from "../../render/markup.js";
 import * as m from "../../render/markup.js";
 import type { TPage } from "../../types/page.js";
@@ -6,16 +7,12 @@ import { blog } from "../blog.js";
 
 const mainPageTitle: THtmlElementMarkup = m.text("Dev XL");
 
-const formatDate = (date: Date): string => {
-  return date.toISOString().split("T").shift() ?? "";
-};
-
 const card = (page: TPage): THtmlElementMarkup => {
   return m.div(
     m.a(`/${page.path}/`, [
       m.h3(m.text(page.title)),
       m.div(
-        m.span(m.text(formatDate(page.createdAt)), { class: "date-value" }),
+        m.span(m.text(dateToIso8601(page.createdAt)), { class: "date-value" }),
         { class: "date" },
       ),
       m.div(m.text(page.summary), { class: "summary" }),
