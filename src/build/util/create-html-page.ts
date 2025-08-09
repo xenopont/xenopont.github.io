@@ -36,9 +36,16 @@ const prepareBody = (page: TPage): string => {
       m.article(
         [
           m.header(m.h1(m.text(page.title))),
-          m.section([m.time(m.text(dateToIso8601(page.createdAt)))], {
-            id: "article-properties",
-          }),
+          m.section(
+            [
+              m.time(m.text(dateToIso8601(page.createdAt)), {
+                datetime: dateToIso8601(page.createdAt),
+              }),
+            ],
+            {
+              id: "article-properties",
+            },
+          ),
         ],
         { id: "article" },
       ),

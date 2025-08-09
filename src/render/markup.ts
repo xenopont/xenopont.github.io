@@ -269,12 +269,11 @@ export const span = (
 
 export const time = (
   content: TContainerElementContent,
-  datetime?: Date,
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => {
   return containerHtmlElement({
     tagName: "time",
-    attributes: { datetime: datetime?.toISOString(), ...attributes },
+    attributes,
     children: contentToChildren(content),
     separator: "",
   });
