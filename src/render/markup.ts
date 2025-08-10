@@ -110,12 +110,17 @@ const containerHtmlElement = ({
 };
 
 // TODO: add text manipulations and options to cancel them
-export const text = (str: string): THtmlElementMarkup =>
+export const safe = (str: string): THtmlElementMarkup =>
   str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;") as THtmlElementMarkup;
+export const unsafe = (str: string): THtmlElementMarkup =>
+  str as THtmlElementMarkup;
+
+export const nl2br = (str: string): THtmlElementMarkup =>
+  str.replace(/\n/g, "<br>") as THtmlElementMarkup;
 
 export const none = "" as THtmlElementMarkup;
 
@@ -148,6 +153,18 @@ export const br = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "br", attributes });
 
+export const code = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "code",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
 export const div = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -157,6 +174,18 @@ export const div = (
     attributes,
     children: contentToChildren(content),
     separator: "\n",
+  });
+};
+
+export const em = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "em",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
   });
 };
 
@@ -255,6 +284,18 @@ export const p = (
   });
 };
 
+export const pre = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "pre",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
 export const section = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -273,6 +314,18 @@ export const span = (
 ): THtmlElementMarkup => {
   return containerHtmlElement({
     tagName: "span",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const strong = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "strong",
     attributes,
     children: contentToChildren(content),
     separator: "",

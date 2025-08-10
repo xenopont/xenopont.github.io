@@ -13,7 +13,7 @@ import * as m from "../../render/markup.js";
 import type { TPartialPage } from "../../types/partial-page.js";
 
 export const page404: TPartialPage = {
-  content: m.div([m.h1(m.text("Not Found")), m.a("/", m.text("Main Page"))], {
+  content: m.div([m.h1(m.safe("Not Found")), m.a("/", m.safe("Main Page"))], {
     class: "page-404",
   }),
   excludeGlobalApp: true,

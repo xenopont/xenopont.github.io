@@ -8,6 +8,7 @@ import { logger } from "../../utils/logger.js";
 import { buildApp } from "./build-app.js";
 import {
   assetsFolder,
+  cssFolder,
   distFolder,
   globalAppFile,
   globalCssFile,
@@ -36,13 +37,13 @@ const prepareBody = (page: TPage): string => {
       m.article(
         [
           m.header([
-            m.h1(m.text(page.title)),
+            m.h1(m.safe(page.title)),
             m.section(
               [
-                m.time(m.text(dateToIso8601(page.createdAt)), {
+                m.time(m.safe(dateToIso8601(page.createdAt)), {
                   datetime: dateToIso8601(page.createdAt),
                 }),
-                m.span(m.text(`by ${page.author}`), { id: "author" }),
+                m.span(m.safe(`by ${page.author}`), { id: "author" }),
               ],
               { id: "article-properties" },
             ),
@@ -83,6 +84,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   if (!page.excludeGlobalStylesheet) {
     headTags.push(m.link("stylesheet", `/${globalCssFile}`));
   }
+  headTags.push(m.link("stylesheet", `/${cssFolder}/highlight.js/agate.css`));
 
   // local app
   if (page.localApp !== "") {

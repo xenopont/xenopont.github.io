@@ -5,17 +5,17 @@ import type { TPage } from "../../types/page.js";
 import { articles } from "../articles.js";
 import { blog } from "../blog.js";
 
-const mainPageTitle: THtmlElementMarkup = m.text("Dev XL");
+const mainPageTitle: THtmlElementMarkup = m.safe("Dev XL");
 
 const card = (page: TPage): THtmlElementMarkup => {
   return m.div(
     m.a(`/${page.path}/`, [
-      m.h3(m.text(page.title)),
+      m.h3(m.safe(page.title)),
       m.div(
-        m.span(m.text(dateToIso8601(page.createdAt)), { class: "date-value" }),
+        m.span(m.safe(dateToIso8601(page.createdAt)), { class: "date-value" }),
         { class: "date" },
       ),
-      m.div(m.text(page.summary), { class: "summary" }),
+      m.div(m.safe(page.summary), { class: "summary" }),
     ]),
     {
       class: "card",
@@ -25,12 +25,12 @@ const card = (page: TPage): THtmlElementMarkup => {
 
 const articleList = (articles: TPage[]): THtmlElementMarkup => {
   if (articles.length === 0) {
-    return m.text("");
+    return m.safe("");
   }
 
   return m.section(
     [
-      m.header(m.h2(m.text("Articles"))),
+      m.header(m.h2(m.safe("Articles"))),
       m.menu(
         articles
           // latest at the top
@@ -44,7 +44,7 @@ const articleList = (articles: TPage[]): THtmlElementMarkup => {
 
 const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
   if (blogposts.length === 0) {
-    return m.text("");
+    return m.safe("");
   }
 
   return m.section(
@@ -55,7 +55,7 @@ const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
           .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
           .map((page) => m.li(card(page))),
       ),
-      m.header(m.h2(m.text("Blogposts"))),
+      m.header(m.h2(m.safe("Blogposts"))),
     ],
     { id: "blog-section" },
   );
@@ -66,8 +66,8 @@ export const generateMainPageContent = (): THtmlElementMarkup[] => {
     m.div(mainPageTitle, { class: "main-page-title shadow" }),
     m.div(mainPageTitle, { class: "main-page-title text" }),
     articleList(articles),
-    m.div(m.text(""), { id: "article-section-overlay" }),
+    m.div(m.safe(""), { id: "article-section-overlay" }),
     blogpostList(blog),
-    m.div(m.text(""), { id: "blog-section-overlay" }),
+    m.div(m.safe(""), { id: "blog-section-overlay" }),
   ].filter((element) => element !== "");
 };
