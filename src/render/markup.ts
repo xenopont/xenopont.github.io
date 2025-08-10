@@ -243,6 +243,18 @@ export const menu = (
   });
 };
 
+export const p = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "p",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
 export const section = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},

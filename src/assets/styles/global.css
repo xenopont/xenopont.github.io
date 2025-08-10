@@ -122,6 +122,10 @@ a:visited {
   hyphens: auto;
 }
 
+#article-content p {
+  margin: 0 0 1.3rem 0;
+}
+
 /************************** Main Page Title ***********************************/
 
 .main-page-title {
