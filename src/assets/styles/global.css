@@ -1,6 +1,6 @@
 body {
   background: #1e1f22;
-  color: #b9b9aa;
+  color: #b8b8b8;
   font-family: sans-serif;
   padding: 0;
   margin: 0;
@@ -70,13 +70,56 @@ a:visited {
 
 #article {
   margin: 0 auto;
-  max-width: 65ex;
+  max-width: 67ex;
+  font-size: 1.7rem;
+  font-family: "Georgia", serif;
+  padding: 0 4rem;
 }
 
 #article header h1 {
   font-family: "Segoe UI Light", sans-serif;
   font-weight: 100;
-  font-size: 2rem;
+  font-size: 3rem;
+  color: #d5b778;
+  margin: 0;
+  padding: 0;
+  text-align: justify;
+}
+
+#article header section#article-properties {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.7rem 0 3.5rem 0;
+}
+
+#article header section#article-properties time {
+  font-family: "Courier New", "Lucida Console", monospace;
+  color: #6aab73;
+}
+#article header section#article-properties time::before,
+#article header section#article-properties time::after {
+  content: '"';
+}
+
+#article header section#article-properties span#author {
+  color: #0d64c7;
+}
+#article header section#article-properties span#author::before,
+#article header section#article-properties span#author::after {
+  font-family: "Courier New", "Lucida Console", monospace;
+}
+#article header section#article-properties span#author::before {
+  content: "/** ";
+}
+#article header section#article-properties span#author::after {
+  content: " */";
+}
+
+#article-content {
+  line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /************************** Main Page Title ***********************************/
