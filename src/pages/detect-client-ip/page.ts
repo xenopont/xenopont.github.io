@@ -285,4 +285,6 @@ foreach (headerName in weirdHeaderNames) {
   createdAt: new Date("2020-01-17"),
   path: stringToPath("how-to-get-the-client-ip-address-in-your-app"),
   title: "How To Get The Client IP Address In Your App",
+  summary: `The client IPs are not what they seem. What the Internet has told
+    you about detecting them is wrong.`,
 };
