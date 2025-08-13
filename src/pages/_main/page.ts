@@ -13,6 +13,8 @@ import { generateMainPageContent } from "./content.js";
 
 export const MainPage: TPartialPage = {
   content: generateMainPageContent(),
+  excludeGlobalApp: true,
+  excludeGlobalChrome: true,
   localApp: `${import.meta.dirname}/app.ts`,
   path: stringToPath(""),
   title: "Dev XL",

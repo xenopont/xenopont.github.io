@@ -20,7 +20,7 @@ type THtmlElementTagName = string;
 
 // TODO: split the type to global, aria-* and data-* attributes
 // TODO: limit the type by the allowed for exact element ones
-type THtmlElementAttributes = Record<string, string>;
+type THtmlElementAttributes = Record<string, string | undefined>;
 
 type TVoidElementTagName =
   | "area"
@@ -70,11 +70,27 @@ const voidHtmlElement = ({
   return `${startTag(tagName, attributes)}` as THtmlElementMarkup;
 };
 
+type TContainerElementContent =
+  | undefined
+  | THtmlElementMarkup
+  | THtmlElementMarkup[];
+const contentToChildren = (
+  content: TContainerElementContent,
+): THtmlElementMarkup[] => {
+  if (content === undefined) {
+    return [];
+  }
+  if (Array.isArray(content)) {
+    return content;
+  }
+  return [content];
+};
+
 type TChildrenSeparator = "" | "\n";
 type TContainerHtmlElementCreateParams = {
   tagName: string;
   attributes: THtmlElementAttributes;
-  children: string[];
+  children: THtmlElementMarkup[];
   separator: TChildrenSeparator;
 };
 const containerHtmlElement = ({
@@ -93,27 +109,20 @@ const containerHtmlElement = ({
   return parts.join(separator) as THtmlElementMarkup;
 };
 
-type TContainerElementContent =
-  | undefined
-  | THtmlElementMarkup
-  | THtmlElementMarkup[];
-const contentToChildren = (content: TContainerElementContent): string[] => {
-  if (content === undefined) {
-    return [];
-  }
-  if (Array.isArray(content)) {
-    return content;
-  }
-  return [content];
-};
-
 // TODO: add text manipulations and options to cancel them
-export const text = (str: string): THtmlElementMarkup =>
+export const safe = (str: string): THtmlElementMarkup =>
   str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;") as THtmlElementMarkup;
+export const unsafe = (str: string): THtmlElementMarkup =>
+  str as THtmlElementMarkup;
+
+export const nl2br = (str: string): THtmlElementMarkup =>
+  str.replace(/\n/g, "<br>") as THtmlElementMarkup;
+
+export const none = "" as THtmlElementMarkup;
 
 export const a = (
   href: string,
@@ -128,9 +137,33 @@ export const a = (
   });
 };
 
+export const article = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "article",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
+
 export const br = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "br", attributes });
+
+export const code = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "code",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
 
 export const div = (
   content: TContainerElementContent,
@@ -141,6 +174,18 @@ export const div = (
     attributes,
     children: contentToChildren(content),
     separator: "\n",
+  });
+};
+
+export const em = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "em",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
   });
 };
 
@@ -208,6 +253,13 @@ export const li = (
   });
 };
 
+export const link = (rel: string, href: string): THtmlElementMarkup => {
+  return voidHtmlElement({
+    tagName: "link",
+    attributes: { rel, href },
+  });
+};
+
 export const menu = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -217,6 +269,30 @@ export const menu = (
     attributes,
     children: contentToChildren(content),
     separator: "\n",
+  });
+};
+
+export const p = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "p",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const pre = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "pre",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
   });
 };
 
@@ -240,6 +316,41 @@ export const span = (
     tagName: "span",
     attributes,
     children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const strong = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "strong",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const time = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "time",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
+export const title = (content: string): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "title",
+    attributes: {},
+    // a pure `string` is allowed here, as the <title> tag doesn't support
+    // HTML entities
+    children: [content as THtmlElementMarkup],
     separator: "",
   });
 };

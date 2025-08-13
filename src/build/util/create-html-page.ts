@@ -1,16 +1,63 @@
 import fs from "node:fs";
 import { writeFile } from "node:fs/promises";
+import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
+import * as m from "../../render/markup.js";
 import type { TPage } from "../../types/page.js";
 import { generateId } from "../../utils/generate-id.js";
 import { logger } from "../../utils/logger.js";
 import { buildApp } from "./build-app.js";
 import {
   assetsFolder,
+  cssFolder,
   distFolder,
   globalAppFile,
   globalCssFile,
   jsFolder,
 } from "./constants.js";
+
+const prepareBody = (page: TPage): string => {
+  if (page.excludeGlobalChrome) {
+    return Array.isArray(page.content) ? page.content.join("\n") : page.content;
+  }
+
+  return m.div(
+    [
+      m.header(
+        m.menu(
+          m.li(
+            m.a("/", m.span(m.none, { id: "home-link-chevron" }), {
+              id: "home-link",
+            }),
+          ),
+        ),
+        {
+          id: "global-chrome-header",
+        },
+      ),
+      m.article(
+        [
+          m.header([
+            m.h1(m.safe(page.title)),
+            m.section(
+              [
+                m.time(m.safe(dateToIso8601(page.createdAt)), {
+                  datetime: dateToIso8601(page.createdAt),
+                }),
+                m.span(m.safe(`by ${page.author}`), { id: "author" }),
+              ],
+              { id: "article-properties" },
+            ),
+          ]),
+          m.div(page.content, { id: "article-content" }),
+        ],
+        { id: "article" },
+      ),
+    ],
+    {
+      id: "global-chrome",
+    },
+  );
+};
 
 export const createHtmlPage = (page: TPage): Promise<void>[] => {
   const headTags: string[] = [];
@@ -18,7 +65,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   const promises: Promise<void>[] = [];
 
   // title
-  headTags.push(`<title>${page.title}</title>`);
+  headTags.push(m.title(page.title));
 
   // meta
   headTags.push(
@@ -26,9 +73,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   );
 
   // icon
-  headTags.push(
-    `<link rel="shortcut icon" href="/${assetsFolder}/favicon.ico">`,
-  );
+  headTags.push(m.link("shortcut icon", `/${assetsFolder}/favicon.ico`));
 
   // global app
   if (!page.excludeGlobalApp) {
@@ -37,8 +82,9 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 
   // global styles
   if (!page.excludeGlobalStylesheet) {
-    headTags.push(`<link rel="stylesheet" href="/${globalCssFile}">`);
+    headTags.push(m.link("stylesheet", `/${globalCssFile}`));
   }
+  headTags.push(m.link("stylesheet", `/${cssFolder}/highlight.js/agate.css`));
 
   // local app
   if (page.localApp !== "") {
@@ -62,7 +108,7 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 <html lang="${page.language}">
 <head>\n${headTags.join("\n  ")}</head>
 <body>
-${page.content}
+${prepareBody(page)}
 </body>
 </html>`;
 

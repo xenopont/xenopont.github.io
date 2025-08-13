@@ -1,10 +1,13 @@
+import type { THtmlElementMarkup } from "../render/markup.js";
 import type { THtmlFilename } from "./html-filename.js";
 import type { TPath } from "./path.js";
 
 export type TPage = {
-  content: string;
+  author: string;
+  content: THtmlElementMarkup | THtmlElementMarkup[];
   createdAt: Date;
   excludeGlobalApp: boolean;
+  excludeGlobalChrome: boolean;
   excludeGlobalStylesheet: boolean;
   filename: THtmlFilename;
   isPublic: boolean;
