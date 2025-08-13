@@ -9,7 +9,7 @@ export const HowToDetectClientIpPage: TPartialPage = {
     m.p(
       m.safe(`Pretty often, your server app needs to know the IP address of
       a client making the HTTP request. For either securing the session,
-      or tracking, or geolocation or any other reasonable purpose. All
+      or tracking, or geolocating or any other reasonable purpose. All the
       programming languages give you their options to do that:`),
     ),
     m.p(
@@ -59,8 +59,8 @@ export const HowToDetectClientIpPage: TPartialPage = {
     ),
     m.p([
       m.safe(`As you can see, the server, listening to a socket in your app,
-      knows its client address and ready to share it with you. This always
-      works pretty well on your machine and gives you proper results:
+      knows its direct client address and ready to share it with you. This
+      always works pretty well on your machine and gives you proper results:
       you'd either see the local `),
       m.code(highlight("bash", "127.0.0.1")),
       m.safe(` address, or, if you run the app in a docker container, it'd be
@@ -69,18 +69,18 @@ export const HowToDetectClientIpPage: TPartialPage = {
       m.safe(` or smth.`),
     ]),
     m.p(
-      m.safe(`The interesting part comes when you want to deploy that
-      on production.`),
+      m.safe(`Most of the internet guides stop at this point, as if that was it.
+      But the interesting part comes when you deploy that on production.`),
     ),
     m.p(
       m.unsafe(`Nobody wants to take care of load balancing, bot attack
       protection, caching and serving SSL certificates in their code every time.
       That's why your app on production is always deployed behind a
-      ${m.em(m.unsafe("load balancer"))}, which serves requests of a
-      ${m.em(m.unsafe("cache manager"))}, which sits behind a
+      ${m.em(m.unsafe("load balancer"))}, that serves requests of a
+      ${m.em(m.unsafe("cache manager"))}, that sits behind a
       ${m.em(m.unsafe("firewall"))}, etc. And all those smart internet
       providers, hiding their client networks by chains of
-      ${m.em(m.unsafe("proxy-servers"))}... Which IP from those is visible
+      ${m.em(m.unsafe("proxy-servers"))}... What one IP from those is visible
       to your app? Its direct client – the
       ${m.em(m.unsafe("load balancer"))}, in this case.`),
     ),
@@ -90,18 +90,18 @@ export const HowToDetectClientIpPage: TPartialPage = {
       Luckily, not.`),
     ),
     m.p(
-      m.unsafe(`By an RFC, every
+      m.unsafe(`By convention, every
       ${m.em(m.safe("proxy / firewall / load balancing server"))}
-      should append an additional header to the request and keep the original
-      client IP there. You can find a lot of suggestions in the Internet,
-      to take the header called ${m.code(highlight("bash", "X-Forwarded-For"))}
-      as the client IP address. But that is just half true, which is worse
-      than a lie.`),
+      should append an additional header to the request and store its client IP
+      there. You can find a lot of suggestions in the Internet, to take
+      the header called ${m.code(highlight("bash", "X-Forwarded-For"))} as
+      the client IP address. But that is just half true, which is worse than
+      a lie.`),
     ),
     m.p(
       m.unsafe(`In fact, the ${m.code(highlight("bash", "X-Forwarded-For"))}
-      header may contain the full chain of proxies, and its format is the
-      following:`),
+      header may contain the full chain of proxies, and its format is
+      a comma-separated list:`),
     ),
     m.p(
       codeSnippet(
@@ -180,27 +180,27 @@ const getClientIp = (request) => {
     m.p(
       m.unsafe(
         `Note, that there is a method ${m.code(highlight("js", "isValidIp()"))}
-        used in every approach; all languages provide their own tools for
-        such a validation. Every time you get an IP from a request header,
-        it must be validated, since it's almost the same as a user input and
-        can contain anything. If the IP is not valid, better to fall back to
-        the ${m.code(highlight("js", "remoteAddress"))} thing, or any string
+        used in every snippet; all languages provide their own tools for such
+        a validation. Every time you get an IP from a request header, it must
+        be validated, since it's almost the same as a user input and can
+        contain anything. If the IP is not valid, better to fall back to
+        the ${m.code(highlight("js", "remoteAddress"))} approach, or any string
         constant of your choice, like
-        ${m.code(highlight("js", '"127.0.0.1"'))} or
-        ${m.code(highlight("js", '"::1"'))}.`,
+        ${m.code(highlight("bash", '"127.0.0.1"'))} or
+        ${m.code(highlight("bash", '"::1"'))}.`,
       ),
     ),
     m.p(m.safe(`Is that all? Are those snippets gonna work now?`)),
     m.p(
       m.unsafe(`Well, yes. If you're lucky and your proxy servers are properly
-      tuned to follow the standards and keep the client IP in the
+      configured to follow the convention and store the client IP in the
       ${m.code(highlight("bash", "X-Forwarded-For"))} header. If you can
       configure them or ask someone to do that for you, always prefer
       that way.`),
     ),
     m.p(
       m.unsafe(`Otherwise, you’ll have to experiment in the target environment
-      and start listing all the request headers. There you may meet a whole zoo
+      and start listing all the request headers. There you may find a whole zoo
       of them being appended. They can be called
       ${m.code(highlight("bash", "X-Real-IP"))},
       ${m.code(highlight("bash", "Client-Real-IP"))},
@@ -240,9 +240,10 @@ foreach (headerName in weirdHeaderNames) {
       will never know what can be kept and what should be thrown away.`),
     ),
     m.p(
-      m.unsafe(`For future, you might consider processing also
-      the ${m.code(highlight("bash", "Forwarded"))} header, proposed in 2014
-      but not used IRL yet. Probably, due to its complexity and overload:`),
+      m.unsafe(`For the future, you may consider processing also
+      the ${m.code(highlight("bash", "Forwarded"))} header, that was proposed
+      in 2014 but not actively used IRL yet. Probably, due to its complexity
+      and overload:`),
     ),
     m.p(
       codeSnippet(
@@ -261,5 +262,5 @@ foreach (headerName in weirdHeaderNames) {
   path: stringToPath("how-to-get-the-client-ip-address-in-your-app"),
   title: "How To Get The Client IP Address In Your App",
   summary: `The client IPs are not what they seem. What the Internet has told
-    you about detecting them is wrong.`,
+    you about detecting them is probably wrong.`,
 };
