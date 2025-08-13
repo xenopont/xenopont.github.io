@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/pages/_main/app.ts"],
+  "sourcesContent": ["document.addEventListener(\"DOMContentLoaded\", () => {\n  const el = document.getElementById(\"blog-section\");\n  if (el) {\n    el.scrollTop = el.scrollHeight;\n  }\n});\n"],
+  "mappings": "mBAAA,SAAS,iBAAiB,mBAAoB,IAAM,CAClD,IAAMA,EAAK,SAAS,eAAe,cAAc,EAC7CA,IACFA,EAAG,UAAYA,EAAG,aAEtB,CAAC",
+  "names": ["el"]
+}

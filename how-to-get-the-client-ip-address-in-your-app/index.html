@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<title>How To Get The Client IP Address In Your App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/assets-e20eilr7r4t/favicon.ico">
+  <script src="/assets-e20eilr7r4t/js/global.js"></script>
+  <link rel="stylesheet" href="/assets-e20eilr7r4t/styles/global.css">
+  <link rel="stylesheet" href="/assets-e20eilr7r4t/styles/highlight.js/agate.css"></head>
+<body>
+<div id="global-chrome">
+<header id="global-chrome-header">
+<menu>
+<li><a href="/" id="home-link"><span id="home-link-chevron"></span></a></li>
+</menu>
+</header>
+<article id="article">
+<header>
+<h1>How To Get The Client IP Address In Your App</h1>
+<section id="article-properties">
+<time datetime="2020-01-17">2020-01-17</time>
+<span id="author">by Sergei Kovalenko</span>
+</section>
+</header>
+<div id="article-content">
+<p>Pretty often, your server app needs to know the IP address of
+      a client making the HTTP request. For either securing the session,
+      or tracking, or geolocating or any other reasonable purpose. All the
+      programming languages give you their options to do that:</p>
+<p><div class="code-snippet">
+<header>
+<strong>Java</strong>
+ (via 
+<code>HttpServletRequest</code>
+):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-type">String</span> <span class="hljs-variable">clientIp</span> <span class="hljs-operator">=</span> request.getRemoteAddr();</code></pre>
+</div></p>
+<p><div class="code-snippet">
+<header>
+<strong>PHP</strong>
+ (via the 
+<code><span class="hljs-variable">$_SERVER</span></code>
+ superglobal):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-variable">$clientIp</span> = <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>];</code></pre>
+</div></p>
+<p><div class="code-snippet">
+<header>
+<strong>NodeJs</strong>
+ (via the Express 
+<code>request</code>
+ object):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-keyword">const</span> clientIp = request.<span class="hljs-property">connection</span>.<span class="hljs-property">remoteAddress</span>;</code></pre>
+</div></p>
+<p><div class="code-snippet">
+<header>
+Pure 
+<strong>NodeJs</strong>
+ (via the 
+<code>http.<span class="hljs-title function_">createServer</span>()</code>
+'s callback):
+</header>
+<pre class="code-snippet-body"><code>(req, res) =&gt; {
+    <span class="hljs-keyword">const</span> clientIp = res.<span class="hljs-property">socket</span>.<span class="hljs-property">remoteAddress</span>;
+}</code></pre>
+</div></p>
+<p>As you can see, the server, listening to a socket in your app,
+      knows its direct client address and ready to share it with you. This
+      always works pretty well on your machine and gives you proper results:
+      you'd either see the local <code>127.0.0.1</code> address, or, if you run the app in a docker container, it'd be
+      the docker host machine address <code>::ffff:172.17.0.1</code> or smth.</p>
+<p>Most of the internet guides stop at this point, as if that was it.
+      But the interesting part comes when you deploy that on production.</p>
+<p>Nobody wants to take care of load balancing, bot attack
+      protection, caching and serving SSL certificates in their code every time.
+      That's why your app on production is always deployed behind a
+      <em>load balancer</em>, that serves requests of a
+      <em>cache manager</em>, that sits behind a
+      <em>firewall</em>, etc. And all those smart internet
+      providers, hiding their client networks by chains of
+      <em>proxy-servers</em>... What one IP from those is visible
+      to your app? Its direct client – the
+      <em>load balancer</em>, in this case.</p>
+<p>Wait a minute! Does that mean, the client IP vanished into
+      oblivion? <br>
+      Luckily, not.</p>
+<p>By convention, every
+      <em>proxy / firewall / load balancing server</em>
+      should append an additional header to the request and store its client IP
+      there. You can find a lot of suggestions in the Internet, to take
+      the header called <code>X-Forwarded-For</code> as
+      the client IP address. But that is just half true, which is worse than
+      a lie.</p>
+<p>In fact, the <code>X-Forwarded-For</code>
+      header may contain the full chain of proxies, and its format is
+      a comma-separated list:</p>
+<p><div class="code-snippet">
+<pre class="code-snippet-body"><code>&lt;client-ip&gt;, &lt;proxy1-ip&gt;, &lt;proxy2-ip&gt;, ..., &lt;proxyN-ip&gt;</code></pre>
+</div></p>
+<p>So, knowing that, we're ready to get the client IP address
+      in a proper way:</p>
+<p><div class="code-snippet">
+<header>
+<strong>Java</strong> (via
+        <code>HttpServletRequest</code>):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getClientIp</span><span class="hljs-params">(HttpServletRequest request)</span>
+{
+    <span class="hljs-type">String</span> <span class="hljs-variable">clientIp</span> <span class="hljs-operator">=</span> request.getHeader(<span class="hljs-string">&#x27;X-Forwarded-For&#x27;</span>);
+    <span class="hljs-keyword">if</span> (clientIp != <span class="hljs-literal">null</span>)
+    {
+        clientIp = trim(clientIp.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>]);
+        <span class="hljs-keyword">if</span> (isValidIp(clientIp))
+        {
+            <span class="hljs-keyword">return</span> clientIp;
+        }
+    }
+  
+    <span class="hljs-keyword">return</span> request.getRemoteAddr();
+}</code></pre>
+</div></p>
+<p><div class="code-snippet">
+<header>
+<strong>PHP</strong> (via the
+        <code><span class="hljs-variable">$_SERVER</span></code> superglobal):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getClientIp</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// Note the header name format</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>])) {
+        <span class="hljs-variable">$ips</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;,&#x27;</span>, <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]);
+        <span class="hljs-variable">$clientIp</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$ips</span>[<span class="hljs-number">0</span>]);
+        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">isValidIp</span>(<span class="hljs-variable">$clientIp</span>)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-variable">$clientIp</span>;
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>];
+}</code></pre>
+</div></p>
+<p><div class="code-snippet">
+<header>
+<strong>NodeJs</strong> (via the Express
+        <code>request</code> object):
+</header>
+<pre class="code-snippet-body"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">getClientIp</span> = (<span class="hljs-params">request</span>) =&gt; {
+    <span class="hljs-comment">// header names are in lowercase</span>
+    <span class="hljs-keyword">if</span> (request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>]) {
+        <span class="hljs-keyword">const</span> clientIp = request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-title function_">trim</span>();
+        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isValidIp</span>(clientIp)) {
+            <span class="hljs-keyword">return</span> clientIp;
+        }
+    }
+
+    <span class="hljs-keyword">return</span> request.<span class="hljs-property">connection</span>.<span class="hljs-property">remoteAddress</span>;
+}</code></pre>
+</div></p>
+<p>Note, that there is a method <code><span class="hljs-title function_">isValidIp</span>()</code>
+        used in every snippet; all languages provide their own tools for such
+        a validation. Every time you get an IP from a request header, it must
+        be validated, since it's almost the same as a user input and can
+        contain anything. If the IP is not valid, better to fall back to
+        the <code>remoteAddress</code> approach, or any string
+        constant of your choice, like
+        <code><span class="hljs-string">&quot;127.0.0.1&quot;</span></code> or
+        <code><span class="hljs-string">&quot;::1&quot;</span></code>.</p>
+<p>Is that all? Are those snippets gonna work now?</p>
+<p>Well, yes. If you're lucky and your proxy servers are properly
+      configured to follow the convention and store the client IP in the
+      <code>X-Forwarded-For</code> header. If you can
+      configure them or ask someone to do that for you, always prefer
+      that way.</p>
+<p>Otherwise, you’ll have to experiment in the target environment
+      and start listing all the request headers. There you may find a whole zoo
+      of them being appended. They can be called
+      <code>X-Real-IP</code>,
+      <code>Client-Real-IP</code>,
+      <code>pRO-X-yEnCipHereDNAme-Client-IP</code>, etc.
+      Actually those names are only limited by their server owner's imagination.
+      If you'd like (or you have to), you can take those headers into
+      consideration too:</p>
+<p><div class="code-snippet">
+<pre class="code-snippet-body"><code><span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">const</span> weirdHeaderNames = [ <span class="hljs-comment">// order by priority</span>
+    <span class="hljs-string">&#x27;x-real-ip&#x27;</span>,
+    <span class="hljs-string">&#x27;client-real-ip&#x27;</span>,
+    <span class="hljs-comment">// ...</span>
+]
+<span class="hljs-title function_">foreach</span> (headerName <span class="hljs-keyword">in</span> weirdHeaderNames) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-title function_">headerExists</span>(headerName)) {
+        clientIp = <span class="hljs-title function_">extractIpFromHeader</span>(headerName);
+        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isValidIp</span>(clientIp)) {
+            <span class="hljs-keyword">return</span> clientIp
+        }
+    }
+}
+<span class="hljs-comment">// ...</span></code></pre>
+</div></p>
+<p>Translate this to your favorite programming language and
+      put after checking the <code>X-Forwarded-For</code>
+      header and before returning the default value at the end of the method.
+      And don't forget to add a big comment explaining those headers and
+      the sources where they are coming from. Otherwise, the next developer
+      will never know what can be kept and what should be thrown away.</p>
+<p>For the future, you may consider processing also
+      the <code>Forwarded</code> header, that was proposed
+      in 2014 but not actively used IRL yet. Probably, due to its complexity
+      and overload:</p>
+<p><div class="code-snippet">
+<header>
+2014, <a href="https://tools.ietf.org/html/rfc7239">https://tools.ietf.org/html/rfc7239</a>
+</header>
+<pre class="code-snippet-body"><code>Forwarded: <span class="hljs-keyword">for</span>=192.0.2.60;proto=http;by=203.0.113.43</code></pre>
+</div></p>
+</div>
+</article>
+</div>
+</body>
+</html>
