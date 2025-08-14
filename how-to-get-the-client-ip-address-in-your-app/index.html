@@ -3,10 +3,10 @@
 <head>
 <title>How To Get The Client IP Address In Your App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="/assets-e20eilr7r4t/favicon.ico">
-  <script src="/assets-e20eilr7r4t/js/global.js"></script>
-  <link rel="stylesheet" href="/assets-e20eilr7r4t/styles/global.css">
-  <link rel="stylesheet" href="/assets-e20eilr7r4t/styles/highlight.js/agate.css"></head>
+  <link rel="shortcut icon" href="/assets-f23rgjt96z/favicon.ico">
+  <script src="/assets-f23rgjt96z/js/global.js"></script>
+  <link rel="stylesheet" href="/assets-f23rgjt96z/styles/global.css">
+  <link rel="stylesheet" href="/assets-f23rgjt96z/styles/highlight.js/agate.css"></head>
 <body>
 <div id="global-chrome">
 <header id="global-chrome-header">
@@ -147,7 +147,11 @@ Pure
 <pre class="code-snippet-body"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">getClientIp</span> = (<span class="hljs-params">request</span>) =&gt; {
     <span class="hljs-comment">// header names are in lowercase</span>
     <span class="hljs-keyword">if</span> (request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>]) {
-        <span class="hljs-keyword">const</span> clientIp = request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-title function_">trim</span>();
+        <span class="hljs-keyword">const</span> clientIp =
+            request
+                .<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>]
+                .<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>]
+                .<span class="hljs-title function_">trim</span>();
         <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isValidIp</span>(clientIp)) {
             <span class="hljs-keyword">return</span> clientIp;
         }
