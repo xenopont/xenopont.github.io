@@ -272,6 +272,32 @@ export const menu = (
   });
 };
 
+type TMetaName = {
+  name:
+    | "application-name"
+    | "description"
+    | "generator"
+    | "keywords"
+    | "viewport";
+  content: string;
+};
+type TMetaHttpEquivalent = {
+  "http-equiv":
+    | "content-security-policy"
+    | "content-type"
+    | "default-style"
+    | "refresh";
+  content: string;
+};
+type TMetaCharset = { charset: "UTF-8" };
+export type TMetaParams = TMetaName | TMetaHttpEquivalent | TMetaCharset;
+export const meta = (params: TMetaParams): THtmlElementMarkup => {
+  return voidHtmlElement({
+    tagName: "meta",
+    attributes: params,
+  });
+};
+
 export const p = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},

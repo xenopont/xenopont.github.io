@@ -69,12 +69,15 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 
   // description
   if (page.summary !== "") {
-    headTags.push(`<meta name="description" content="${page.summary}">`);
+    headTags.push(m.meta({ name: "description", content: page.summary }));
   }
 
   // meta
   headTags.push(
-    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    m.meta({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0",
+    }),
   );
 
   // icon
