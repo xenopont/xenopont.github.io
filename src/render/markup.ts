@@ -290,7 +290,15 @@ type TMetaHttpEquivalent = {
   content: string;
 };
 type TMetaCharset = { charset: "UTF-8" };
-export type TMetaParams = TMetaName | TMetaHttpEquivalent | TMetaCharset;
+type TMetaProperty = {
+  property: "og:description" | "og:image" | "og:title" | "og:type" | "og:url";
+  content: string;
+};
+export type TMetaParams =
+  | TMetaName
+  | TMetaHttpEquivalent
+  | TMetaCharset
+  | TMetaProperty;
 export const meta = (params: TMetaParams): THtmlElementMarkup => {
   return voidHtmlElement({
     tagName: "meta",

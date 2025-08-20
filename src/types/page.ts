@@ -17,5 +17,5 @@ export type TPage = {
   path: TPath;
   summary: string;
   title: string;
-  uri: () => string;
+  uri: string;
 };

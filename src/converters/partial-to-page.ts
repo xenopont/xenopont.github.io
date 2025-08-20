@@ -7,6 +7,9 @@ import { stringToHtmlFilename } from "./string-to-html-filename.js";
 const defaultFilename: THtmlFilename = stringToHtmlFilename("index.html");
 
 export const partialToPage = (partial: TPartialPage): TPage => {
+  const uri = `/${partial.path}/${[defaultFilename, undefined].indexOf(partial.filename) ? "" : partial.filename}`;
+  console.log("URI:", uri, "");
+
   return {
     ...partial,
     author: partial.author ?? defaultAuthor,
@@ -20,7 +23,6 @@ export const partialToPage = (partial: TPartialPage): TPage => {
     localApp: partial.localApp ?? "",
     localStylesheet: partial.localStylesheet ?? "",
     summary: partial.summary ?? "",
-    uri: (): string =>
-      `/${partial.path}/${partial.filename === defaultFilename ? "" : partial.filename}`,
+    uri,
   };
 };

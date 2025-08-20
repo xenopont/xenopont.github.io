@@ -1,5 +1,8 @@
 import { generateId } from "../../utils/generate-id.js";
 
+// biome-ignore lint/complexity/useLiteralKeys: the source is indexed
+export const domainName = process.env["DOMAIN_NAME"] ?? "localhost:8080";
+
 export const distFolder = "dist";
 
 export const assetsFolder = `assets-${generateId()}`;
