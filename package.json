@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "(npm run type-check || true) && npm run build && npm run http",
     "build": "./node_modules/.bin/tsx src/build/all.ts",
+    "build:xenopont": "DOMAIN_NAME=xenopont.github.io ./node_modules/.bin/tsx src/build/all.ts",
+    "build:dev-xl": "DOMAIN_NAME=dev-xl.com ./node_modules/.bin/tsx src/build/all.ts",
     "http": "./node_modules/.bin/http-server ./dist/",
     "type-check": "./node_modules/.bin/tsc --noEmit",
-    "watch": "./node_modules/.bin/nodemon"
+    "watch": "DOMAIN_NAME=localhost:8080 ./node_modules/.bin/nodemon"
   },
   "repository": {
     "type": "git",
