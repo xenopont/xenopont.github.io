@@ -88,14 +88,25 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   headTags.push(m.link("shortcut icon", `/${assetsFolder}/favicon.ico`));
 
   // Open Graph
-  headTags.push(m.meta({ property: "og:title", content: page.title }));
-  headTags.push(m.meta({ property: "og:description", content: page.summary }));
-  headTags.push(m.meta({ property: "og:type", content: "article" }));
   headTags.push(
+    m.meta({ property: "og:title", content: page.title }),
+    m.meta({ property: "og:description", content: page.summary }),
+    m.meta({ property: "og:type", content: "article" }),
     m.meta({
       property: "og:url",
       content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.uri}`,
+      // TODO uncomment with a proper image url outside the assets folder
+      // m.meta({ property: "og:image", content: "" })
     }),
+  );
+
+  // Twitter cards
+  headTags.push(
+    m.meta({ name: "twitter:card", content: "summary_large_card" }),
+    m.meta({ name: "twitter:title", content: page.title }),
+    m.meta({ name: "twitter:description", content: page.summary }),
+    // TODO uncomment with a proper image url outside the assets folder
+    // m.meta({ name: "twitter:image", content: "" }),
   );
 
   // global app

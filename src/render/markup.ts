@@ -165,6 +165,13 @@ export const code = (
   });
 };
 
+export const comment = (text: string): THtmlElementMarkup => {
+  const escapedText = text.replace("-->", "→");
+  // add a warning here
+
+  return `<!-- ${escapedText} -->` as THtmlElementMarkup;
+};
+
 export const div = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -278,7 +285,12 @@ type TMetaName = {
     | "description"
     | "generator"
     | "keywords"
-    | "viewport";
+    | "viewport"
+    | "twitter:card"
+    | "twitter:description"
+    | "twitter:image"
+    | "twitter:title"
+    | "twitter:url";
   content: string;
 };
 type TMetaHttpEquivalent = {
