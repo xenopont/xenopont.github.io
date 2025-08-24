@@ -3,6 +3,7 @@ import { stringToPath } from "../../converters/string-to-path.js";
 import { highlight } from "../../render/highlight.js";
 import * as m from "../../render/markup.js";
 import type { TPartialPage } from "../../types/partial-page.js";
+import { socialCardImageUri } from "./image-1.jpg.js";
 
 export const HowToDetectClientIpPage: TPartialPage = {
   content: [
@@ -261,6 +262,7 @@ foreach (headerName in weirdHeaderNames) {
   createdAt: new Date("2020-01-17"),
   path: stringToPath("how-to-get-the-client-ip-address-in-your-app"),
   title: "How To Get The Client IP Address In Your App",
+  socialCardImageUri,
   summary: `The client IPs are not what they seem. What the Internet has told
     you about detecting them is probably wrong.`,
 };

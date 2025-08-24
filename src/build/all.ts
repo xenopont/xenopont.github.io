@@ -3,7 +3,7 @@ import { allPages } from "../pages/all.js";
 import { logger } from "../utils/logger.js";
 import { buildGlobalApp } from "./util/build-global-app.js";
 import { copyGlobalAssets } from "./util/copy-global-assets.js";
-import { createAssetsFolder } from "./util/create-assets-folder.js";
+import { createAssetsFolders } from "./util/create-assets-folders.js";
 import { createDistFolderSync } from "./util/create-dist-folder-sync.js";
 import { createHtmlPage } from "./util/create-html-page.js";
 
@@ -11,7 +11,7 @@ const main = async (): Promise<PromiseSettledResult<void>[]> => {
   const promises: Promise<void>[] = [];
 
   createDistFolderSync();
-  await createAssetsFolder();
+  await createAssetsFolders();
   // The copy queue is already fulfilled by the public pages content
   // when we import them.
   // But it must not be started before the assets folder is ready.

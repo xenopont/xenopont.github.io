@@ -11,5 +11,6 @@ export const createDistFolderSync = (): void => {
   } catch (error) {
     logger.error("❌ Cannot create the dist folder.");
     logger.error(error);
+    throw error;
   }
 };

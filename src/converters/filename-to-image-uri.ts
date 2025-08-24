@@ -1,4 +1,4 @@
-import { imagesFolder } from "../build/util/constants.js";
+import { staticImagesFolder } from "../build/util/constants.js";
 import type { TImageUri } from "../types/image-uri.js";
 import { filenameToUri } from "./filename-to-uri.js";
 
@@ -10,12 +10,15 @@ const allowedExtensions: Set<string> = new Set([
   "webp",
 ]);
 
-export const filenameToImageUri = (sourceFilename: string): TImageUri => {
+export const filenameToImageUri = (
+  sourceFilename: string,
+  baseFilename?: string,
+): TImageUri => {
   return filenameToUri(
     sourceFilename,
     allowedExtensions,
-    `${imagesFolder}`,
+    `${staticImagesFolder}`,
     "TImageUri",
-    "img",
+    baseFilename ?? "img",
   );
 };

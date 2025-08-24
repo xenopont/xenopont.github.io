@@ -37,6 +37,7 @@ export const partialToPage = (partial: TPartialPage): TPage => {
     language: partial.language ?? "en-US",
     localApp: partial.localApp ?? "",
     localStylesheet: partial.localStylesheet ?? "",
+    socialCardImageUri: partial.socialCardImageUri ?? "",
     summary: partial.summary ?? "",
     uri: buildUri(partial.path, partial.filename),
   };

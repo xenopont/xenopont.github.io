@@ -17,5 +17,6 @@ export type TPartialPage = {
   localApp?: string; // ""
   localStylesheet?: string; // ""
   isPublic?: boolean; // true
+  socialCardImageUri?: string; // ""
   summary?: string;
 };

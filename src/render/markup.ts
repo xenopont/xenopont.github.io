@@ -2,6 +2,8 @@
  * https://html.spec.whatwg.org/multipage/syntax.html#elements-2
  */
 
+import type { TImageUri } from "../types/image-uri.js";
+
 declare const __brandStartTag: unique symbol;
 export type TStartTag = string & {
   [__brandStartTag]: "TStartTag";
@@ -194,6 +196,16 @@ export const em = (
     children: contentToChildren(content),
     separator: "",
   });
+};
+
+type TImageElementAttributes = THtmlElementAttributes & {
+  src: TImageUri;
+  alt: string;
+};
+export const img = (
+  attributes: TImageElementAttributes,
+): THtmlElementMarkup => {
+  return voidHtmlElement({ tagName: "img", attributes });
 };
 
 export const h1 = (

@@ -1,6 +1,5 @@
 import * as fs from "node:fs";
 import { distFolder } from "../build/util/constants.js";
-import { counter } from "../utils/counter.js";
 import { copyQueue } from "./copy-queue.js";
 
 export const filenameToUri = <T>(
@@ -22,7 +21,7 @@ export const filenameToUri = <T>(
     throw new Error(`❌ Required resource ${sourceFilename} not found`);
   }
 
-  const fileUri = `${destinationUri}/${baseFilename}-${counter()}.${extension}`;
+  const fileUri = `${destinationUri}/${baseFilename}.${extension}`;
   const destinationFilename = `./${distFolder}/${fileUri}`;
   // At this moment the copy operation is impossible, because the page contents
   // are prepared first, and the assets directory is not created yet.

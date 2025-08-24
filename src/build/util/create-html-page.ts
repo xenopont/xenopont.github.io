@@ -95,19 +95,31 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
     m.meta({
       property: "og:url",
       content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.uri}`,
-      // TODO uncomment with a proper image url outside the assets folder
-      // m.meta({ property: "og:image", content: "" })
     }),
   );
+  if (page.socialCardImageUri !== "") {
+    headTags.push(
+      m.meta({
+        property: "og:image",
+        content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.socialCardImageUri}`,
+      }),
+    );
+  }
 
   // Twitter cards
   headTags.push(
     m.meta({ name: "twitter:card", content: "summary_large_card" }),
     m.meta({ name: "twitter:title", content: page.title }),
     m.meta({ name: "twitter:description", content: page.summary }),
-    // TODO uncomment with a proper image url outside the assets folder
-    // m.meta({ name: "twitter:image", content: "" }),
   );
+  if (page.socialCardImageUri !== "") {
+    headTags.push(
+      m.meta({
+        name: "twitter:image",
+        content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.socialCardImageUri}`,
+      }),
+    );
+  }
 
   // global app
   if (!page.excludeGlobalApp) {
