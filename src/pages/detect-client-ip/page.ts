@@ -3,7 +3,7 @@ import { stringToPath } from "../../converters/string-to-path.js";
 import { highlight } from "../../render/highlight.js";
 import * as m from "../../render/markup.js";
 import type { TPartialPage } from "../../types/partial-page.js";
-import { socialCardImageUri } from "./image-1.jpg.js";
+import { socialCardImageUri } from "./social-network-cover.jpg.js";
 
 export const HowToDetectClientIpPage: TPartialPage = {
   content: [
