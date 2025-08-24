@@ -28,7 +28,7 @@ const applyStyle = (
     return;
   }
   for (const property in style) {
-    if (!Object.prototype.hasOwnProperty.call(style, property)) {
+    if (!Object.hasOwn(style, property)) {
       continue;
     }
     element.style.setProperty(property, style[property]?.toString() ?? null);
@@ -40,7 +40,7 @@ const applyAttributes = (
   attributes: Attributes,
 ): void => {
   for (const key in attributes) {
-    if (!Object.prototype.hasOwnProperty.call(attributes, key)) {
+    if (!Object.hasOwn(attributes, key)) {
       continue;
     }
 
