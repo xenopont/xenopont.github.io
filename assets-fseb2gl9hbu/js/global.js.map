@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../src/utils/logger.ts", "../../../src/app.ts"],
-  "sourcesContent": ["export const logger = {\n  error: console.error,\n  log: console.log,\n  warn: console.warn,\n};\n", "import { logger } from \"./utils/logger.js\";\n\nlogger.log(\"Global App Started\");\n"],
+  "sourcesContent": ["export const logger = {\r\n  error: console.error,\r\n  log: console.log,\r\n  warn: console.warn,\r\n};\r\n", "import { logger } from \"./utils/logger.js\";\r\n\r\nlogger.log(\"Global App Started\");\r\n"],
   "mappings": "mBAAO,IAAMA,EAAS,CACpB,MAAO,QAAQ,MACf,IAAK,QAAQ,IACb,KAAM,QAAQ,IAChB,ECFAC,EAAO,IAAI,oBAAoB",
   "names": ["logger", "logger"]
 }

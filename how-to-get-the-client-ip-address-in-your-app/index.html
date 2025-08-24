@@ -1,12 +1,26 @@
 <!doctype html>
 <html lang="en-US">
 <head>
-<title>How To Get The Client IP Address In Your App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="/assets-f23rgjt96z/favicon.ico">
-  <script src="/assets-f23rgjt96z/js/global.js"></script>
-  <link rel="stylesheet" href="/assets-f23rgjt96z/styles/global.css">
-  <link rel="stylesheet" href="/assets-f23rgjt96z/styles/highlight.js/agate.css"></head>
+<meta charset="UTF-8">
+  <title>How To Get The Client IP Address In Your App</title>
+  <meta name="description" content="The client IPs are not what they seem. What the Internet has told
+    you about detecting them is probably wrong.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets-fseb2gl9hbu/favicon.ico">
+  <meta property="og:title" content="How To Get The Client IP Address In Your App">
+  <meta property="og:description" content="The client IPs are not what they seem. What the Internet has told
+    you about detecting them is probably wrong.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://xenopont.github.io/how-to-get-the-client-ip-address-in-your-app/">
+  <meta property="og:image" content="https://xenopont.github.io/images/detect-client-ip.jpg">
+  <meta name="twitter:card" content="summary_large_card">
+  <meta name="twitter:title" content="How To Get The Client IP Address In Your App">
+  <meta name="twitter:description" content="The client IPs are not what they seem. What the Internet has told
+    you about detecting them is probably wrong.">
+  <meta name="twitter:image" content="https://xenopont.github.io/images/detect-client-ip.jpg">
+  <script src="/assets-fseb2gl9hbu/js/global.js"></script>
+  <link rel="stylesheet" href="/assets-fseb2gl9hbu/styles/global.css">
+  <link rel="stylesheet" href="/assets-fseb2gl9hbu/styles/highlight.js/agate.css"></head>
 <body>
 <div id="global-chrome">
 <header id="global-chrome-header">
@@ -147,11 +161,7 @@ Pure
 <pre class="code-snippet-body"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">getClientIp</span> = (<span class="hljs-params">request</span>) =&gt; {
     <span class="hljs-comment">// header names are in lowercase</span>
     <span class="hljs-keyword">if</span> (request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>]) {
-        <span class="hljs-keyword">const</span> clientIp =
-            request
-                .<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>]
-                .<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>]
-                .<span class="hljs-title function_">trim</span>();
+        <span class="hljs-keyword">const</span> clientIp = request.<span class="hljs-property">headers</span>[<span class="hljs-string">&#x27;x-forwarded-for&#x27;</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-title function_">trim</span>();
         <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isValidIp</span>(clientIp)) {
             <span class="hljs-keyword">return</span> clientIp;
         }
