@@ -10,6 +10,7 @@ import {
   assetsFolder,
   cssFolder,
   distFolder,
+  domainName,
   globalAppFile,
   globalCssFile,
   jsFolder,
@@ -64,16 +65,61 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   let missingResources = false;
   const promises: Promise<void>[] = [];
 
+  // charset
+  headTags.push(m.meta({ charset: "UTF-8" }));
+
   // title
   headTags.push(m.title(page.title));
 
-  // meta
+  // description
+  if (page.summary !== "") {
+    headTags.push(m.meta({ name: "description", content: page.summary }));
+  }
+
+  // viewport
   headTags.push(
-    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    m.meta({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0",
+    }),
   );
 
   // icon
   headTags.push(m.link("shortcut icon", `/${assetsFolder}/favicon.ico`));
+
+  // Open Graph
+  headTags.push(
+    m.meta({ property: "og:title", content: page.title }),
+    m.meta({ property: "og:description", content: page.summary }),
+    m.meta({ property: "og:type", content: "article" }),
+    m.meta({
+      property: "og:url",
+      content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.uri}`,
+    }),
+  );
+  if (page.socialCardImageUri !== "") {
+    headTags.push(
+      m.meta({
+        property: "og:image",
+        content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.socialCardImageUri}`,
+      }),
+    );
+  }
+
+  // Twitter cards
+  headTags.push(
+    m.meta({ name: "twitter:card", content: "summary_large_card" }),
+    m.meta({ name: "twitter:title", content: page.title }),
+    m.meta({ name: "twitter:description", content: page.summary }),
+  );
+  if (page.socialCardImageUri !== "") {
+    headTags.push(
+      m.meta({
+        name: "twitter:image",
+        content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.socialCardImageUri}`,
+      }),
+    );
+  }
 
   // global app
   if (!page.excludeGlobalApp) {

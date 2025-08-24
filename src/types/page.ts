@@ -15,7 +15,8 @@ export type TPage = {
   localApp: string;
   localStylesheet: string;
   path: TPath;
+  socialCardImageUri: string;
   summary: string;
   title: string;
-  uri: () => string;
+  uri: string;
 };

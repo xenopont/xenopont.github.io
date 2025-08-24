@@ -2,9 +2,27 @@ import { defaultAuthor } from "../config/contants.js";
 import type { THtmlFilename } from "../types/html-filename.js";
 import type { TPage } from "../types/page.js";
 import type { TPartialPage } from "../types/partial-page.js";
+import type { TPath } from "../types/path.js";
 import { stringToHtmlFilename } from "./string-to-html-filename.js";
 
 const defaultFilename: THtmlFilename = stringToHtmlFilename("index.html");
+
+const buildUri = (
+  path: TPath | undefined,
+  filename: THtmlFilename | undefined,
+): string => {
+  if (path && filename) {
+    return `/${path}/${filename}`;
+  }
+  if (path) {
+    return `/${path}/`;
+  }
+  if (filename) {
+    return `/${filename}`;
+  }
+
+  return "/";
+};
 
 export const partialToPage = (partial: TPartialPage): TPage => {
   return {
@@ -19,8 +37,8 @@ export const partialToPage = (partial: TPartialPage): TPage => {
     language: partial.language ?? "en-US",
     localApp: partial.localApp ?? "",
     localStylesheet: partial.localStylesheet ?? "",
+    socialCardImageUri: partial.socialCardImageUri ?? "",
     summary: partial.summary ?? "",
-    uri: (): string =>
-      `/${partial.path}/${partial.filename === defaultFilename ? "" : partial.filename}`,
+    uri: buildUri(partial.path, partial.filename),
   };
 };

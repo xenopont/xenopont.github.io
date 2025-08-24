@@ -2,6 +2,8 @@
  * https://html.spec.whatwg.org/multipage/syntax.html#elements-2
  */
 
+import type { TImageUri } from "../types/image-uri.js";
+
 declare const __brandStartTag: unique symbol;
 export type TStartTag = string & {
   [__brandStartTag]: "TStartTag";
@@ -165,6 +167,13 @@ export const code = (
   });
 };
 
+export const comment = (text: string): THtmlElementMarkup => {
+  const escapedText = text.replace("-->", "→");
+  // add a warning here
+
+  return `<!-- ${escapedText} -->` as THtmlElementMarkup;
+};
+
 export const div = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -187,6 +196,16 @@ export const em = (
     children: contentToChildren(content),
     separator: "",
   });
+};
+
+type TImageElementAttributes = THtmlElementAttributes & {
+  src: TImageUri;
+  alt: string;
+};
+export const img = (
+  attributes: TImageElementAttributes,
+): THtmlElementMarkup => {
+  return voidHtmlElement({ tagName: "img", attributes });
 };
 
 export const h1 = (
@@ -269,6 +288,45 @@ export const menu = (
     attributes,
     children: contentToChildren(content),
     separator: "\n",
+  });
+};
+
+type TMetaName = {
+  name:
+    | "application-name"
+    | "description"
+    | "generator"
+    | "keywords"
+    | "viewport"
+    | "twitter:card"
+    | "twitter:description"
+    | "twitter:image"
+    | "twitter:title"
+    | "twitter:url";
+  content: string;
+};
+type TMetaHttpEquivalent = {
+  "http-equiv":
+    | "content-security-policy"
+    | "content-type"
+    | "default-style"
+    | "refresh";
+  content: string;
+};
+type TMetaCharset = { charset: "UTF-8" };
+type TMetaProperty = {
+  property: "og:description" | "og:image" | "og:title" | "og:type" | "og:url";
+  content: string;
+};
+export type TMetaParams =
+  | TMetaName
+  | TMetaHttpEquivalent
+  | TMetaCharset
+  | TMetaProperty;
+export const meta = (params: TMetaParams): THtmlElementMarkup => {
+  return voidHtmlElement({
+    tagName: "meta",
+    attributes: params,
   });
 };
 
