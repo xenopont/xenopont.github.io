@@ -8,3 +8,16 @@ export type THtmlElementMarkup = string & {
 };
 
 export type THtmlElementTagName = string;
+
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes
+type GlobalHtmlElementAttributes = {
+  accesskey?: string;
+  autocapitalize?: "none" | "off" | "sentences" | "on" | "words" | "characters";
+  autocorrect?: "off" | "on" | "";
+  autofocues?: null;
+  class?: string;
+  contenteditable?: "true" | "false" | "plaintext-only";
+  [attr: `data-${string}`]: string | undefined;
+  dir?: "ltr" | "rtl" | "auto";
+  draggable?: "true" | "false" | "auto";
+};
