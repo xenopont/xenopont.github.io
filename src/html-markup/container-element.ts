@@ -1,7 +1,7 @@
 import { endTag, startTag } from "./base-tags.js";
 import type { THtmlElementAttributes, THtmlElementMarkup } from "./types.js";
 
-type TContainerElementContent =
+export type TContainerElementContent =
   | undefined
   | THtmlElementMarkup
   | THtmlElementMarkup[];
