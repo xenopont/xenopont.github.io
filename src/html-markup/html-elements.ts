@@ -71,6 +71,9 @@ export const div = (
   });
 };
 
+export const doctype = (): THtmlElementMarkup =>
+  "<!DOCTYPE html>" as THtmlElementMarkup;
+
 export const em = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -142,6 +145,21 @@ export const header = (
 export const hr = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "hr", attributes });
+
+// todo create runtime validation
+// The lang attribute must follow BCP 47
+type THtmlTagAttributes = THtmlElementAttributes & { lang: string };
+export const html = (
+  content: TContainerElementContent,
+  attributes: THtmlTagAttributes,
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "html",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
 
 export const li = (
   content: TContainerElementContent,
