@@ -1,22 +1,28 @@
 import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
-import type { THtmlElementMarkup } from "../../render/markup.js";
-import * as m from "../../render/markup.js";
+import * as m from "../../html-markup/html-elements.js";
+import * as s from "../../html-markup/non-html-elements.js";
+import type { THtmlElementMarkup } from "../../html-markup/types.js";
 import type { TPage } from "../../types/page.js";
 import { articles } from "../articles.js";
 import { blog } from "../blog.js";
 
-const mainPageTitle: THtmlElementMarkup = m.safe("Dev XL");
+const mainPageTitle: THtmlElementMarkup = s.safe("Dev XL");
 
 const card = (page: TPage): THtmlElementMarkup => {
   return m.div(
-    m.a(`/${page.path}/`, [
-      m.h3(m.safe(page.title)),
-      m.div(
-        m.span(m.safe(dateToIso8601(page.createdAt)), { class: "date-value" }),
-        { class: "date" },
-      ),
-      m.div(m.safe(page.summary), { class: "summary" }),
-    ]),
+    m.a(
+      [
+        m.h3(s.safe(page.title)),
+        m.div(
+          m.span(s.safe(dateToIso8601(page.createdAt)), {
+            class: "date-value",
+          }),
+          { class: "date" },
+        ),
+        m.div(s.safe(page.summary), { class: "summary" }),
+      ],
+      { href: page.uri },
+    ),
     {
       class: "card",
     },
@@ -25,12 +31,12 @@ const card = (page: TPage): THtmlElementMarkup => {
 
 const articleList = (articles: TPage[]): THtmlElementMarkup => {
   if (articles.length === 0) {
-    return m.safe("");
+    return s.safe("");
   }
 
   return m.section(
     [
-      m.header(m.h2(m.safe("Articles"))),
+      m.header(m.h2(s.safe("Articles"))),
       m.menu(
         articles
           // latest at the top
@@ -44,7 +50,7 @@ const articleList = (articles: TPage[]): THtmlElementMarkup => {
 
 const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
   if (blogposts.length === 0) {
-    return m.safe("");
+    return s.safe("");
   }
 
   return m.section(
@@ -55,7 +61,7 @@ const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
           .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
           .map((page) => m.li(card(page))),
       ),
-      m.header(m.h2(m.safe("Blogposts"))),
+      m.header(m.h2(s.safe("Blogposts"))),
     ],
     { id: "blog-section" },
   );
@@ -66,8 +72,8 @@ export const generateMainPageContent = (): THtmlElementMarkup[] => {
     m.div(mainPageTitle, { class: "main-page-title shadow" }),
     m.div(mainPageTitle, { class: "main-page-title text" }),
     articleList(articles),
-    m.div(m.safe(""), { id: "article-section-overlay" }),
+    m.div(s.safe(""), { id: "article-section-overlay" }),
     blogpostList(blog),
-    m.div(m.safe(""), { id: "blog-section-overlay" }),
+    m.div(s.safe(""), { id: "blog-section-overlay" }),
   ].filter((element) => element !== "");
 };

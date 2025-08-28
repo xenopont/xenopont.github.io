@@ -1,6 +1,6 @@
+import * as m from "../html-markup/html-elements.js";
+import type { THtmlElementMarkup } from "../html-markup/types.js";
 import { highlight, type THighlightLanguage } from "../render/highlight.js";
-import type { THtmlElementMarkup } from "../render/markup.js";
-import * as m from "../render/markup.js";
 
 export const codeSnippet = (
   language: THighlightLanguage,

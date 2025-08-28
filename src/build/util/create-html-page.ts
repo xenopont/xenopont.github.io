@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
-import * as m from "../../render/markup.js";
+import * as m from "../../html-markup/html-elements.js";
+import * as s from "../../html-markup/non-html-elements.js";
 import type { TPage } from "../../types/page.js";
 import { generateId } from "../../utils/generate-id.js";
 import { logger } from "../../utils/logger.js";
@@ -26,7 +27,8 @@ const prepareBody = (page: TPage): string => {
       m.header(
         m.menu(
           m.li(
-            m.a("/", m.span(m.none, { id: "home-link-chevron" }), {
+            m.a(m.span(s.none, { id: "home-link-chevron" }), {
+              href: "/",
               id: "home-link",
             }),
           ),
@@ -38,13 +40,13 @@ const prepareBody = (page: TPage): string => {
       m.article(
         [
           m.header([
-            m.h1(m.safe(page.title)),
+            m.h1(s.safe(page.title)),
             m.section(
               [
-                m.time(m.safe(dateToIso8601(page.createdAt)), {
+                m.time(s.safe(dateToIso8601(page.createdAt)), {
                   datetime: dateToIso8601(page.createdAt),
                 }),
-                m.span(m.safe(`by ${page.author}`), { id: "author" }),
+                m.span(s.safe(`by ${page.author}`), { id: "author" }),
               ],
               { id: "article-properties" },
             ),
@@ -85,7 +87,9 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
   );
 
   // icon
-  headTags.push(m.link("shortcut icon", `/${assetsFolder}/favicon.ico`));
+  headTags.push(
+    m.link({ rel: "shortcut icon", href: `/${assetsFolder}/favicon.ico` }),
+  );
 
   // Open Graph
   headTags.push(
@@ -128,9 +132,11 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
 
   // global styles
   if (!page.excludeGlobalStylesheet) {
-    headTags.push(m.link("stylesheet", `/${globalCssFile}`));
+    headTags.push(m.link({ rel: "stylesheet", href: `/${globalCssFile}` }));
   }
-  headTags.push(m.link("stylesheet", `/${cssFolder}/highlight.js/agate.css`));
+  headTags.push(
+    m.link({ rel: "stylesheet", href: `/${cssFolder}/highlight.js/agate.css` }),
+  );
 
   // local app
   if (page.localApp !== "") {

@@ -174,22 +174,7 @@ export const li = (
 };
 
 type TLinkAttributes = THtmlElementAttributes & {
-  rel:
-    | "alternate"
-    | "author"
-    | "dns-prefetch"
-    | "help"
-    | "icon"
-    | "license"
-    | "next"
-    | "pingback"
-    | "preconnect"
-    | "prefetch"
-    | "preload"
-    | "prerender"
-    | "prev"
-    | "search"
-    | "stylesheet";
+  rel: string;
   href: string;
 };
 export const link = (attributes: TLinkAttributes): THtmlElementMarkup => {
