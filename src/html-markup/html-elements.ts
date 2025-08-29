@@ -3,137 +3,22 @@
  */
 
 import type { TImageUri } from "../types/image-uri.js";
+import {
+  containerHtmlElement,
+  contentToChildren,
+  type TContainerElementContent,
+} from "./container-element.js";
+import type { THtmlElementAttributes, THtmlElementMarkup } from "./types.js";
+import { voidHtmlElement } from "./void-element.js";
 
-declare const __brandStartTag: unique symbol;
-export type TStartTag = string & {
-  [__brandStartTag]: "TStartTag";
-};
-declare const __brandEndTag: unique symbol;
-export type TEndTag = string & {
-  [__brandEndTag]: "TEndTag";
-};
-
-declare const __brandTHtmlElementMarkup: unique symbol;
-export type THtmlElementMarkup = string & {
-  [__brandTHtmlElementMarkup]: "THtmlElementMarkup";
-};
-
-type THtmlElementTagName = string;
-
-// TODO: split the type to global, aria-* and data-* attributes
-// TODO: limit the type by the allowed for exact element ones
-type THtmlElementAttributes = Record<string, string | undefined>;
-
-type TVoidElementTagName =
-  | "area"
-  | "base"
-  | "br"
-  | "col"
-  | "embed"
-  | "hr"
-  | "img"
-  | "input"
-  | "link"
-  | "meta"
-  | "source"
-  | "track"
-  | "wbr";
-type TVoidHtmlElementCreateParams = {
-  tagName: TVoidElementTagName;
-  attributes: THtmlElementAttributes;
-};
-
-const startTag = (
-  tagName: THtmlElementTagName,
-  attributes: THtmlElementAttributes,
-): TStartTag => {
-  const parts: string[] = [];
-  parts.push(`<${tagName}`);
-  if (Object.keys(attributes).length > 0) {
-    parts.push(
-      ` ${Object.keys(attributes)
-        .map((k) => `${k}="${attributes[k]}"`)
-        .join(" ")}`, // note the space before the value
-    );
-  }
-  parts.push(">");
-
-  return parts.join("") as TStartTag;
-};
-
-const endTag = (tagName: THtmlElementTagName): TEndTag => {
-  return `</${tagName}>` as TEndTag;
-};
-
-const voidHtmlElement = ({
-  tagName,
-  attributes,
-}: TVoidHtmlElementCreateParams): THtmlElementMarkup => {
-  return `${startTag(tagName, attributes)}` as THtmlElementMarkup;
-};
-
-type TContainerElementContent =
-  | undefined
-  | THtmlElementMarkup
-  | THtmlElementMarkup[];
-const contentToChildren = (
-  content: TContainerElementContent,
-): THtmlElementMarkup[] => {
-  if (content === undefined) {
-    return [];
-  }
-  if (Array.isArray(content)) {
-    return content;
-  }
-  return [content];
-};
-
-type TChildrenSeparator = "" | "\n";
-type TContainerHtmlElementCreateParams = {
-  tagName: string;
-  attributes: THtmlElementAttributes;
-  children: THtmlElementMarkup[];
-  separator: TChildrenSeparator;
-};
-const containerHtmlElement = ({
-  tagName,
-  attributes,
-  children,
-  separator,
-}: TContainerHtmlElementCreateParams): THtmlElementMarkup => {
-  const parts: string[] = [];
-  parts.push(startTag(tagName, attributes));
-  if (children.length > 0) {
-    parts.push(children.join(separator));
-  }
-  parts.push(endTag(tagName));
-
-  return parts.join(separator) as THtmlElementMarkup;
-};
-
-// TODO: add text manipulations and options to cancel them
-export const safe = (str: string): THtmlElementMarkup =>
-  str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;") as THtmlElementMarkup;
-export const unsafe = (str: string): THtmlElementMarkup =>
-  str as THtmlElementMarkup;
-
-export const nl2br = (str: string): THtmlElementMarkup =>
-  str.replace(/\n/g, "<br>") as THtmlElementMarkup;
-
-export const none = "" as THtmlElementMarkup;
-
+type TAnchorAttributes = THtmlElementAttributes & { href: string };
 export const a = (
-  href: string,
   content: TContainerElementContent,
-  attributes: THtmlElementAttributes = {},
+  attributes: TAnchorAttributes,
 ): THtmlElementMarkup => {
   return containerHtmlElement({
     tagName: "a",
-    attributes: { href, ...attributes },
+    attributes,
     children: contentToChildren(content),
     separator: "",
   });
@@ -186,6 +71,9 @@ export const div = (
   });
 };
 
+export const doctype = (): THtmlElementMarkup =>
+  "<!DOCTYPE html>" as THtmlElementMarkup;
+
 export const em = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -198,13 +86,11 @@ export const em = (
   });
 };
 
-type TImageElementAttributes = THtmlElementAttributes & {
+type TImageAttributes = THtmlElementAttributes & {
   src: TImageUri;
   alt: string;
 };
-export const img = (
-  attributes: TImageElementAttributes,
-): THtmlElementMarkup => {
+export const img = (attributes: TImageAttributes): THtmlElementMarkup => {
   return voidHtmlElement({ tagName: "img", attributes });
 };
 
@@ -260,6 +146,21 @@ export const hr = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "hr", attributes });
 
+// todo create runtime validation
+// The lang attribute must follow BCP 47
+type THtmlTagAttributes = THtmlElementAttributes & { lang: string };
+export const html = (
+  content: TContainerElementContent,
+  attributes: THtmlTagAttributes,
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "html",
+    attributes,
+    children: contentToChildren(content),
+    separator: "\n",
+  });
+};
+
 export const li = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},
@@ -272,10 +173,14 @@ export const li = (
   });
 };
 
-export const link = (rel: string, href: string): THtmlElementMarkup => {
+type TLinkAttributes = THtmlElementAttributes & {
+  rel: string;
+  href: string;
+};
+export const link = (attributes: TLinkAttributes): THtmlElementMarkup => {
   return voidHtmlElement({
     tagName: "link",
-    attributes: { rel, href },
+    attributes,
   });
 };
 
@@ -318,15 +223,15 @@ type TMetaProperty = {
   property: "og:description" | "og:image" | "og:title" | "og:type" | "og:url";
   content: string;
 };
-export type TMetaParams =
+type TMetaAttributes =
   | TMetaName
   | TMetaHttpEquivalent
   | TMetaCharset
   | TMetaProperty;
-export const meta = (params: TMetaParams): THtmlElementMarkup => {
+export const meta = (attributes: TMetaAttributes): THtmlElementMarkup => {
   return voidHtmlElement({
     tagName: "meta",
-    attributes: params,
+    attributes,
   });
 };
 
@@ -390,9 +295,10 @@ export const strong = (
   });
 };
 
+type TTimeAttributes = THtmlElementAttributes & { datetime: string };
 export const time = (
   content: TContainerElementContent,
-  attributes: THtmlElementAttributes = {},
+  attributes: TTimeAttributes,
 ): THtmlElementMarkup => {
   return containerHtmlElement({
     tagName: "time",

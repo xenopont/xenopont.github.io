@@ -1,4 +1,4 @@
-import type { THtmlElementMarkup } from "../render/markup.js";
+import type { THtmlElementMarkup } from "../html-markup/types.js";
 import type { THtmlFilename } from "./html-filename.js";
 import type { TPath } from "./path.js";
 

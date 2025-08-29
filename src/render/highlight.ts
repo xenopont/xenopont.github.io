@@ -4,7 +4,7 @@ import java from "highlight.js/lib/languages/java";
 import jsLang from "highlight.js/lib/languages/javascript";
 import php from "highlight.js/lib/languages/php";
 import xmlMarkup from "highlight.js/lib/languages/xml";
-import type { THtmlElementMarkup } from "./markup.js";
+import type { THtmlElementMarkup } from "../html-markup/types.js";
 
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("html", xmlMarkup);
