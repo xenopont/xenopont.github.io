@@ -35,7 +35,8 @@ export const HowToDetectClientIpPage: TPartialPage = {
         "javascript",
         "const clientIp = request.connection.remoteAddress;",
         [
-          m.strong(s.safe("NodeJs")),
+          m.strong(s.safe("Node.js")),
+          m.strong(s.safe("Node.js")),
           s.safe(" (via the Express "),
           m.code(highlight("js", "request")),
           s.safe(" object):"),
@@ -52,7 +53,7 @@ export const HowToDetectClientIpPage: TPartialPage = {
 `,
         [
           s.safe("Pure "),
-          m.strong(s.safe("NodeJs")),
+          m.strong(s.safe("Node.js")),
           s.safe(" (via the "),
           m.code(highlight("js", "http.createServer()")),
           s.safe("'s callback):"),
@@ -175,7 +176,7 @@ const getClientIp = (request) => {
     return request.connection.remoteAddress;
 }
       `,
-        s.unsafe(`${m.strong(s.safe("NodeJs"))} (via the Express
+        s.unsafe(`${m.strong(s.safe("Node.js"))} (via the Express
         ${m.code(highlight("js", "request"))} object):`),
       ),
     ),
