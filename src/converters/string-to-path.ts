@@ -11,13 +11,13 @@ export const stringToPath = (source: string): TPath => {
   }
 
   const segments = lowercase.split("/");
-  const filteredSegments = segments.filter((s) => s.length > 0);
-  if (segments.length > 1 && filteredSegments.length !== segments.length) {
+  const nonEmptySegments = segments.filter((s) => s.length > 0);
+  if (segments.length > 1 && nonEmptySegments.length !== segments.length) {
     logger.warn(`Path "${source}" has empty segments`);
   }
 
   let invalidCharacterFound = false;
-  for (const s of filteredSegments) {
+  for (const s of nonEmptySegments) {
     for (const ch of s) {
       if (!allowedCharacters.has(ch)) {
         invalidCharacterFound = true;
@@ -29,5 +29,5 @@ export const stringToPath = (source: string): TPath => {
     throw new Error(`Cannot safely convert "${source}" to TPath`);
   }
 
-  return filteredSegments.join("/") as TPath;
+  return nonEmptySegments.join("/") as TPath;
 };

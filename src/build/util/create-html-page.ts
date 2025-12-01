@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import { writeFile } from "node:fs/promises";
+import { copyQueue } from "../../converters/copy-queue.js";
 import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
-import * as m from "../../html-markup/html-elements.js";
-import * as s from "../../html-markup/non-html-elements.js";
+import * as m from "../../html5/html-elements.js";
+import * as s from "../../html5/non-html-elements.js";
 import type { TPage } from "../../types/page.js";
 import { generateId } from "../../utils/generate-id.js";
 import { logger } from "../../utils/logger.js";
@@ -145,12 +146,27 @@ export const createHtmlPage = (page: TPage): Promise<void>[] => {
       logger.error(`❌ Local app "${page.localApp}" not found`);
     } else {
       const localAppUri = `${jsFolder}/${generateId()}.js`;
-      headTags.push(`<script src="/${localAppUri}"></script>`);
       promises.push(buildApp(page.localApp, `${distFolder}/${localAppUri}`));
+      headTags.push(`<script src="/${localAppUri}"></script>`);
     }
   }
 
   // local styles
+  if (page.localStylesheet !== "") {
+    if (!fs.existsSync(page.localStylesheet)) {
+      missingResources = true;
+      logger.error(`❌ Local stylesheet "${page.localStylesheet}" not found`);
+    } else {
+      const localStylesheetUri = `${cssFolder}/${generateId()}.css`;
+      copyQueue.add({
+        source: page.localStylesheet,
+        destination: `./${distFolder}/${localStylesheetUri}`,
+      });
+      headTags.push(
+        m.link({ rel: "stylesheet", href: `/${localStylesheetUri}` }),
+      );
+    }
+  }
 
   if (missingResources) {
     throw new Error("Missing resources");

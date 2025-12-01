@@ -1,7 +1,7 @@
 import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
-import * as m from "../../html-markup/html-elements.js";
-import * as s from "../../html-markup/non-html-elements.js";
-import type { THtmlElementMarkup } from "../../html-markup/types.js";
+import * as m from "../../html5/html-elements.js";
+import * as s from "../../html5/non-html-elements.js";
+import type { THtmlElementMarkup } from "../../html5/types.js";
 import type { TPage } from "../../types/page.js";
 import { articles } from "../articles.js";
 import { blog } from "../blog.js";

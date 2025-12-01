@@ -12,15 +12,15 @@ const main = async (): Promise<PromiseSettledResult<void>[]> => {
 
   createDistFolderSync();
   await createAssetsFolders();
-  // The copy queue is already fulfilled by the public pages content
-  // when we import them.
-  // But it must not be started before the assets folder is ready.
-  promises.push(...startCopyQueue());
   promises.push(copyGlobalAssets());
   promises.push(buildGlobalApp());
   for (const page of allPages) {
     promises.push(...createHtmlPage(page));
   }
+  // The copy queue is already fulfilled by the public pages content
+  // when we import them and when we build them (local CSS).
+  // But it must not be started before the assets folder is ready.
+  promises.push(...startCopyQueue());
 
   return Promise.allSettled(promises);
 };

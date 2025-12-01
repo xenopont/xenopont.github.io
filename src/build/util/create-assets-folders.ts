@@ -1,6 +1,7 @@
 import { mkdir } from "node:fs/promises";
 import {
   assetsFolder,
+  cssFolder,
   distFolder,
   imagesFolder,
   jsFolder,
@@ -12,6 +13,7 @@ export const createAssetsFolders = async (): Promise<void> => {
     mkdir(`${distFolder}/${assetsFolder}`, { recursive: true }),
     mkdir(`${distFolder}/${imagesFolder}`, { recursive: true }),
     mkdir(`${distFolder}/${jsFolder}`, { recursive: true }),
+    mkdir(`${distFolder}/${cssFolder}`, { recursive: true }),
     mkdir(`${distFolder}/${staticImagesFolder}`, { recursive: true }),
   ]);
 };

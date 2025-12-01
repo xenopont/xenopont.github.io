@@ -9,8 +9,8 @@
 
 import { stringToHtmlFilename } from "../../converters/string-to-html-filename.js";
 import { stringToPath } from "../../converters/string-to-path.js";
-import * as m from "../../html-markup/html-elements.js";
-import * as s from "../../html-markup/non-html-elements.js";
+import * as m from "../../html5/html-elements.js";
+import * as s from "../../html5/non-html-elements.js";
 import type { TPartialPage } from "../../types/partial-page.js";
 
 export const page404: TPartialPage = {

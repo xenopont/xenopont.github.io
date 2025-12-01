@@ -1,5 +1,5 @@
-import * as m from "../html-markup/html-elements.js";
-import type { THtmlElementMarkup } from "../html-markup/types.js";
+import * as m from "../html5/html-elements.js";
+import type { THtmlElementMarkup } from "../html5/types.js";
 import { highlight, type THighlightLanguage } from "../render/highlight.js";
 
 export const codeSnippet = (
