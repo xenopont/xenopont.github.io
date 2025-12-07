@@ -40,6 +40,18 @@ export const br = (
   attributes: THtmlElementAttributes = {},
 ): THtmlElementMarkup => voidHtmlElement({ tagName: "br", attributes });
 
+export const button = (
+  content: TContainerElementContent,
+  attributes: THtmlElementAttributes = {},
+): THtmlElementMarkup => {
+  return containerHtmlElement({
+    tagName: "button",
+    attributes,
+    children: contentToChildren(content),
+    separator: "",
+  });
+};
+
 export const code = (
   content: TContainerElementContent,
   attributes: THtmlElementAttributes = {},

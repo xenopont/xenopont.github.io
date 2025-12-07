@@ -3,9 +3,10 @@ import { stringToPath } from "../../converters/string-to-path.js";
 import { topBar } from "../../server-components/top-bar.js";
 import type { TPage } from "../../types/page.js";
 import type { TPartialPage } from "../../types/partial-page.js";
+import { fakeText } from "./fake-text.js";
 
 const partialIndexPage: TPartialPage = {
-  content: [topBar],
+  content: [topBar, fakeText],
   path: stringToPath("test"),
   title: "Dev XL",
   excludeGlobalApp: true,
