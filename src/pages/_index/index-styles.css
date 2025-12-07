@@ -3,8 +3,8 @@ body {
   margin: 0;
 }
 
-.top-bar {
-  height: 3rem;
+#top-bar {
+  min-height: 3rem;
   width: 100%;
   position: fixed;
   padding: 0.3rem;
@@ -13,14 +13,39 @@ body {
   backdrop-filter: blur(0.1rem);
   box-shadow: 0 1px 0 0 #00000025;
 }
-.home-button {
-  position: fixed;
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: 50%;
-  border: 1px solid #f8fcff80;
-  background: #c0c8cf;
-  margin-top: -0.7rem;
+#home-button {
+  background: none;
+  border: none;
+}
+#home-button #home-chevron {
+  --thikness: 0.2rem;
+  --color: #80c0ff45;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: none;
+  border-top: var(--thikness) solid var(--color);
+  border-right: var(--thikness) solid var(--color);
+  transform: rotate(45deg);
+  transition: 0.2s ease-in-out;
+}
+#home-button #home-chevron:after {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: none;
+  border-bottom: var(--thikness) solid var(--color);
+  transform: rotate(-45deg) translate(1.75rem, 0.25rem);
+  transition: 0.2s ease-in-out;
+}
+#home-button:hover #home-chevron,
+#home-button #home-chevron.home {
+  transform: rotate(-45deg) scale(1.1);
+}
+#home-button:hover #home-chevron:after,
+#home-button #home-chevron.home:after {
+  transform: rotate(45deg) translate(0rem, 0rem);
 }
 
 .fake-text {
