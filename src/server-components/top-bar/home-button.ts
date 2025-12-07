@@ -1,4 +1,4 @@
-import { button, span } from "../../html5/html-elements.js";
+import { a, span } from "../../html5/html-elements.js";
 import { none } from "../../html5/non-html-elements.js";
 import type { THtmlElementMarkup } from "../../html5/types.js";
 
@@ -14,13 +14,23 @@ export const homeButton = (
   };
   const mergedArgs = { ...defaultArgs, ...args };
 
-  return button(
+  return span(
     [
-      span(none, {
-        id: "home-chevron",
-        ...(mergedArgs.isHomePage && { class: "home" }),
-      }),
+      a(
+        [
+          span(none, {
+            id: "home-chevron",
+          }),
+        ],
+        {
+          id: "home-button",
+          href: mergedArgs.isHomePage ? "#" : "/",
+        },
+      ),
     ],
-    { id: "home-button" },
+    {
+      id: "home-button-hover-zone",
+      ...(mergedArgs.isHomePage && { class: "home" }),
+    },
   );
 };

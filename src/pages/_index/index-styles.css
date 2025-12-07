@@ -3,6 +3,7 @@ body {
   margin: 0;
 }
 
+/*----------------------------- TOP BAR --------------------------------------*/
 #top-bar {
   min-height: 3rem;
   width: 100%;
@@ -13,23 +14,95 @@ body {
   backdrop-filter: blur(0.1rem);
   box-shadow: 0 1px 0 0 #00000025;
 }
-#home-button {
-  background: none;
-  border: none;
+
+#home-button-hover-zone {
+  --inactive-width: 5.75rem;
+  --inactive-height: 4.5rem;
+  --border-width: 0.2rem;
+  position: fixed;
+  display: inline-block;
+  width: var(--inactive-width);
+  height: var(--inactive-height);
+  top: 0;
+  left: 1rem;
+  border: var(--border-width) solid #00000000;
 }
-#home-button #home-chevron {
-  --thikness: 0.2rem;
-  --color: #80c0ff45;
+@keyframes home-button-background-animation {
+  0% {
+    background: #333333;
+  }
+  20% {
+    background: #440000;
+  }
+  40% {
+    background: #222200;
+  }
+  60% {
+    background: #004400;
+  }
+  80% {
+    background: #003355;
+  }
+  100% {
+    background: #333333;
+  }
+}
+@keyframes home-button-hover-background-animation {
+  0% {
+    background: #cc4422;
+  }
+  20% {
+    background: #cc8800;
+  }
+  40% {
+    background: #009900;
+  }
+  60% {
+    background: #0088cc;
+  }
+  80% {
+    background: #aa00aa;
+  }
+  100% {
+    background: #cc4422;
+  }
+}
+#home-button-hover-zone #home-button {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  box-shadow:
+    inset 0.3rem 0.3rem 0.5rem 0 #ffffff80,
+    inset 0.1rem 0.1rem 0 0 #000000,
+    0 0.2rem 0.2rem 0 #00000040,
+    0 0.4rem 0.4rem 0 #00000040,
+    0 0.8rem 0.8rem 0 #00000040;
+  border: var(--border-width) solid #eee;
+  border-radius: 0.5rem;
+  padding: 0;
+  animation: home-button-background-animation 50s ease-in-out infinite;
+  transition: 0.2s ease-in-out;
+}
+#home-button-hover-zone #home-button #home-chevron {
+  --thikness: 0.25rem;
+  --color: #80c0ff;
   display: inline-block;
   width: 1rem;
   height: 1rem;
+  margin: auto;
   border: none;
   border-top: var(--thikness) solid var(--color);
   border-right: var(--thikness) solid var(--color);
-  transform: rotate(45deg);
+  transform: rotate(45deg)
+    translate(
+      calc(var(--inactive-width) / -7),
+      calc(var(--inactive-width) / 3.5)
+    );
   transition: 0.2s ease-in-out;
 }
-#home-button #home-chevron:after {
+#home-button-hover-zone #home-button #home-chevron:after {
   content: "";
   display: inline-block;
   width: 1rem;
@@ -39,15 +112,35 @@ body {
   transform: rotate(-45deg) translate(1.75rem, 0.25rem);
   transition: 0.2s ease-in-out;
 }
-#home-button:hover #home-chevron,
-#home-button #home-chevron.home {
-  transform: rotate(-45deg) scale(1.1);
+#home-button-hover-zone.home #home-button {
+  cursor: default;
 }
-#home-button:hover #home-chevron:after,
-#home-button #home-chevron.home:after {
+#home-button-hover-zone:hover #home-button,
+#home-button-hover-zone.home #home-button {
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.5rem;
+  box-shadow:
+    inset 0 -0.3rem 1rem -0.3rem #00000080,
+    0 0.2rem 0.2rem 0 #00000040,
+    0 0.4rem 0.4rem 0 #00000040,
+    0 0.8rem 0.8rem 0 #00000040;
+  animation: home-button-hover-background-animation 50s ease-in-out infinite;
+}
+#home-button-hover-zone:hover #home-button #home-chevron,
+#home-button-hover-zone.home #home-button #home-chevron {
+  margin: auto auto;
+  transform: rotate(-45deg) scale(1.1);
+  border-color: #333;
+}
+#home-button-hover-zone:hover #home-button #home-chevron:after,
+#home-button-hover-zone.home #home-button #home-chevron:after {
   transform: rotate(45deg) translate(0rem, 0rem);
+  border-color: #333;
 }
 
+/*----------------------------- FAKE TEXT ------------------------------------*/
 .fake-text {
   font-family: "Georgia", serif;
   font-size: 1.7rem;

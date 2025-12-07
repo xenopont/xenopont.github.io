@@ -4,7 +4,7 @@ import type { THtmlElementMarkup } from "../../html5/types.js";
 import { homeButton } from "./home-button.js";
 
 export const topBar: THtmlElementMarkup = div(
-  [homeButton({ isHomePage: true })],
+  [homeButton({ isHomePage: false })],
   {
     id: "top-bar",
   },
