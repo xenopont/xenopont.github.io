@@ -6,7 +6,7 @@ import type { TPartialPage } from "../../types/partial-page.js";
 import { fakeText } from "./fake-text.js";
 
 const partialIndexPage: TPartialPage = {
-  content: [topBar, fakeText],
+  content: [topBar({ isHomePage: true }), fakeText],
   path: stringToPath("test"),
   title: "Dev XL",
   excludeGlobalApp: true,

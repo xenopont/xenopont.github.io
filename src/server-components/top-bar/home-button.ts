@@ -13,6 +13,7 @@ export const homeButton = (
     isHomePage: false,
   };
   const mergedArgs = { ...defaultArgs, ...args };
+  const { isHomePage } = mergedArgs;
 
   return span(
     [
@@ -24,13 +25,13 @@ export const homeButton = (
         ],
         {
           id: "home-button",
-          href: mergedArgs.isHomePage ? "#" : "/",
+          href: isHomePage ? "#" : "/",
         },
       ),
     ],
     {
       id: "home-button-hover-zone",
-      ...(mergedArgs.isHomePage && { class: "home" }),
+      ...(isHomePage && { class: "home" }),
     },
   );
 };
