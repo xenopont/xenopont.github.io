@@ -1,5 +1,5 @@
+import { allPages } from "../content/all-pages.js";
 import { startCopyQueue } from "../converters/copy-queue.js";
-import { allPages } from "../pages/all.js";
 import { logger } from "../utils/logger.js";
 import { buildGlobalApp } from "./util/build-global-app.js";
 import { copyGlobalAssets } from "./util/copy-global-assets.js";

@@ -1,10 +1,10 @@
-import { dateToIso8601 } from "../../converters/date-to-iso-8601.js";
-import * as m from "../../html5/html-elements.js";
-import * as s from "../../html5/non-html-elements.js";
-import type { THtmlElementMarkup } from "../../html5/types.js";
-import type { TPage } from "../../types/page.js";
-import { articles } from "../articles.js";
-import { blog } from "../blog.js";
+import { dateToIso8601 } from "../../../converters/date-to-iso-8601.js";
+import * as m from "../../../html5/html-elements.js";
+import * as s from "../../../html5/non-html-elements.js";
+import type { THtmlElementMarkup } from "../../../html5/types.js";
+import type { TPage } from "../../../types/page.js";
+import { articles } from "../../articles/all.js";
+import { blogPosts } from "../../blog/all.js";
 
 const mainPageTitle: THtmlElementMarkup = s.safe("Dev XL");
 
@@ -63,7 +63,7 @@ const blogpostList = (blogposts: TPage[]): THtmlElementMarkup => {
       ),
       m.header(m.h2(s.safe("Blogposts"))),
     ],
-    { id: "blog-section" },
+    { id: "all-section" },
   );
 };
 
@@ -73,7 +73,7 @@ export const generateMainPageContent = (): THtmlElementMarkup[] => {
     m.div(mainPageTitle, { class: "main-page-title text" }),
     articleList(articles),
     m.div(s.safe(""), { id: "article-section-overlay" }),
-    blogpostList(blog),
-    m.div(s.safe(""), { id: "blog-section-overlay" }),
+    blogpostList(blogPosts),
+    m.div(s.safe(""), { id: "all-section-overlay" }),
   ].filter((element) => element !== "");
 };

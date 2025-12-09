@@ -7,11 +7,13 @@
  * And always public.
  */
 
-import { stringToPath } from "../../converters/string-to-path.js";
-import type { TPartialPage } from "../../types/partial-page.js";
+import { partialToPage } from "../../../converters/partial-to-page.js";
+import { stringToPath } from "../../../converters/string-to-path.js";
+import type { TPage } from "../../../types/page.js";
+import type { TPartialPage } from "../../../types/partial-page.js";
 import { generateMainPageContent } from "./content.js";
 
-export const MainPage: TPartialPage = {
+const partial: TPartialPage = {
   content: generateMainPageContent(),
   excludeGlobalApp: true,
   excludeGlobalChrome: true,
@@ -19,3 +21,5 @@ export const MainPage: TPartialPage = {
   path: stringToPath(""),
   title: "Dev XL",
 };
+
+export const mainPage: TPage = partialToPage(partial);

@@ -7,13 +7,15 @@
  * And always public.
  */
 
-import { stringToHtmlFilename } from "../../converters/string-to-html-filename.js";
-import { stringToPath } from "../../converters/string-to-path.js";
-import * as m from "../../html5/html-elements.js";
-import * as s from "../../html5/non-html-elements.js";
-import type { TPartialPage } from "../../types/partial-page.js";
+import { partialToPage } from "../../../converters/partial-to-page.js";
+import { stringToHtmlFilename } from "../../../converters/string-to-html-filename.js";
+import { stringToPath } from "../../../converters/string-to-path.js";
+import * as m from "../../../html5/html-elements.js";
+import * as s from "../../../html5/non-html-elements.js";
+import type { TPage } from "../../../types/page.js";
+import type { TPartialPage } from "../../../types/partial-page.js";
 
-export const page404: TPartialPage = {
+const partial: TPartialPage = {
   content: m.div(
     [m.h1(s.safe("Not Found")), m.a(s.safe("Main Page"), { href: "/" })],
     {
@@ -22,7 +24,10 @@ export const page404: TPartialPage = {
   ),
   excludeGlobalApp: true,
   excludeGlobalChrome: true,
+  excludeGlobalStylesheet: true,
   filename: stringToHtmlFilename("404.html"),
   path: stringToPath(""),
   title: "Not Found",
 };
+
+export const page404: TPage = partialToPage(partial);
