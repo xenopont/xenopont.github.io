@@ -2,7 +2,7 @@ import type { THtmlElementMarkup } from "../html5/types.js";
 import type { THtmlFilename } from "./html-filename.js";
 import type { TPath } from "./path.js";
 
-export type TPage = {
+export interface TPage {
   author: string;
   content: THtmlElementMarkup | THtmlElementMarkup[];
   createdAt: Date;
@@ -19,4 +19,4 @@ export type TPage = {
   summary: string;
   title: string;
   uri: string;
-};
+}

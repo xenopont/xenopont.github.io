@@ -139,21 +139,12 @@ body {
   border-color: #333;
 }
 
-/*----------------------------- FAKE TEXT ------------------------------------*/
-.fake-text {
-  font-family: "Georgia", serif;
-  font-size: 1.7rem;
-  line-height: 1.5;
-  color: #d5b778;
-  padding: 4rem;
-  background: #804020;
+/*----------------------------- PAGE CONTENT ------------------------------------*/
+#page-content {
+  max-width: 65rem;
+  background: #e0e0e0;
+  border: 0.1rem solid #c0c0c0;
+  border-top: none;
+  border-bottom: none;
   margin: 0 auto;
-  max-width: 65ex;
-  text-justify: distribute;
-}
-.fake-text h1 {
-  background: #d4bdb2;
-  color: #804020;
-  margin: 0 -4rem;
-  padding: 2rem 4rem;
 }
