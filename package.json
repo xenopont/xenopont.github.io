@@ -5,13 +5,13 @@
   "description": "xenopont.github.io",
   "main": "index.html",
   "scripts": {
-    "dev": "(npm run type-check || true) && npm run build && npm run http",
-    "build": "./node_modules/.bin/tsx src/build/all.ts",
-    "build:xenopont": "DOMAIN_NAME=xenopont.github.io ./node_modules/.bin/tsx src/build/all.ts",
-    "build:dev-xl": "DOMAIN_NAME=dev-xl.com ./node_modules/.bin/tsx src/build/all.ts",
+    "build": "./node_modules/.bin/tsx src/build.ts",
+    "build:xenopont": "DOMAIN_NAME=xenopont.github.io ./node_modules/.bin/tsx src/build.ts",
+    "build:dev-xl": "DOMAIN_NAME=dev-xl.com ./node_modules/.bin/tsx src/build.ts",
     "http": "./node_modules/.bin/http-server ./dist/",
+    "tsx-watch": "./node_modules/.bin/tsx watch --include 'src/**/*' src/build.ts",
     "type-check": "./node_modules/.bin/tsc --noEmit",
-    "watch": "DOMAIN_NAME=localhost:8080 ./node_modules/.bin/nodemon"
+    "watch": "(npm run type-check || true) && npm run http & npm run tsx-watch"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "esbuild": "0.27.2",
     "highlight.js": "11.11.1",
     "http-server": "14.1.1",
-    "nodemon": "3.1.11",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
   }
