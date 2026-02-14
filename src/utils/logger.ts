@@ -1,12 +1,20 @@
 /** biome-ignore-all lint/suspicious/noConsole: ILogger implementation */
-type TDebuggable = string | number | object | undefined | unknown;
+// biome-ignore lint/suspicious/noExplicitAny: This really must be anything
+type TAnything = any;
 
 interface ILogger {
   info: (message: string) => void;
-  debug: (...data: TDebuggable[]) => void;
+  debug: (...data: TAnything[]) => void;
 }
 
-export const logger: ILogger = {
-  info: (message: string) => console.log(message),
-  debug: (...data: TDebuggable[]) => console.log(data),
-};
+class TLogger implements ILogger {
+  public info(message: string): void {
+    console.log(message);
+  }
+
+  public debug(...data: TAnything[]): void {
+    console.log(...data);
+  }
+}
+
+export const logger: ILogger = new TLogger();
