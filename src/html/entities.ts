@@ -1,4 +1,5 @@
-import type { THtmlText } from "./text.js";
+declare const __brandTHtmlText: unique symbol;
+export type THtmlText = string & { [__brandTHtmlText]: "THtmlText" };
 
 class InvalidTagNameError extends Error {}
 

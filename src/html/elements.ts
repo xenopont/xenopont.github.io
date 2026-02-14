@@ -2,7 +2,7 @@ import {
   type IHtmlElement,
   type THtmlElementAttributes,
   VoidElement,
-} from "./element.js";
+} from "./entities.js";
 
 export const area = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("area", attributes);
