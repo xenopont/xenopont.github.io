@@ -1,6 +1,10 @@
 declare const __brandTHtmlText: unique symbol;
 export type THtmlText = string & { [__brandTHtmlText]: "THtmlText" };
 
+// required to make sure the text is escaped
+declare const __brandTSafeText: unique symbol;
+export type TSafeText = string & { [__brandTSafeText]: "TSafeText" };
+
 class InvalidTagNameError extends Error {}
 
 export type THtmlElementAttributes = Record<string, string>;
@@ -10,7 +14,7 @@ export interface IHtmlElement {
   toString(): string;
 }
 
-type THtmlEntity = THtmlText | IHtmlElement;
+export type THtmlEntity = IHtmlElement | THtmlText | TSafeText;
 
 abstract class HtmlElement implements IHtmlElement {
   protected readonly tagName: string;
