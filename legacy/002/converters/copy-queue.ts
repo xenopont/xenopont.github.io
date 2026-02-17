@@ -29,3 +29,8 @@ export const startCopyQueue = (): Promise<void>[] => {
 
   return promises;
 };
+
+// all global css files are attached in templates only
+// if you want to copy a css file to the dist folder, mention its uri
+// in the template.
+// store global css files next to their templates, or in a shared folder
