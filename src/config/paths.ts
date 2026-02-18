@@ -1,7 +1,7 @@
 import { access, constants as fsConst } from "node:fs/promises";
-import { resolve } from "node:path";
+import { resolve, sep } from "node:path";
 import { logger } from "../utils/logger.js";
-import { sourceRoot } from "./constants.js";
+import { publicRoot, sourceRoot } from "./constants.js";
 
 /**
  * There are the following possible paths in the app:
@@ -14,8 +14,10 @@ import { sourceRoot } from "./constants.js";
  */
 
 const SOURCE_ROOT: string = resolve(sourceRoot);
+const PUBLIC_ROOT: string = resolve(publicRoot);
 
 export class LocalFileNameError extends Error {}
+export class PublicDirectoryError extends Error {}
 
 declare const __brandTLocalFileName: unique symbol;
 export type TLocalFileName = string & {
@@ -57,4 +59,52 @@ export const toLocalFileName = async (str: string): Promise<TLocalFileName> => {
   }
 
   return absolutePath as TLocalFileName;
+};
+
+const validPublicDirectoryChars: Set<string> = new Set([
+  "-",
+  ..."abcdefghijklmnopqrstuvwxyz",
+  ..."0123456789",
+  ..."абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
+  ..."äöüè",
+]);
+
+export const toPublicDirectory = (str: string): TPublicDirectory => {
+  const absolutePath = resolve(str);
+
+  if (!absolutePath.startsWith(PUBLIC_ROOT)) {
+    throw new PublicDirectoryError(
+      `❌ Unable to get the path for the directory "${str}" outside the public root.`,
+    );
+  }
+
+  const relativePath = absolutePath.slice(PUBLIC_ROOT.length);
+
+  // If it's exactly the public root, it's valid (relativePath is empty)
+  if (relativePath.length <= 0) {
+    return absolutePath as TPublicDirectory;
+  }
+
+  // Check if the relative part starts with a path separator
+  if (!relativePath.startsWith(sep)) {
+    // This case handles strings like "/dist-stuff" instead of "/dist/stuff"
+    throw new PublicDirectoryError(
+      `❌ Path "${str}" is not inside the public root.`,
+    );
+  }
+
+  const pathPieces = relativePath.split(sep).filter((p) => p.length > 0);
+
+  for (const part of pathPieces) {
+    for (const char of part) {
+      if (!validPublicDirectoryChars.has(char)) {
+        throw new PublicDirectoryError(
+          `❌ Directory "${str}" contains disallowed character "${char}".\n` +
+            "Only lowercase letters, numbers, and dashes are allowed.",
+        );
+      }
+    }
+  }
+
+  return absolutePath as TPublicDirectory;
 };
