@@ -3,3 +3,4 @@ export const domainName: string =
   process.env["DOMAIN_NAME"] ?? "localhost:8080";
 
 export const sourceRoot: string = "./src";
+export const publicRoot: string = "./dist";

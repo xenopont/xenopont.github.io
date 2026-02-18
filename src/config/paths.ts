@@ -1,4 +1,4 @@
-import { access, constants } from "node:fs/promises";
+import { access, constants as fsConst } from "node:fs/promises";
 import { resolve } from "node:path";
 import { logger } from "../utils/logger.js";
 import { sourceRoot } from "./constants.js";
@@ -45,7 +45,7 @@ export const toLocalFileName = async (str: string): Promise<TLocalFileName> => {
   }
 
   try {
-    await access(absolutePath, constants.R_OK);
+    await access(absolutePath, fsConst.R_OK);
   } catch (e: unknown) {
     const msg = `❌ Cannot read file "${str}"`;
     if (e instanceof Error) {
