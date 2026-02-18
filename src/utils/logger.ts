@@ -5,6 +5,7 @@ type TAnything = any;
 interface ILogger {
   info: (message: string) => void;
   debug: (...data: TAnything[]) => void;
+  error: (...data: TAnything[]) => void;
 }
 
 class TLogger implements ILogger {
@@ -14,6 +15,10 @@ class TLogger implements ILogger {
 
   public debug(...data: TAnything[]): void {
     console.log(...data);
+  }
+
+  public error(...data: TAnything[]): void {
+    console.error(...data);
   }
 }
 
