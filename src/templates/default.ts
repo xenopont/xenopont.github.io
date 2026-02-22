@@ -1,4 +1,3 @@
-import { domainName } from "../config/constants.js";
 import {
   body,
   doctype,
@@ -10,6 +9,7 @@ import {
 } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
+import { baseUrl } from "../utils/base-url.js";
 
 declare const __brandTHtmlPage: unique symbol;
 type THtmlPage = THtmlEntity[] & { [__brandTHtmlPage]: "THtmlPage" };
@@ -21,7 +21,7 @@ export const defaultTemplate = (page: IPublishable): THtmlPage => {
     meta({ property: "og:type", content: "article" }),
     meta({
       property: "og:url",
-      content: `http${domainName.match(/localhost/) ? "" : "s"}://${domainName}${page.uri}`,
+      content: `${baseUrl}${page.uri}`,
     }),
   ];
 
@@ -32,10 +32,12 @@ export const defaultTemplate = (page: IPublishable): THtmlPage => {
   ];
 
   if (page.socialCardImageUri !== null) {
-    const protocol = domainName.match(/localhost/) ? "http" : "https";
-    const imageUri = `${protocol}://${domainName}${page.socialCardImageUri}`;
-    openGraphTags.push(meta({ property: "og:image", content: imageUri }));
-    twitterCardTags.push(meta({ name: "twitter:image", content: imageUri }));
+    openGraphTags.push(
+      meta({ property: "og:image", content: page.socialCardImageUri }),
+    );
+    twitterCardTags.push(
+      meta({ name: "twitter:image", content: page.socialCardImageUri }),
+    );
   }
 
   return [

@@ -1,5 +1,6 @@
 import { access, constants as fsConst } from "node:fs/promises";
 import { resolve, sep } from "node:path";
+import { baseUrl } from "../utils/base-url.js";
 import { logger } from "../utils/logger.js";
 import { publicRoot, sourceRoot } from "./constants.js";
 
@@ -18,6 +19,7 @@ const PUBLIC_ROOT: string = resolve(publicRoot);
 
 export class EInvalidLocalFileName extends Error {}
 export class EInvalidPublicDirectory extends Error {}
+export class EInvalidPublicFileName extends Error {}
 
 declare const __brandTLocalFileName: unique symbol;
 export type TLocalFileName = string & {
@@ -108,3 +110,26 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
 
   return absolutePath as TPublicDirectory;
 };
+
+export function toWebUri(filename: TPublicFileName): TWebUri {
+  const absolutePath = resolve(filename);
+
+  if (!absolutePath.startsWith(PUBLIC_ROOT)) {
+    throw new EInvalidPublicFileName(
+      `❌ Path "${filename}" is outside the public root.`,
+    );
+  }
+
+  const relativePath = absolutePath.slice(PUBLIC_ROOT.length);
+
+  if (!relativePath.startsWith(sep)) {
+    throw new EInvalidPublicFileName(
+      `❌ Path "${filename}" is not inside the public root.`,
+    );
+  }
+
+  // Convert to URI format: forward slashes, starting with /
+  const uri = relativePath.split(sep).join("/");
+
+  return `${baseUrl}${uri}` as TWebUri;
+}
