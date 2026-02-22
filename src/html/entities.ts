@@ -5,7 +5,7 @@ export type THtmlText = string & { [__brandTHtmlText]: "THtmlText" };
 declare const __brandTSafeText: unique symbol;
 export type TSafeText = string & { [__brandTSafeText]: "TSafeText" };
 
-class InvalidTagNameError extends Error {}
+class EInvalidTagName extends Error {}
 
 export type THtmlElementAttributes = Record<string, string>;
 
@@ -22,7 +22,7 @@ abstract class HtmlElement implements IHtmlElement {
 
   public constructor(tagName: string, attributes: THtmlElementAttributes) {
     if (!HtmlElement.isValidTagName(tagName)) {
-      throw new InvalidTagNameError(`Invalid tag name: ${tagName}`);
+      throw new EInvalidTagName(`Invalid tag name: ${tagName}`);
     }
     this.tagName = tagName;
     this.attributes = attributes;

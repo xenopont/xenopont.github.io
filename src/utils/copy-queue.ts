@@ -7,8 +7,8 @@ type TFileCopyOperation = {
   destination: TPublicFileName;
 };
 
-class SourceFileDoesntExistError extends Error {}
-class DestinationFileAlreadyExistsError extends Error {}
+class ESourceFileDoesntExist extends Error {}
+class EDestinationFileAlreadyExists extends Error {}
 
 class CopyQueue {
   private queue: Set<TFileCopyOperation> = new Set();
@@ -35,16 +35,17 @@ class CopyQueue {
             logger.error(
               `❌ Cannot copy ${operation.source} to ${operation.destination}`,
             );
-            if (error instanceof SourceFileDoesntExistError) {
+            if (error instanceof ESourceFileDoesntExist) {
               logger.info(`Source file ${operation.source} does not exist`);
               return;
             }
-            if (error instanceof DestinationFileAlreadyExistsError) {
+            if (error instanceof EDestinationFileAlreadyExists) {
               logger.info(
                 `Destination file ${operation.destination} already exists`,
               );
               return;
             }
+            logger.error(error);
           }),
       );
     }
@@ -54,7 +55,7 @@ class CopyQueue {
 
   private async checkSourceExists(source: TLocalFileName): Promise<void> {
     return access(source, fsConst.R_OK).catch(() => {
-      throw new SourceFileDoesntExistError(`Cannot read file ${source}`);
+      throw new ESourceFileDoesntExist(`Cannot read file ${source}`);
     });
   }
 
@@ -63,7 +64,7 @@ class CopyQueue {
   ): Promise<void> {
     return access(destination, fsConst.R_OK)
       .then(() => {
-        throw new DestinationFileAlreadyExistsError(
+        throw new EDestinationFileAlreadyExists(
           `File ${destination} already exists`,
         );
       })
@@ -71,4 +72,4 @@ class CopyQueue {
   }
 }
 
-export const copyQueue = new CopyQueue();
+export const copyQueue: CopyQueue = new CopyQueue();

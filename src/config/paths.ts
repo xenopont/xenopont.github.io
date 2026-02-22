@@ -16,8 +16,8 @@ import { publicRoot, sourceRoot } from "./constants.js";
 const SOURCE_ROOT: string = resolve(sourceRoot);
 const PUBLIC_ROOT: string = resolve(publicRoot);
 
-export class LocalFileNameError extends Error {}
-export class PublicDirectoryError extends Error {}
+export class EInvalidLocalFileName extends Error {}
+export class EInvalidPublicDirectory extends Error {}
 
 declare const __brandTLocalFileName: unique symbol;
 export type TLocalFileName = string & {
@@ -41,7 +41,7 @@ export const toLocalFileName = async (str: string): Promise<TLocalFileName> => {
   const absolutePath = resolve(str);
 
   if (!absolutePath.startsWith(SOURCE_ROOT)) {
-    throw new LocalFileNameError(
+    throw new EInvalidLocalFileName(
       `❌ Unable to get the path for the file "${str}" outside the project.`,
     );
   }
@@ -54,7 +54,7 @@ export const toLocalFileName = async (str: string): Promise<TLocalFileName> => {
       logger.error(msg);
       throw e;
     } else {
-      throw new LocalFileNameError(`${msg}: ${e}`);
+      throw new EInvalidLocalFileName(`${msg}: ${e}`);
     }
   }
 
@@ -73,7 +73,7 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
   const absolutePath = resolve(str);
 
   if (!absolutePath.startsWith(PUBLIC_ROOT)) {
-    throw new PublicDirectoryError(
+    throw new EInvalidPublicDirectory(
       `❌ Unable to get the path for the directory "${str}" outside the public root.`,
     );
   }
@@ -88,7 +88,7 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
   // Check if the relative part starts with a path separator
   if (!relativePath.startsWith(sep)) {
     // This case handles strings like "/dist-stuff" instead of "/dist/stuff"
-    throw new PublicDirectoryError(
+    throw new EInvalidPublicDirectory(
       `❌ Path "${str}" is not inside the public root.`,
     );
   }
@@ -98,7 +98,7 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
   for (const part of pathPieces) {
     for (const char of part) {
       if (!validPublicDirectoryChars.has(char)) {
-        throw new PublicDirectoryError(
+        throw new EInvalidPublicDirectory(
           `❌ Directory "${str}" contains disallowed character "${char}".\n` +
             "Only lowercase letters, numbers, and dashes are allowed.",
         );
