@@ -1,6 +1,6 @@
 import { access, copyFile, constants as fsConst } from "node:fs/promises";
-import type { TLocalFileName, TPublicFileName } from "../config/paths.js";
 import { logger } from "./logger.js";
+import type { TLocalFileName, TPublicFileName } from "./paths.js";
 
 type TFileCopyOperation = {
   source: TLocalFileName;

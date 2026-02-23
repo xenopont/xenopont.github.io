@@ -1,8 +1,8 @@
 import { access, constants as fsConst } from "node:fs/promises";
 import { resolve, sep } from "node:path";
-import { baseUrl } from "../utils/base-url.js";
-import { logger } from "../utils/logger.js";
-import { publicRoot, sourceRoot } from "./constants.js";
+import { publicRoot, sourceRoot } from "../config/constants.js";
+import { baseUrl } from "./base-url.js";
+import { logger } from "./logger.js";
 
 /**
  * There are the following possible paths in the app:
