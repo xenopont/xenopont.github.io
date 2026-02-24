@@ -1,29 +1,41 @@
-import { access, constants as fsConst } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { publicRoot, sourceRoot } from "../config/constants.js";
 import { baseUrl } from "./base-url.js";
-import { logger } from "./logger.js";
 
 /**
  * There are the following possible paths in the app:
  * 1. TLocalFileName: <...>/src/content/my-page/my-image.webp
- *    Validate, that file exists.
- * 2. TPublicDirectory: ./dist/images
- * 3. TPublicFile: ./dist/images/my-image.webp
- * 4. TWebUri: /images/my-image.webp
- *    Validate, that contains only allowed characters, properly structured.
+ * 2. TPublicDirectory: <...>/dist/images
+ *    a) TPublicPathPiece: contains only valid characters
+ *    b) TPublicSubPath: path pieces separated by node:path.sep
+ * 3. TPublicFile: <...>/dist/images/my-image.webp
+ * 4. TWebUri: https://example.com/images/my-image.webp
+ *
+ * We only validate the structure of the paths. The source file
+ * doesn't have to exist at this moment.
  */
 
 const SOURCE_ROOT: string = resolve(sourceRoot);
-const PUBLIC_ROOT: string = resolve(publicRoot);
+export const PUBLIC_ROOT: string = resolve(publicRoot);
 
 export class EInvalidLocalFileName extends Error {}
+export class EInvalidPublicPathPiece extends Error {}
 export class EInvalidPublicDirectory extends Error {}
 export class EInvalidPublicFileName extends Error {}
 
 declare const __brandTLocalFileName: unique symbol;
 export type TLocalFileName = string & {
   [__brandTLocalFileName]: "TLocalFileName";
+};
+
+declare const __brandTPublicPathPiece: unique symbol;
+export type TPublicPathPiece = string & {
+  [__brandTPublicPathPiece]: "TPublicPathPiece";
+};
+
+declare const __brandTPublicSubPath: unique symbol;
+export type TPublicSubPath = string & {
+  [__brandTPublicSubPath]: "TPublicSubPath";
 };
 
 declare const __brandTPublicDirectory: unique symbol;
@@ -39,25 +51,13 @@ export type TPublicFileName = string & {
 declare const __brandTWebUri: unique symbol;
 export type TWebUri = string & { [__brandTWebUri]: "TWebUri" };
 
-export const toLocalFileName = async (str: string): Promise<TLocalFileName> => {
+export const toLocalFileName = (str: string): TLocalFileName => {
   const absolutePath = resolve(str);
 
   if (!absolutePath.startsWith(SOURCE_ROOT)) {
     throw new EInvalidLocalFileName(
       `❌ Unable to get the path for the file "${str}" outside the project.`,
     );
-  }
-
-  try {
-    await access(absolutePath, fsConst.R_OK);
-  } catch (e: unknown) {
-    const msg = `❌ Cannot read file "${str}"`;
-    if (e instanceof Error) {
-      logger.error(msg);
-      throw e;
-    } else {
-      throw new EInvalidLocalFileName(`${msg}: ${e}`);
-    }
   }
 
   return absolutePath as TLocalFileName;
@@ -70,6 +70,38 @@ const validPublicDirectoryChars: Set<string> = new Set([
   ..."абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
   ..."äöüè",
 ]);
+const isValidPublicPathPiece = (str: string): boolean => {
+  for (const char of str) {
+    if (!validPublicDirectoryChars.has(char)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+export const toPublicPathPiece = (str: string): TPublicPathPiece => {
+  if (!isValidPublicPathPiece(str)) {
+    throw new EInvalidPublicPathPiece(
+      `❌ "${str}" contains invalid characters and can not be a public directory name.`,
+    );
+  }
+
+  return str as TPublicPathPiece;
+};
+
+export const toPublicSubPath = (str: string): TPublicSubPath => {
+  const pieces = str.split("/");
+  for (const p of pieces) {
+    if (!isValidPublicPathPiece(p)) {
+      throw new EInvalidPublicPathPiece(
+        `❌ Subpath "${str}" contains invalid characters.`,
+      );
+    }
+  }
+
+  return pieces.join(sep) as TPublicSubPath;
+};
 
 export const toPublicDirectory = (str: string): TPublicDirectory => {
   const absolutePath = resolve(str);
@@ -97,18 +129,31 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
 
   const pathPieces = relativePath.split(sep).filter((p) => p.length > 0);
 
-  for (const part of pathPieces) {
-    for (const char of part) {
-      if (!validPublicDirectoryChars.has(char)) {
-        throw new EInvalidPublicDirectory(
-          `❌ Directory "${str}" contains disallowed character "${char}".\n` +
-            "Only lowercase letters, numbers, and dashes are allowed.",
-        );
-      }
+  for (const piece of pathPieces) {
+    if (!isValidPublicPathPiece(piece)) {
+      throw new EInvalidPublicDirectory(
+        `❌ Directory "${str}" contains disallowed piece "${piece}".`,
+      );
     }
   }
 
   return absolutePath as TPublicDirectory;
+};
+
+export const toPublicFileName = (
+  directory: TPublicDirectory,
+  filename: string,
+): TPublicFileName => {
+  const pieces = filename.split(".");
+  for (const p of pieces) {
+    if (!isValidPublicPathPiece(p)) {
+      throw new EInvalidPublicPathPiece(
+        `❌ Filename "${filename}" contains invalid characters.`,
+      );
+    }
+  }
+
+  return `${directory}${sep}${filename}` as TPublicFileName;
 };
 
 export function toWebUri(filename: TPublicFileName): TWebUri {

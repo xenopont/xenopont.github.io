@@ -54,8 +54,8 @@ export const defaultTemplate = (page: IPublishable): THtmlPage => {
         // <link rel="shortcut icon" href="/favicon.ico">; pass through copy-queue
         ...openGraphTags,
         ...twitterCardTags,
-        // global styles
-        // local styles
+        // global styles should be attached as a file
+        // local styles should be attached as a file from a parameter
         // global app
         // local app
       ]),

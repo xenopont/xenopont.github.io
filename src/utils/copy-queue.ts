@@ -13,6 +13,8 @@ class EDestinationFileAlreadyExists extends Error {}
 class CopyQueue {
   private queue: Set<TFileCopyOperation> = new Set();
 
+  // We don't check if the local file exists.
+  // It must be present only after we `start()` copying.
   public add(local: TLocalFileName, publicFile: TPublicFileName): void {
     this.queue.add({ source: local, destination: publicFile });
   }
