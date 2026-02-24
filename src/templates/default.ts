@@ -3,6 +3,7 @@ import {
   doctype,
   head,
   html,
+  link,
   meta,
   safe,
   title,
@@ -10,6 +11,7 @@ import {
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
 import { baseUrl } from "../utils/base-url.js";
+import { faviconFileWrapper } from "../utils/file-wrapper.js";
 
 declare const __brandTHtmlPage: unique symbol;
 type THtmlPage = THtmlEntity[] & { [__brandTHtmlPage]: "THtmlPage" };
@@ -51,7 +53,10 @@ export const defaultTemplate = (page: IPublishable): THtmlPage => {
           name: "viewport",
           content: "width=device-width, initial-scale=1.0, user-scalable=yes",
         }),
-        // <link rel="shortcut icon" href="/favicon.ico">; pass through copy-queue
+        link({
+          rel: "shortcut icon",
+          href: faviconFileWrapper.url("../assets/favicon.ico", "favicon"),
+        }),
         ...openGraphTags,
         ...twitterCardTags,
         // global styles should be attached as a file

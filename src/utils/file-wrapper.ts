@@ -1,8 +1,6 @@
 import { copyQueue } from "./copy-queue.js";
 import {
-  type TLocalFileName,
   type TPublicDirectory,
-  type TPublicPathPiece,
   type TPublicSubPath,
   type TWebUri,
   toLocalFileName,
@@ -21,7 +19,8 @@ interface IFileWrapper {
    *
    * @param filename A file name, must be inside the `/src` folder.
    * @param basename A base filename visible to the User agent. The extension
-   *   will be added from the `filename` automatically.
+   *   will be added from the `filename` automatically. Must be a valid
+   *   public file name.
    *
    * @returns A URL of the file that can be used in the webpage code so that
    *   the User agent can access it from the Web.
@@ -46,7 +45,7 @@ interface IFileWrapper {
    * // <img src="https://example.com/images/my-article-fig-1.webp" alt="Fig. 1">
    * ```
    */
-  url(filename: TLocalFileName, basename: TPublicPathPiece): TWebUri;
+  url(filename: string, basename: string): TWebUri;
 }
 
 class TFileWrapper implements IFileWrapper {
@@ -62,8 +61,9 @@ class TFileWrapper implements IFileWrapper {
     this.destination = toPublicDirectory(relativePublicPath);
   }
 
-  public url(filename: string, basename: TPublicPathPiece): TWebUri {
+  public url(filename: string, basename: string): TWebUri {
     const source = toLocalFileName(filename);
+    const destBase = toPublicPathPiece(basename);
     const extension = toPublicPathPiece(
       source.split(".").pop()?.toLowerCase() || "",
     );
@@ -76,7 +76,7 @@ class TFileWrapper implements IFileWrapper {
 
     const publicFilename = toPublicFileName(
       this.destination,
-      `${basename}.${extension}`,
+      `${destBase}.${extension}`,
     );
     copyQueue.add(source, publicFilename);
 
