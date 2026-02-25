@@ -38,12 +38,22 @@ export class THtmlTemplate {
   ) {}
 
   public render(page: IPublishable): string {
-    const structure = this.build(page);
+    const structure = this.buildHtml(page);
 
     return structure.toString();
   }
 
-  private build(page: IPublishable): THtmlEntity[] {
+  private buildHtml(page: IPublishable): THtmlEntity[] {
+    return [
+      doctype(),
+      html({ lang: page.language }, [
+        this.buildHead(page),
+        this.buildBody(page.content),
+      ]),
+    ];
+  }
+
+  protected buildHead(page: IPublishable): THtmlEntity {
     const headTags: THtmlEntity[] = [
       meta({ charset: "utf-8" }),
       title({}, [safe(page.title)]),
@@ -63,13 +73,11 @@ export class THtmlTemplate {
       // add custom template/page tags if necessary
     ];
 
-    return [
-      doctype(),
-      html({ lang: page.language }, [
-        head({}, headTags),
-        body({}, page.content),
-      ]),
-    ];
+    return head({}, headTags);
+  }
+
+  protected buildBody(content: THtmlEntity[]): THtmlEntity {
+    return body({}, content);
   }
 
   private buildOpenGraphTags(page: IPublishable): THtmlEntity[] {

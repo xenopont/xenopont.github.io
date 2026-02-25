@@ -10,7 +10,6 @@ class EInvalidTagName extends Error {}
 export type THtmlElementAttributes = Record<string, string>;
 
 export interface IHtmlElement {
-  outerHtml(): string;
   toString(): string;
 }
 
@@ -28,9 +27,8 @@ abstract class HtmlElement implements IHtmlElement {
     this.attributes = attributes;
   }
 
-  public abstract outerHtml(): string;
   public toString(): string {
-    return this.outerHtml();
+    return this.serializeHtml();
   }
 
   public static isValidTagName(tagName: string): boolean {
@@ -42,10 +40,12 @@ abstract class HtmlElement implements IHtmlElement {
       .map((k) => `${k}="${this.attributes[k]}"`)
       .join(" ")}>`;
   }
+
+  protected abstract serializeHtml(): string;
 }
 
 export class VoidElement extends HtmlElement {
-  public override outerHtml(): string {
+  protected override serializeHtml(): string {
     return this.startTag();
   }
 }
@@ -62,7 +62,7 @@ export class Element extends HtmlElement {
     this.children = children;
   }
 
-  public override outerHtml(): string {
+  protected override serializeHtml(): string {
     return `${this.startTag()}${this.children.join("\n")}${this.endTag()}`;
   }
 
