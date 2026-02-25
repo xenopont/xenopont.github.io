@@ -81,6 +81,13 @@ export const meta = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("meta", attributes);
 };
 
+export const script = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("script", attributes, children);
+};
+
 export const source = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("source", attributes);
 };

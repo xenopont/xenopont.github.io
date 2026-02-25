@@ -6,15 +6,29 @@ import {
   link,
   meta,
   safe,
+  script,
   title,
 } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
 import { baseUrl } from "../utils/base-url.js";
 import { faviconFileWrapper } from "../utils/file-wrapper.js";
+import type { TWebUri } from "../utils/paths.js";
 
 interface IHtmlTemplateOptions {
-  charset: string;
+  /**
+   * These are global styles that are applied to all pages using this template.
+   * Any page-specific style should come via IPublishable properties.
+   */
+  styles: TWebUri[];
+
+  /**
+   * These are global scripts that are applied to all pages using this template.
+   * Any page-specific script should come via IPublishable properties.
+   */
+  scripts: TWebUri[];
+
+  // add custom tags here when necessary
 }
 
 export class THtmlTemplate {
@@ -44,10 +58,9 @@ export class THtmlTemplate {
       }),
       ...this.buildOpenGraphTags(page),
       ...this.buildTwitterCardTags(page),
-      // global styles should be attached as a file
-      // local styles should be attached as a file from a parameter
-      // global app
-      // local app
+      ...this.buildStyleTags([...this.options.styles, ...page.styles]),
+      ...this.buildScriptTags([...this.options.scripts, ...page.scripts]),
+      // add custom template/page tags if necessary
     ];
 
     return [
@@ -91,5 +104,19 @@ export class THtmlTemplate {
     }
 
     return twitterCardTags;
+  }
+
+  private buildStyleTags(styleUris: TWebUri[]): THtmlEntity[] {
+    const uniqueStyles = [...new Set(styleUris)];
+    return uniqueStyles.map((styleUri) =>
+      link({ rel: "stylesheet", href: styleUri }),
+    );
+  }
+
+  private buildScriptTags(scriptUris: TWebUri[]): THtmlEntity[] {
+    const uniqueScripts = [...new Set(scriptUris)];
+    return uniqueScripts.map((scriptUri) =>
+      script({ src: scriptUri, type: "module" }),
+    );
   }
 }
