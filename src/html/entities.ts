@@ -32,7 +32,28 @@ abstract class HtmlElement implements IHtmlElement {
   }
 
   public static isValidTagName(tagName: string): boolean {
-    return /^(a-z)(a-z0-9)*$/.test(tagName);
+    const len = tagName.length;
+    if (len < 1 || len > 61) {
+      return false;
+    }
+
+    const firstChar = tagName.charAt(0);
+    if (firstChar < "a" || firstChar > "z") {
+      return false;
+    }
+
+    for (let i = 1; i < len; i++) {
+      const char = tagName.charAt(i);
+      const isLowercaseLetter = char >= "a" && char <= "z";
+      const isDigit = char >= "0" && char <= "9";
+      const isDash = char === "-";
+
+      if (!isLowercaseLetter && !isDigit && !isDash) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   protected startTag(): string {

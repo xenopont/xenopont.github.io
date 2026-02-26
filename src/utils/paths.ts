@@ -104,7 +104,17 @@ export const toPublicSubPath = (str: string): TPublicSubPath => {
 };
 
 export const toPublicDirectory = (str: string): TPublicDirectory => {
-  const absolutePath = resolve(str);
+  let normalizedStr = str;
+
+  if (normalizedStr === "" || normalizedStr === "/") {
+    return PUBLIC_ROOT as TPublicDirectory;
+  }
+
+  if (normalizedStr.startsWith("/")) {
+    normalizedStr = normalizedStr.slice(1);
+  }
+
+  const absolutePath = resolve(PUBLIC_ROOT, normalizedStr);
 
   if (!absolutePath.startsWith(PUBLIC_ROOT)) {
     throw new EInvalidPublicDirectory(
@@ -114,12 +124,10 @@ export const toPublicDirectory = (str: string): TPublicDirectory => {
 
   const relativePath = absolutePath.slice(PUBLIC_ROOT.length);
 
-  // If it's exactly the public root, it's valid (relativePath is empty)
   if (relativePath.length <= 0) {
     return absolutePath as TPublicDirectory;
   }
 
-  // Check if the relative part starts with a path separator
   if (!relativePath.startsWith(sep)) {
     // This case handles strings like "/dist-stuff" instead of "/dist/stuff"
     throw new EInvalidPublicDirectory(

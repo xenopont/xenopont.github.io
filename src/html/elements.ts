@@ -39,12 +39,33 @@ export const col = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("col", attributes);
 };
 
+export const div = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("div", attributes, children);
+};
+
 export const doctype = (): THtmlText => {
   return "<!doctype html>" as THtmlText;
 };
 
+export const em = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("em", attributes, children);
+};
+
 export const embed = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("embed", attributes);
+};
+
+export const h1 = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("h1", attributes, children);
 };
 
 export const head = (

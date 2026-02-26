@@ -1,5 +1,5 @@
 import type { THtmlEntity, TSafeText } from "../html/entities.js";
-import type { TTemplateId } from "../templates/available.js";
+import type { TTemplateId } from "../templates/active.js";
 import type { TWebUri } from "../utils/paths.js";
 
 export interface IPublishable {
