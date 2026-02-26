@@ -6,7 +6,7 @@ export function cleanDist(): boolean {
   try {
     rmSync(PUBLIC_ROOT, { recursive: true, force: true });
     mkdirSync(PUBLIC_ROOT, { recursive: true });
-    logger.info("✅ Successfully cleaned dist directory");
+    logger.info("✅ Successfully cleaned the dist directory");
     return true;
   } catch (error) {
     logger.error("❌ Failed to clean dist directory:", error);
