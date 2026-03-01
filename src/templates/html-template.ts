@@ -40,7 +40,11 @@ export class THtmlTemplate {
   public render(page: IPublishable): string {
     const structure = this.buildHtml(page);
 
-    return structure.toString();
+    return structure.map((entity) => entity.toString()).join("\n");
+  }
+
+  protected buildBody(content: THtmlEntity[]): THtmlEntity {
+    return body({}, content);
   }
 
   private buildHtml(page: IPublishable): THtmlEntity[] {
@@ -53,7 +57,7 @@ export class THtmlTemplate {
     ];
   }
 
-  protected buildHead(page: IPublishable): THtmlEntity {
+  private buildHead(page: IPublishable): THtmlEntity {
     const headTags: THtmlEntity[] = [
       meta({ charset: "utf-8" }),
       title({}, [safe(page.title)]),
@@ -64,7 +68,10 @@ export class THtmlTemplate {
       }),
       link({
         rel: "shortcut icon",
-        href: faviconFileWrapper.url("../assets/favicon.ico", "favicon"),
+        href: faviconFileWrapper.url(
+          `${import.meta.dirname}/../assets/favicon.ico`,
+          "favicon",
+        ),
       }),
       ...this.buildOpenGraphTags(page),
       ...this.buildTwitterCardTags(page),
@@ -74,10 +81,6 @@ export class THtmlTemplate {
     ];
 
     return head({}, headTags);
-  }
-
-  protected buildBody(content: THtmlEntity[]): THtmlEntity {
-    return body({}, content);
   }
 
   private buildOpenGraphTags(page: IPublishable): THtmlEntity[] {
