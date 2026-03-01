@@ -57,9 +57,14 @@ abstract class HtmlElement implements IHtmlElement {
   }
 
   protected startTag(): string {
-    return `<${this.tagName} ${Object.keys(this.attributes)
-      .map((k) => `${k}="${this.attributes[k]}"`)
-      .join(" ")}>`;
+    const tagPieces: string[] = [
+      this.tagName,
+      ...Object.keys(this.attributes).map(
+        (attributeName) =>
+          `${attributeName}="${this.attributes[attributeName]}"`,
+      ),
+    ];
+    return `<${tagPieces.join(" ")}>`;
   }
 
   protected abstract serializeHtml(): string;
