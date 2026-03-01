@@ -64,6 +64,7 @@ abstract class HtmlElement implements IHtmlElement {
           `${attributeName}="${this.attributes[attributeName]}"`,
       ),
     ];
+
     return `<${tagPieces.join(" ")}>`;
   }
 

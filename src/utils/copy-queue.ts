@@ -1,5 +1,6 @@
 import { access, copyFile, constants as fsConst } from "node:fs/promises";
 import { logger } from "./logger.js";
+import { noOperation } from "./no-operation.js";
 import type { TLocalFileName, TPublicFileName } from "./paths.js";
 
 type TFileCopyOperation = {
@@ -70,7 +71,7 @@ class CopyQueue {
           `File ${destination} already exists`,
         );
       })
-      .catch();
+      .catch(noOperation);
   }
 }
 
