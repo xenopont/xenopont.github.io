@@ -13,6 +13,7 @@ const main = async (): Promise<void> => {
   logger.debug(`Content found: ${content.length} items`);
   for (const page of content) {
     logger.debug(`Rendering ${page.title}`);
+    logger.debug(page.uri);
     const template = getTemplate(page.template);
     const renderedHtml = template.render(page);
     logger.debug(renderedHtml);

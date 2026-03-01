@@ -181,8 +181,11 @@ export function toWebUri(filename: TPublicFileName): TWebUri {
     );
   }
 
-  // Convert to URI format: forward slashes, starting with /
-  const uri = relativePath.split(sep).join("/");
+  const uriPieces = relativePath.split(sep).filter((p) => p.length > 0);
+  if (uriPieces[uriPieces.length - 1] === "index.html") {
+    uriPieces.pop();
+  }
+  const uri = uriPieces.join("/");
 
-  return `${baseUrl}${uri}` as TWebUri;
+  return `${baseUrl}/${uri}` as TWebUri;
 }
