@@ -12,15 +12,19 @@ class ESourceFileDoesntExist extends Error {}
 class EDestinationFileAlreadyExists extends Error {}
 
 class CopyQueue {
-  private queue: Set<TFileCopyOperation> = new Set();
+  private queue: TFileCopyOperation[] = [];
 
   // We don't check if the local file exists.
   // It must be present only after we `start()` copying.
   public add(local: TLocalFileName, publicFile: TPublicFileName): void {
-    this.queue.add({ source: local, destination: publicFile });
+    if (!this.contains(local, publicFile)) {
+      this.queue.push({ source: local, destination: publicFile });
+    }
   }
 
   public async start(): Promise<void> {
+    logger.info("Starting copy queue.");
+    logger.info(`${this.queue.length} items found.`);
     const promises: Promise<void>[] = [];
     for (const operation of this.queue) {
       promises.push(
@@ -54,6 +58,15 @@ class CopyQueue {
     }
 
     await Promise.all(promises);
+  }
+
+  private contains(
+    source: TLocalFileName,
+    destination: TPublicFileName,
+  ): boolean {
+    return this.queue.some(
+      (item) => item.source === source && item.destination === destination,
+    );
   }
 
   private async checkSourceExists(source: TLocalFileName): Promise<void> {
