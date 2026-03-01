@@ -22,7 +22,7 @@ class CopyQueue {
     }
   }
 
-  public async start(): Promise<void> {
+  public start(): Promise<void>[] {
     logger.info("Starting copy queue.");
     logger.info(`${this.queue.length} items found.`);
     const promises: Promise<void>[] = [];
@@ -57,7 +57,7 @@ class CopyQueue {
       );
     }
 
-    await Promise.all(promises);
+    return promises;
   }
 
   private contains(

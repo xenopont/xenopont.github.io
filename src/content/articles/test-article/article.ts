@@ -8,22 +8,22 @@ import {
   toWebUri,
 } from "../../../utils/paths.js";
 
-const directory: TPublicDirectory = toPublicDirectory("");
+const publicDirectory: TPublicDirectory = toPublicDirectory("test-article");
 const publicFileName: TPublicFileName = toPublicFileName(
-  directory,
+  publicDirectory,
   "index.html",
 );
 
-export const homePage: IPublishable = {
+export const testArticle: IPublishable = {
   content: [],
-  description: safe("Home Page"),
+  description: safe("Test Article"),
   language: "en",
-  publicDirectory: directory,
+  publicDirectory,
   publicFileName,
   scripts: [],
   socialCardImageUri: null,
   styles: [],
   template: "default",
-  title: safe("Home Page"),
+  title: safe("TEST ARTICLE"),
   uri: toWebUri(publicFileName),
 };
