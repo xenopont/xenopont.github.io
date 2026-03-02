@@ -30,6 +30,7 @@
     "@types/node": "25.3.2",
     "esbuild": "0.27.3",
     "highlight.js": "11.11.1",
+    "htmlfy": "^1.0.1",
     "http-server": "14.1.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3"

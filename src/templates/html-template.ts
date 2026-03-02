@@ -11,7 +11,6 @@ import {
 } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
-import { baseUrl } from "../utils/base-url.js";
 import { faviconFileWrapper } from "../utils/file-wrapper.js";
 import type { TWebUri } from "../utils/paths.js";
 
@@ -90,7 +89,7 @@ export class THtmlTemplate {
       meta({ property: "og:type", content: "article" }),
       meta({
         property: "og:url",
-        content: `${baseUrl}${page.uri}`,
+        content: page.uri,
       }),
     ];
     if (page.socialCardImageUri !== null) {

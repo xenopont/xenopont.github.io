@@ -1,3 +1,4 @@
+import { prettify } from "htmlfy";
 import { content } from "./content/all.js";
 import { getTemplate } from "./templates/active.js";
 import { cleanDist } from "./utils/clean-dist.js";
@@ -6,7 +7,6 @@ import { logger } from "./utils/logger.js";
 import { saveHTML } from "./utils/save-html.js";
 
 const main = async (): Promise<void> => {
-  logger.info("Start building.");
   if (!cleanDist()) {
     return;
   }
@@ -19,9 +19,12 @@ const main = async (): Promise<void> => {
     const template = getTemplate(page.template);
     const renderedHtml = template.render(page);
     promises.push(
-      saveHTML(renderedHtml, page.publicDirectory, page.publicFileName).then(
-        () =>
-          logger.info(`✅ Page ${page.title} saved to ${page.publicFileName}`),
+      saveHTML(
+        prettify(renderedHtml, { content_wrap: 80, strict: true }),
+        page.publicDirectory,
+        page.publicFileName,
+      ).then(() =>
+        logger.info(`✅ Page ${page.title} saved to ${page.publicFileName}`),
       ),
     );
   }
@@ -33,12 +36,17 @@ const main = async (): Promise<void> => {
   await Promise.all(promises);
 };
 
+logger.time("Built in");
+logger.info("Start building.");
 main()
   .then(() => {
     logger.info("Done!");
   })
   .catch((error) => {
     logger.error("Error:", error);
+  })
+  .finally(() => {
+    logger.timeEnd("Built in");
   });
 
 logger.info("");
