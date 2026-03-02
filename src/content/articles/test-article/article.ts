@@ -17,14 +17,14 @@ const publicFileName: TPublicFileName = toPublicFileName(
 
 export const testArticle: IPublishable = {
   content: [],
-  description: safe("Test Article"),
+  description: safe("Test article description"),
   language: "en",
   publicDirectory,
   publicFileName: toValidHtmlFileName(publicFileName),
   scripts: [],
   socialCardImageUri: null,
   styles: [],
-  template: "default",
-  title: safe("TEST ARTICLE"),
+  template: "article",
+  title: safe("Test Article Title"),
   uri: toWebUri(publicFileName),
 };
