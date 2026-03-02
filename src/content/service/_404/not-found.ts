@@ -1,5 +1,6 @@
 import { em, h1, hr, safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
+import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
   type TPublicFileName,
@@ -23,7 +24,7 @@ export const notFound: IPublishable = {
   description: safe("The requested content was not found."),
   language: "en",
   publicDirectory,
-  publicFileName,
+  publicFileName: toValidHtmlFileName(publicFileName),
   scripts: [],
   socialCardImageUri: null,
   styles: [],

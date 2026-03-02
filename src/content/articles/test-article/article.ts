@@ -1,5 +1,6 @@
 import { safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
+import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
   type TPublicFileName,
@@ -19,7 +20,7 @@ export const testArticle: IPublishable = {
   description: safe("Test Article"),
   language: "en",
   publicDirectory,
-  publicFileName,
+  publicFileName: toValidHtmlFileName(publicFileName),
   scripts: [],
   socialCardImageUri: null,
   styles: [],
