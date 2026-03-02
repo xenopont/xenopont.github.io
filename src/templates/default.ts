@@ -4,7 +4,7 @@ import type { IPublishable } from "../publishing/publishable.js";
 import { THtmlTemplate } from "./html-template.js";
 
 // A new class allows overriding the `buildBody()` method
-// for injecting custom content into the page.
+// for injecting custom chrome for the page.
 class TDefaultHtmlTemplate extends THtmlTemplate {
   protected override buildBody(page: IPublishable): THtmlEntity {
     return body({}, [div({ id: "content" }, page.content)]);

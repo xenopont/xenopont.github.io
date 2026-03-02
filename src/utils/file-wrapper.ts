@@ -1,3 +1,4 @@
+import { assetsFolder } from "../config/constants.js";
 import { copyQueue } from "./copy-queue.js";
 import {
   type TPublicDirectory,
@@ -83,6 +84,12 @@ class TFileWrapper implements IFileWrapper {
     return toWebUri(publicFilename);
   }
 }
+
+export const cssFileWrapper: TFileWrapper = new TFileWrapper(
+  "css",
+  new Set(["css"]),
+  toPublicSubPath(`${assetsFolder}/css`),
+);
 
 export const imageFileWrapper: TFileWrapper = new TFileWrapper(
   "image",

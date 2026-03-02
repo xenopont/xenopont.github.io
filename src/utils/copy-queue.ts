@@ -1,4 +1,10 @@
-import { access, copyFile, constants as fsConst } from "node:fs/promises";
+import {
+  access,
+  copyFile,
+  constants as fsConst,
+  mkdir,
+} from "node:fs/promises";
+import { sep } from "node:path";
 import { logger } from "./logger.js";
 import { noOperation } from "./no-operation.js";
 import type { TLocalFileName, TPublicFileName } from "./paths.js";
@@ -32,6 +38,7 @@ class CopyQueue {
           this.checkSourceExists(operation.source),
           this.checkDestinationDoesntExist(operation.destination),
         ])
+          .then(() => this.mkdir(operation.destination))
           .then(() => copyFile(operation.source, operation.destination))
           .then(() => {
             logger.info(
@@ -85,6 +92,15 @@ class CopyQueue {
         );
       })
       .catch(noOperation);
+  }
+
+  private async mkdir(publicFileName: TPublicFileName): Promise<void> {
+    const pathPieces = publicFileName.split(sep);
+    pathPieces.pop();
+    const path = pathPieces.join(sep);
+    if (path !== "") {
+      await mkdir(path, { recursive: true });
+    }
   }
 }
 

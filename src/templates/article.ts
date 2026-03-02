@@ -3,6 +3,7 @@ import { topBar } from "../components/top-bar.js";
 import { article, body, div } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
+import { cssFileWrapper } from "../utils/file-wrapper.js";
 import { THtmlTemplate } from "./html-template.js";
 
 class TArticleTemplate extends THtmlTemplate {
@@ -21,6 +22,11 @@ export const articleTemplate: TArticleTemplate = new TArticleTemplate(
   "article",
   {
     scripts: [],
-    styles: [],
+    styles: [
+      cssFileWrapper.url(
+        `${import.meta.dirname}/../assets/styles/article.css`,
+        "article",
+      ),
+    ],
   },
 );
