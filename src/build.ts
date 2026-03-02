@@ -24,7 +24,7 @@ const main = async (): Promise<void> => {
         page.publicDirectory,
         page.publicFileName,
       ).then(() =>
-        logger.info(`✅ Page ${page.title} saved to ${page.publicFileName}`),
+        logger.info(`✅ Page "${page.title}" saved to ${page.publicFileName}`),
       ),
     );
   }
