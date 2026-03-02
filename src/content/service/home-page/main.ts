@@ -1,5 +1,6 @@
 import { safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
+import { baseUrl } from "../../../utils/base-url.js";
 import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
@@ -8,6 +9,7 @@ import {
   toPublicFileName,
   toWebUri,
 } from "../../../utils/paths.js";
+import { past } from "../../../utils/time.js";
 
 const directory: TPublicDirectory = toPublicDirectory("");
 const publicFileName: TPublicFileName = toPublicFileName(
@@ -16,11 +18,16 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const homePage: IPublishable = {
+  author: {
+    name: "Sergei Kovalenko",
+    url: `${baseUrl}/sergei-kovalenko/`,
+  },
   content: [],
   description: safe("Home Page"),
   language: "en",
   publicDirectory: directory,
   publicFileName: toValidHtmlFileName(publicFileName),
+  publishedAt: past(),
   scripts: [],
   socialCardImageUri: null,
   styles: [],

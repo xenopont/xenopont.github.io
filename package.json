@@ -11,7 +11,7 @@
     "http": "./node_modules/.bin/http-server ./dist/",
     "tsx-watch": "./node_modules/.bin/tsx watch --include 'src/**/*' src/build.ts",
     "type-check": "./node_modules/.bin/tsc --noEmit",
-    "watch": "(npm run type-check || true) && npm run http & npm run tsx-watch"
+    "watch": "npm run http & npm run tsx-watch"
   },
   "repository": {
     "type": "git",

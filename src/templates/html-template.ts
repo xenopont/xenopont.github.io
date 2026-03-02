@@ -42,8 +42,8 @@ export class THtmlTemplate {
     return structure.map((entity) => entity.toString()).join("\n");
   }
 
-  protected buildBody(content: THtmlEntity[]): THtmlEntity {
-    return body({}, content);
+  protected buildBody(page: IPublishable): THtmlEntity {
+    return body({}, page.content);
   }
 
   private buildHtml(page: IPublishable): THtmlEntity[] {
@@ -51,7 +51,7 @@ export class THtmlTemplate {
       doctype(),
       html({ lang: page.language }, [
         this.buildHead(page),
-        this.buildBody(page.content),
+        this.buildBody(page),
       ]),
     ];
   }

@@ -16,8 +16,29 @@ export const safe = (str: string): TSafeText =>
     .replace(/"/g, "&quot;") as TSafeText;
 export const unsafe = (str: string): THtmlText => str as THtmlText;
 
+export const a = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("a", attributes, children);
+};
+
+export const address = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("address", attributes, children);
+};
+
 export const area = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("area", attributes);
+};
+
+export const article = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("article", attributes, children);
 };
 
 export const base = (attributes: THtmlElementAttributes): IHtmlElement => {
@@ -75,6 +96,13 @@ export const head = (
   return new Element("head", attributes, children);
 };
 
+export const header = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("header", attributes, children);
+};
+
 export const hr = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("hr", attributes);
 };
@@ -109,6 +137,13 @@ export const p = (
   return new Element("p", attributes, children);
 };
 
+export const section = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("section", attributes, children);
+};
+
 export const script = (
   attributes: THtmlElementAttributes,
   children: THtmlEntity[] = [],
@@ -118,6 +153,13 @@ export const script = (
 
 export const source = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("source", attributes);
+};
+
+export const time = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("time", attributes, children);
 };
 
 export const title = (

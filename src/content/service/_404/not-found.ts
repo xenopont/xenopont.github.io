@@ -1,5 +1,6 @@
 import { em, h1, hr, safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
+import { baseUrl } from "../../../utils/base-url.js";
 import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
@@ -8,6 +9,7 @@ import {
   toPublicFileName,
   toWebUri,
 } from "../../../utils/paths.js";
+import { past } from "../../../utils/time.js";
 
 const publicDirectory: TPublicDirectory = toPublicDirectory("/");
 const publicFileName: TPublicFileName = toPublicFileName(
@@ -16,6 +18,10 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const notFound: IPublishable = {
+  author: {
+    name: "Sergei Kovalenko",
+    url: `${baseUrl}/sergei-kovalenko/`,
+  },
   content: [
     h1({}, [safe("404 Not Found")]),
     hr({}),
@@ -25,6 +31,7 @@ export const notFound: IPublishable = {
   language: "en",
   publicDirectory,
   publicFileName: toValidHtmlFileName(publicFileName),
+  publishedAt: past(),
   scripts: [],
   socialCardImageUri: null,
   styles: [],
