@@ -1,3 +1,4 @@
+import "../assets/fonts/permian-slab-serif.js";
 import { highlightJsAgateCssUrl } from "../assets/highlight.js/agate.css.js";
 import { articleCssUrl } from "../assets/styles/article.css.js";
 import { articleHeader } from "../components/article-header.js";

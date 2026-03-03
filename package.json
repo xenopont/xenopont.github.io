@@ -8,7 +8,7 @@
     "build": "./node_modules/.bin/tsx src/build.ts",
     "build:xenopont": "DOMAIN_NAME=xenopont.github.io ./node_modules/.bin/tsx src/build.ts",
     "build:dev-xl": "DOMAIN_NAME=dev-xl.com ./node_modules/.bin/tsx src/build.ts",
-    "http": "./node_modules/.bin/http-server ./dist/",
+    "http": "./node_modules/.bin/http-server --cors ./dist/",
     "tsx-watch": "./node_modules/.bin/tsx watch --include 'src/**/*' src/build.ts",
     "type-check": "./node_modules/.bin/tsc --noEmit",
     "watch": "npm run http & npm run tsx-watch"
