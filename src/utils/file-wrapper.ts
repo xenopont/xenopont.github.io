@@ -91,6 +91,13 @@ export const cssFileWrapper: TFileWrapper = new TFileWrapper(
   toPublicSubPath(`${assetsFolder}/css`),
 );
 
+// use the `cached` version for the third-party CSS that you don't update often
+export const cssCachedFileWrapper: TFileWrapper = new TFileWrapper(
+  "css",
+  new Set(["css"]),
+  toPublicSubPath("styles"),
+);
+
 export const imageFileWrapper: TFileWrapper = new TFileWrapper(
   "image",
   new Set(["gif", "jpeg", "jpg", "png", "webp"]),
