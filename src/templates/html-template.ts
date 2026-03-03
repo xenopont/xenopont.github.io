@@ -1,3 +1,4 @@
+import { faviconUrl } from "../assets/favicon.ico.js";
 import {
   body,
   doctype,
@@ -11,7 +12,6 @@ import {
 } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
-import { faviconFileWrapper } from "../utils/file-wrapper.js";
 import type { TWebUri } from "../utils/paths.js";
 
 interface IHtmlTemplateOptions {
@@ -65,13 +65,7 @@ export class THtmlTemplate {
         name: "viewport",
         content: "width=device-width, initial-scale=1.0, user-scalable=yes",
       }),
-      link({
-        rel: "shortcut icon",
-        href: faviconFileWrapper.url(
-          `${import.meta.dirname}/../assets/favicon.ico`,
-          "favicon",
-        ),
-      }),
+      link({ rel: "shortcut icon", href: faviconUrl }),
       ...this.buildOpenGraphTags(page),
       ...this.buildTwitterCardTags(page),
       ...this.buildStyleTags([...this.options.styles, ...page.styles]),

@@ -23,16 +23,13 @@ interface IFileWrapper {
    *   will be added from the `filename` automatically. Must be a valid
    *   public file name.
    *
-   * @returns A URL of the file that can be used in the webpage code so that
-   *   the User agent can access it from the Web.
-   *
    * @example
    * ```ts
    * // my-image.webp.ts
    * import { imageFileWrapper } from "../utils/file-wrapper.js";
    *
    * export const myImageUrl = ImageFileWrapper.url(
-   *   `${import.media.dirname}/my-image.webp`,
+   *   `${import.meta.dirname}/my-image.webp`,
    *   "my-article-fig-1"
    * );
    * // https://example.com/images/my-article-fig-1.webp
@@ -45,6 +42,9 @@ interface IFileWrapper {
    *
    * // <img src="https://example.com/images/my-article-fig-1.webp" alt="Fig. 1">
    * ```
+   *
+   * @returns A URL of the file that can be used in the webpage code so that
+   *   the User agent can access it from the Web.
    */
   url(filename: string, basename: string): TWebUri;
 }
@@ -101,4 +101,10 @@ export const faviconFileWrapper: TFileWrapper = new TFileWrapper(
   "favicon",
   new Set(["ico"]),
   toPublicSubPath(""),
+);
+
+export const fontFileWrapper: TFileWrapper = new TFileWrapper(
+  "font",
+  new Set(["woff2"]),
+  toPublicSubPath("fonts"),
 );
