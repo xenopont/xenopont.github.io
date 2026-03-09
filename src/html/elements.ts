@@ -155,6 +155,13 @@ export const source = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("source", attributes);
 };
 
+export const span = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("span", attributes, children);
+};
+
 export const time = (
   attributes: THtmlElementAttributes,
   children: THtmlEntity[],

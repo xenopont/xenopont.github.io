@@ -12,7 +12,7 @@ class TArticleTemplate extends THtmlTemplate {
   protected override buildBody(page: IPublishable): THtmlEntity {
     return body({}, [
       topBar(),
-      article({}, [
+      article({ id: "article-container" }, [
         articleHeader(page),
         div({ id: "article-content" }, page.content),
       ]),

@@ -5,7 +5,7 @@ import { toIso8601, toLongDate } from "../utils/time.js";
 
 export const articleHeader = (page: IPublishable): THtmlEntity => {
   return head({}, [
-    h1({}, [page.title]),
+    h1({ id: "article-title" }, [page.title]),
     section({ id: "byline" }, [
       address({ id: "author" }, [
         a({ id: "author-link", href: page.author.url, rel: "author" }, [
