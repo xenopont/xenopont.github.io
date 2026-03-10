@@ -122,8 +122,22 @@ export const input = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("input", attributes);
 };
 
+export const li = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("li", attributes, children);
+};
+
 export const link = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("link", attributes);
+};
+
+export const menu = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("menu", attributes, children);
 };
 
 export const meta = (attributes: THtmlElementAttributes): IHtmlElement => {
@@ -178,6 +192,13 @@ export const title = (
 
 export const track = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("track", attributes);
+};
+
+export const ul = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("ul", attributes, children);
 };
 
 export const wbr = (attributes: THtmlElementAttributes): IHtmlElement => {

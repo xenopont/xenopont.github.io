@@ -39,6 +39,7 @@ body {
   margin: 0;
   padding: var(--padding-side);
   background-color: var(--color-accent);
+  list-style: none;
 }
 
 #home-link {
@@ -52,6 +53,7 @@ body {
   border: 0.1rem solid var(--color-light-text);
   border-radius: 50%;
   box-shadow: 0.2rem 0.2rem 0.4rem var(--color-light-shadow);
+  transition: var(--transition-time) ease;
 }
 #home-link #home-link-chevron {
   content: "";
@@ -74,6 +76,9 @@ body {
   translate: -0.1rem -0.3rem;
 }
 @media (pointer: fine) {
+  #home-link:hover {
+    scale: 1.3;
+  }
   #home-link #home-link-chevron {
     transition: var(--transition-time) ease;
     transform: rotate(135deg);

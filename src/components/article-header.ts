@@ -1,10 +1,18 @@
-import { a, address, h1, head, safe, section, time } from "../html/elements.js";
+import {
+  a,
+  address,
+  h1,
+  header,
+  safe,
+  section,
+  time,
+} from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
 import { toIso8601, toLongDate } from "../utils/time.js";
 
 export const articleHeader = (page: IPublishable): THtmlEntity => {
-  return head({}, [
+  return header({}, [
     h1({ id: "article-title" }, [page.title]),
     section({ id: "byline" }, [
       address({ id: "author" }, [
