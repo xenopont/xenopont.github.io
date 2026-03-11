@@ -1,7 +1,7 @@
 import "../assets/fonts/permian-slab-serif.js";
 import { highlightJsAgateCssUrl } from "../assets/highlight.js/agate.css.js";
 import { articleCssUrl } from "../assets/styles/article.css.js";
-import { articleHeader } from "../components/article-header.js";
+import { articleHeader } from "../components/article/header.js";
 import { topBar } from "../components/top-bar.js";
 import { article, body, div } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
