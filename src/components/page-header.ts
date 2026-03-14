@@ -1,6 +1,7 @@
 import {
   a,
   address,
+  div,
   h1,
   header,
   safe,
@@ -13,7 +14,9 @@ import { toIso8601, toLongDate } from "../utils/time.js";
 
 export const pageHeader = (page: IPublishable): THtmlEntity => {
   return header({ id: "page-header" }, [
-    section({ id: "title-section" }, [h1({ id: "title" }, [page.title])]),
+    section({ id: "title-section" }, [
+      div({ id: "title-wrapper" }, [h1({ id: "title" }, [page.title])]),
+    ]),
     section({ id: "byline" }, [
       address({ id: "author" }, [
         a({ id: "author-link", href: page.author.url, rel: "author" }, [

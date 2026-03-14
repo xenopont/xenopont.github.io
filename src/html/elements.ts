@@ -133,6 +133,13 @@ export const link = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("link", attributes);
 };
 
+export const main = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[] = [],
+): IHtmlElement => {
+  return new Element("main", attributes, children);
+};
+
 export const menu = (
   attributes: THtmlElementAttributes,
   children: THtmlEntity[] = [],

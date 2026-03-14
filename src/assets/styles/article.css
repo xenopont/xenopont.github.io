@@ -22,6 +22,7 @@
   --color-main-background: #ffffff;
   --color-main-text: #333333;
   --color-accent: #4488ff;
+  --color-accent-secondary: #ff4488;
   --color-gray-text: #999999;
   --color-light-text: #ffffff;
   --color-light-shadow: #00000040;
@@ -114,6 +115,25 @@ body {
   }
 }
 
+@media (min-width: 756px) {
+  #top-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    width: 95%;
+    background-color: rgba(from var(--color-accent) r g b / 0.1);
+    backdrop-filter: blur(0.3rem);
+    border: 0.1rem solid #ffffffc0;
+    box-shadow: 0 0 0.4rem 0.2rem var(--color-light-shadow);
+    border-radius: 0.4rem;
+  }
+  #home-link {
+    background-color: var(--color-accent-secondary);
+  }
+}
+
 /* ------------------------------ Article ----------------------------------- */
 #article {
   --title-padding-top: 0;
@@ -134,29 +154,38 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--color-accent);
-  border-bottom: 0.1rem solid var(--color-light-shadow);
 }
 
-#title {
+#title-wrapper {
+  display: block;
+  max-width: var(--max-width);
+  margin: 0 auto;
   padding: var(--title-padding-top) var(--padding-side)
     var(--title-padding-bottom) var(--padding-side);
-  margin: 0;
+}
+#title {
+  padding: 0;
+  margin: 0 auto;
   font-family: "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-light-text);
-
-  width: auto;
+  width: 100%;
   text-align: center;
-  max-width: var(--max-width);
 }
 
 #article #byline {
-  padding: var(--title-padding-bottom) var(--padding-side);
+  padding: var(--title-padding-bottom) 0;
   margin: 0;
   text-align: right;
   font-size: 1rem;
   color: var(--color-gray-text);
+}
+#article #author,
+#article time {
+  display: block;
+  padding: 0 var(--padding-side);
   max-width: var(--max-width);
+  margin: 0 auto;
 }
 #article #byline a {
   color: var(--color-gray-text);
@@ -170,4 +199,17 @@ body {
   text-align: justify;
   hyphens: auto;
   max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+@media (min-width: 756px) {
+  #article {
+    margin-top: 8rem;
+  }
+  #title-section {
+    background-color: transparent;
+  }
+  #title-wrapper {
+    background-color: var(--color-accent);
+  }
 }

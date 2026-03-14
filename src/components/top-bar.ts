@@ -4,7 +4,7 @@ import { baseUrl } from "../utils/base-url.js";
 
 export const topBar = (): THtmlEntity => {
   return menu({ id: "top-bar" }, [
-    li({}, [
+    li({ id: "home-link-container" }, [
       a({ href: `${baseUrl}/`, id: "home-link" }, [
         span({ id: "home-link-chevron" }, [safe("")]),
       ]),
