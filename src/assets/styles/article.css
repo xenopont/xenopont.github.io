@@ -125,7 +125,7 @@ body {
     width: 100%;
     margin: 0;
     background-color: rgba(from var(--color-accent) r g b / 0.1);
-    backdrop-filter: blur(0.3rem);
+    backdrop-filter: blur(0.15rem);
     border: 0.1rem solid #ffffffc0;
     box-shadow: 0 0 0.4rem 0.2rem var(--color-light-shadow);
     border-radius: 0.4rem;
@@ -134,7 +134,7 @@ body {
     padding: 0.8rem;
   }
   #home-link {
-    background-color: var(--color-accent-secondary);
+    background-color: var(--color-accent);
   }
 }
 
