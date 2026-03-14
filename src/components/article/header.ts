@@ -3,7 +3,6 @@ import {
   address,
   h1,
   header,
-  img,
   safe,
   section,
   time,
@@ -11,11 +10,9 @@ import {
 import type { THtmlEntity } from "../../html/entities.js";
 import type { IPublishable } from "../../publishing/publishable.js";
 import { toIso8601, toLongDate } from "../../utils/time.js";
-import { swirlImageUrl } from "./swirls.webp.js";
 
 export const articleHeader = (page: IPublishable): THtmlEntity => {
   return header({}, [
-    img({ src: swirlImageUrl, id: "article-decorator" }),
     h1({ id: "article-title" }, [page.title]),
     section({ id: "byline" }, [
       address({ id: "author" }, [
