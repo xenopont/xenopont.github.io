@@ -115,49 +115,53 @@ body {
 }
 
 /* ------------------------------ Article ----------------------------------- */
-#article-container {
-  --title-padding-top: 0.8rem;
+#article {
+  --title-padding-top: 0;
+  --title-padding-bottom: 1.6rem;
   --max-width: 50rem;
 
   padding: 0;
 }
 
-#article-decorator {
-  position: absolute;
-  opacity: 0.25;
-  width: 75%;
-  top: calc(var(--padding-side) * 2);
-  right: calc(var(--padding-side) * 2);
-  pointer-events: none;
+#page-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-#article-title {
+#title-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-accent);
+  border-bottom: 0.1rem solid var(--color-light-shadow);
+}
+
+#title {
   padding: var(--title-padding-top) var(--padding-side)
-    calc(var(--title-padding-top) * 2) var(--padding-side);
+    var(--title-padding-bottom) var(--padding-side);
   margin: 0;
   font-family: "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-light-text);
-  background-color: var(--color-accent);
+
   width: auto;
   text-align: center;
-  border-bottom: 0.05rem solid var(--color-light-text);
   max-width: var(--max-width);
 }
 
-#article-container #byline {
-  box-shadow: inset 0 0.6rem 0.4rem -0.4rem var(--color-light-shadow);
-  padding: calc(var(--title-padding-top) * 2) var(--padding-side);
+#article #byline {
+  padding: var(--title-padding-bottom) var(--padding-side);
   margin: 0;
   text-align: right;
   font-size: 1rem;
   color: var(--color-gray-text);
   max-width: var(--max-width);
 }
-#article-container #byline a {
+#article #byline a {
   color: var(--color-gray-text);
 }
-#article-container #byline #author:before {
+#article #byline #author:before {
   content: "by ";
 }
 

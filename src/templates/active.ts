@@ -1,4 +1,4 @@
-import { articleTemplate } from "./article.js";
+import { articleTemplate } from "./article/template.js";
 import { defaultTemplate } from "./default.js";
 import type { THtmlTemplate } from "./html-template.js";
 
