@@ -10,6 +10,7 @@ import {
   toWebUri,
 } from "../../../utils/paths.js";
 import { past } from "../../../utils/time.js";
+import { content } from "./content.js";
 
 const directory: TPublicDirectory = toPublicDirectory("");
 const publicFileName: TPublicFileName = toPublicFileName(
@@ -22,7 +23,7 @@ export const homePage: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
-  content: [],
+  content,
   description: safe("Home Page"),
   language: "en",
   publicDirectory: directory,

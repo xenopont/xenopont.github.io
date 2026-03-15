@@ -6,6 +6,7 @@
 }
 @font-face {
   font-family: "PermianSlabSerif";
+  /* noinspection CssUnknownTarget */
   src: url("../../fonts/permian-slab-serif-italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
