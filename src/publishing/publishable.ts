@@ -1,3 +1,4 @@
+import { domainName } from "../config/constants.js";
 import type { THtmlEntity, TSafeText } from "../html/entities.js";
 import type { TTemplateId } from "../templates/active.js";
 import type { TValidHtmlFileName } from "../utils/filenames.js";
@@ -23,3 +24,11 @@ export interface IPublishable {
   title: TSafeText;
   uri: TWebUri;
 }
+
+type TFilterFunction<T> = (item: T) => boolean;
+const currentDate: Date = new Date();
+export const alreadyPublished = (): TFilterFunction<IPublishable> => {
+  return domainName.startsWith("localhost")
+    ? () => true
+    : (item: IPublishable) => item.publishedAt < currentDate;
+};

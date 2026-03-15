@@ -1,5 +1,5 @@
 import { prettify } from "htmlfy";
-import { content } from "./content/all.js";
+import { pagesToBuild } from "./content/all.js";
 import { getTemplate } from "./templates/active.js";
 import { cleanDist } from "./utils/clean-dist.js";
 import { copyQueue } from "./utils/copy-queue.js";
@@ -12,8 +12,8 @@ const main = async (): Promise<void> => {
   }
   const promises: Promise<void>[] = [];
   // Render all pages first,
-  logger.debug(`Content found: ${content.length} items`);
-  for (const page of content) {
+  logger.debug(`Content found: ${pagesToBuild.length} items`);
+  for (const page of pagesToBuild) {
     logger.info(`Rendering ${page.title}`);
     logger.info(page.uri);
     const template = getTemplate(page.template);
