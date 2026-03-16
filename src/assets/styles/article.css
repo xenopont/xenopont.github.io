@@ -130,6 +130,7 @@ body {
     background-color: rgba(from var(--color-accent) r g b / 0.1);
     backdrop-filter: blur(0.15rem);
     border: 0.1rem solid #ffffffc0;
+    border-top: none;
     box-shadow: 0 0 0.4rem 0.2rem var(--color-light-shadow);
     border-radius: 0.4rem;
   }
