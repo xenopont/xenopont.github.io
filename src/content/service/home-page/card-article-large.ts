@@ -3,7 +3,6 @@ import {
   div,
   h1,
   header,
-  img,
   safe,
   section,
   time,
@@ -11,14 +10,18 @@ import {
 import type { THtmlEntity } from "../../../html/entities.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
 import { toIso8601, toLongDate } from "../../../utils/time.js";
+import { imgIfExists } from "./img-if-exists.js";
 
-export const cardArticleLarge = (page: IPublishable): THtmlEntity[] => {
+export const cardArticleLarge = (
+  page: IPublishable | undefined,
+): THtmlEntity[] => {
+  if (!page) {
+    return [];
+  }
+
   return [
     article({ class: "card-article-large" }, [
-      header({}, [
-        img({ alt: "", src: page.socialCardImageUri }),
-        h1({}, [page.title]),
-      ]),
+      header({}, [imgIfExists(page.socialCardImageUri), h1({}, [page.title])]),
       section({ class: "description" }, [
         time(
           {
