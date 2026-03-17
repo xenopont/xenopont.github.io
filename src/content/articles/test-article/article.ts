@@ -22,6 +22,7 @@ export const testArticle: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
+  colorAccent: "default",
   content: [
     p({}, [
       safe(

@@ -23,6 +23,7 @@ export const homePage: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
+  colorAccent: "default",
   content,
   description: safe("Home Page"),
   language: "en",

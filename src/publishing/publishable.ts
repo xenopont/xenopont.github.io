@@ -11,6 +11,7 @@ interface IAuthor {
 
 export interface IPublishable {
   author: IAuthor;
+  colorAccent: string;
   content: THtmlEntity[];
   description: TSafeText;
   language: string; // BCP 47: "en", "en-GB", ...

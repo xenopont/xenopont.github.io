@@ -21,7 +21,10 @@ export const cardArticleLarge = (
 
   return [
     article({ class: "card-article-large" }, [
-      header({}, [imgIfExists(page.socialCardImageUri), h1({}, [page.title])]),
+      header({}, [
+        imgIfExists(page.socialCardImageUri, page.colorAccent),
+        h1({}, [page.title]),
+      ]),
       section({ class: "description" }, [
         time(
           {

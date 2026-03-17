@@ -22,6 +22,7 @@ export const notFound: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
+  colorAccent: "default",
   content: [
     h1({}, [safe("404 Not Found")]),
     hr({}),
