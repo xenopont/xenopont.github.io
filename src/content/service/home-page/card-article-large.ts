@@ -23,7 +23,7 @@ export const cardArticleLarge = (
   return [
     article({ class: "card-article-large" }, [
       header({}, [
-        imgIfExists(page.socialCardImageUri, page.colorAccent),
+        imgIfExists(page.socialCardImageUri, page.colors?.accent),
         a({ href: page.uri }, [h1({}, [page.title])]),
       ]),
       section({ class: "description" }, [

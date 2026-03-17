@@ -22,7 +22,7 @@ export const testArticle: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
-  colorAccent: "default",
+  colors: { accent: "#009900", accentSecondary: "#e0c000" },
   content: [
     p({}, [
       safe(

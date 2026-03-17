@@ -9,9 +9,14 @@ interface IAuthor {
   url: string; // todo make valid local or external URL/TWebUri
 }
 
+interface TPageColors {
+  accent: string;
+  accentSecondary: string;
+}
+
 export interface IPublishable {
   author: IAuthor;
-  colorAccent: string;
+  colors: TPageColors | null;
   content: THtmlEntity[];
   description: TSafeText;
   language: string; // BCP 47: "en", "en-GB", ...

@@ -183,6 +183,13 @@ export const span = (
   return new Element("span", attributes, children);
 };
 
+export const style = (
+  attributes: THtmlElementAttributes,
+  content: THtmlText,
+): IHtmlElement => {
+  return new Element("style", attributes, [content]);
+};
+
 export const time = (
   attributes: THtmlElementAttributes,
   children: THtmlEntity[],

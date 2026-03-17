@@ -8,7 +8,9 @@ import {
   meta,
   safe,
   script,
+  style,
   title,
+  unsafe,
 } from "../html/elements.js";
 import type { THtmlEntity } from "../html/entities.js";
 import type { IPublishable } from "../publishing/publishable.js";
@@ -72,6 +74,17 @@ export class THtmlTemplate {
       ...this.buildScriptTags([...this.options.scripts, ...page.scripts]),
       // add custom template/page tags if necessary
     ];
+
+    if (page.colors) {
+      headTags.push(
+        style(
+          {},
+          unsafe(`:root {
+        --color-accent: ${page.colors.accent};
+        --color-accent-secondary: ${page.colors.accentSecondary};}`),
+        ),
+      );
+    }
 
     return head({}, headTags);
   }

@@ -17,7 +17,7 @@ export const cardArticleMedium = (page: IPublishable): THtmlEntity[] => {
   return [
     article({ class: "card-article-medium" }, [
       section({ class: "illustration" }, [
-        imgIfExists(page.socialCardImageUri, page.colorAccent),
+        imgIfExists(page.socialCardImageUri, page.colors?.accent),
       ]),
       header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
       section({ class: "description" }, [
