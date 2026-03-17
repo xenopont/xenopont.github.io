@@ -1,1 +1,27 @@
-/* home page */
+/* ------------------------- Card Article Large ----------------------------- */
+.card-article-large {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.card-article-large a {
+  text-decoration: none;
+}
+
+.card-article-large .illustration {
+  display: block;
+  width: 100vw;
+  min-height: 75vw;
+  height: auto;
+}
+
+.card-article-large header h1 {
+  padding: 0 var(--padding-side);
+  margin: 0;
+  font-family: "Segoe UI Light", sans-serif;
+  font-weight: lighter;
+  color: var(--color-accent);
+  width: 100%;
+  text-align: left;
+}

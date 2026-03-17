@@ -9,7 +9,7 @@ interface IAuthor {
   url: string; // todo make valid local or external URL/TWebUri
 }
 
-interface TPageColors {
+export interface TPageColors {
   accent: string;
   accentSecondary: string;
 }
