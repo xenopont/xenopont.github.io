@@ -1,6 +1,8 @@
 import {
+  a,
   article,
   div,
+  h1,
   header,
   safe,
   section,
@@ -15,9 +17,9 @@ export const cardArticleMedium = (page: IPublishable): THtmlEntity[] => {
   return [
     article({ class: "card-article-medium" }, [
       section({ class: "illustration" }, [
-        imgIfExists(page.socialCardImageUri),
+        imgIfExists(page.socialCardImageUri, page.colorAccent),
       ]),
-      header({}, [page.title]),
+      header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
       section({ class: "description" }, [
         time(
           {

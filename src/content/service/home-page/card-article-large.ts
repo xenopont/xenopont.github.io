@@ -1,4 +1,5 @@
 import {
+  a,
   article,
   div,
   h1,
@@ -23,7 +24,7 @@ export const cardArticleLarge = (
     article({ class: "card-article-large" }, [
       header({}, [
         imgIfExists(page.socialCardImageUri, page.colorAccent),
-        h1({}, [page.title]),
+        a({ href: page.uri }, [h1({}, [page.title])]),
       ]),
       section({ class: "description" }, [
         time(

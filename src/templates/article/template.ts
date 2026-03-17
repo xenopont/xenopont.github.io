@@ -1,6 +1,7 @@
 import "../../assets/fonts/permian-slab-serif.js";
 import { highlightJsAgateCssUrl } from "../../assets/highlight.js/agate.css.js";
 import { articleCssUrl } from "../../assets/styles/article.css.js";
+import { globalCssUrl } from "../../assets/styles/global.css.js";
 import { pageHeader } from "../../components/page-header.js";
 import { topBar } from "../../components/top-bar.js";
 import { article, body, main } from "../../html/elements.js";
@@ -24,6 +25,6 @@ export const articleTemplate: TArticleTemplate = new TArticleTemplate(
   "article",
   {
     scripts: [],
-    styles: [articleCssUrl, highlightJsAgateCssUrl],
+    styles: [globalCssUrl, articleCssUrl, highlightJsAgateCssUrl],
   },
 );

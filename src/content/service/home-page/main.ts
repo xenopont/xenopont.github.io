@@ -33,7 +33,7 @@ export const homePage: IPublishable = {
   scripts: [],
   socialCardImageUri: null,
   styles: [],
-  template: "default",
+  template: "home-page",
   title: safe("Home Page"),
   uri: toWebUri(publicFileName),
 };

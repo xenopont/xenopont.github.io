@@ -1,10 +1,12 @@
 import { articleTemplate } from "./article/template.js";
 import { defaultTemplate } from "./default.js";
+import { homePageTemplate } from "./home/template.js";
 import type { THtmlTemplate } from "./html-template.js";
 
 export const ACTIVE_TEMPLATES = {
   default: "default",
   article: "article",
+  homePage: "home-page",
 } as const;
 
 export type TTemplateId =
@@ -18,6 +20,7 @@ const templateRegistry: Map<TTemplateId, THtmlTemplate> = new Map<
 >([
   [ACTIVE_TEMPLATES.default, defaultTemplate],
   [ACTIVE_TEMPLATES.article, articleTemplate],
+  [ACTIVE_TEMPLATES.homePage, homePageTemplate],
 ]);
 
 export function getTemplate(id: TTemplateId): THtmlTemplate {

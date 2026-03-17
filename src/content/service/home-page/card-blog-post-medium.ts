@@ -1,4 +1,5 @@
 import {
+  a,
   article,
   h1,
   header,
@@ -22,7 +23,7 @@ export const cardBlogPostMedium = (page: IPublishable): THtmlEntity[] => {
           },
           [safe(toIso8601(page.publishedAt))],
         ),
-        h1({}, [page.title]),
+        a({ href: page.uri }, [h1({}, [page.title])]),
       ]),
       section({ class: "description" }, [page.description]),
     ]),
