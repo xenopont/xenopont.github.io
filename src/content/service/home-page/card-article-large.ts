@@ -42,7 +42,7 @@ export const cardArticleLarge = (
           },
           [safe(toIso8601(page.publishedAt))],
         ),
-        div({}, [page.description]),
+        div({ class: "article-summary" }, [page.description]),
       ]),
     ]),
   ];

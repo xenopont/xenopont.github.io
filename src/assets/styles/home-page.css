@@ -12,16 +12,36 @@
 .card-article-large .illustration {
   display: block;
   width: 100vw;
-  min-height: 75vw;
+  min-height: 42.85vw;
   height: auto;
+}
+.card-article-large .illustration img {
+  display: block;
 }
 
 .card-article-large header h1 {
+  display: block;
   padding: 0 var(--padding-side);
-  margin: 0;
+  margin: 0.75rem 0;
   font-family: "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-accent);
-  width: 100%;
   text-align: left;
+}
+
+.card-article-large .description {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.card-article-large .description time {
+  display: block;
+  padding: 0 var(--padding-side);
+  color: var(--color-accent-secondary);
+}
+.card-article-large .description .article-summary {
+  display: block;
+  padding: 0 var(--padding-side);
+  margin: 0;
 }
