@@ -1,9 +1,5 @@
 /* ------------------------------ Article ----------------------------------- */
 #article {
-  --title-padding-top: 0;
-  --title-padding-bottom: 1.6rem;
-  --max-width: 50rem;
-
   padding: 0;
   margin: 0;
 }
@@ -30,7 +26,7 @@
 #title {
   padding: 0;
   margin: 0 auto;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-light-text);
   width: 100%;

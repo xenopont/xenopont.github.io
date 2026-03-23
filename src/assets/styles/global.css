@@ -32,6 +32,9 @@
   --color-light-shadow: #00000040;
   --transition-time: 0.2s;
   --top-bar-gap: 0.8rem;
+  --title-padding-top: 0;
+  --title-padding-bottom: 1.6rem;
+  --max-width: 50rem;
 }
 
 body {

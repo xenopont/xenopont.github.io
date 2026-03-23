@@ -11,5 +11,5 @@ export const assetsFolder: string = `assets-${buildId}`;
 export const domainDisplayName: string = domainName.startsWith("xenopont")
   ? "Xenopont"
   : domainName.startsWith("localhost")
-    ? "localhost"
+    ? "Dev-XL.local"
     : "Dev XL";

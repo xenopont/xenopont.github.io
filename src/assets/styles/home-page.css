@@ -1,3 +1,22 @@
+/* ------------------------- Home Page Header ------------------------------- */
+#home-page-header {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-accent);
+}
+#home-page-header h1 {
+  display: block;
+  text-align: center;
+  padding: var(--title-padding-top) var(--padding-side)
+    var(--title-padding-bottom) var(--padding-side);
+  margin: 0 auto;
+  font-family: "Open Sans", "Segoe UI Light", sans-serif;
+  font-weight: lighter;
+  color: var(--color-light-text);
+  font-size: 2.5rem;
+}
+
 /* ------------------------- Card Article Large ----------------------------- */
 .card-article-large {
   display: block;
@@ -24,7 +43,7 @@
   display: block;
   padding: 0 var(--padding-side);
   margin: 0.75rem 0;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-accent);
   text-align: left;
