@@ -17,6 +17,7 @@
 }
 .card-article-large .illustration img {
   display: block;
+  width: 100%;
 }
 
 .card-article-large header h1 {

@@ -10,6 +10,7 @@ import {
   toWebUri,
 } from "../../../utils/paths.js";
 import { future } from "../../../utils/time.js";
+import { coverImageUrl } from "./cover-image.webp.js";
 
 const publicDirectory: TPublicDirectory = toPublicDirectory("test-article");
 const publicFileName: TPublicFileName = toPublicFileName(
@@ -22,7 +23,7 @@ export const testArticle: IPublishable = {
     name: "Sergei Kovalenko",
     url: `${baseUrl}/sergei-kovalenko/`,
   },
-  colors: { accent: "#009900", accentSecondary: "#e0c000" },
+  colors: { accent: "#c8824b", accentSecondary: "#4b82c8" },
   content: [
     p({}, [
       safe(
@@ -129,7 +130,7 @@ export const testArticle: IPublishable = {
   publicFileName: toValidHtmlFileName(publicFileName),
   publishedAt: future(),
   scripts: [],
-  socialCardImageUri: null,
+  socialCardImageUri: coverImageUrl,
   styles: [],
   template: "article",
   title: safe("The Article"),

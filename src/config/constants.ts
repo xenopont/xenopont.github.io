@@ -7,3 +7,9 @@ export const domainName: string =
 export const sourceRoot: string = "./src";
 export const publicRoot: string = "./dist";
 export const assetsFolder: string = `assets-${buildId}`;
+
+export const domainDisplayName: string = domainName.startsWith("xenopont")
+  ? "Xenopont"
+  : domainName.startsWith("localhost")
+    ? "localhost"
+    : "Dev XL";
