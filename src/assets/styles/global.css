@@ -1,22 +1,85 @@
+/* ------------------- font: Permian Slab Serif ------------------------------*/
 @font-face {
-  font-family: "PermianSlabSerif";
+  font-family: "Permian Slab Serif";
   /* noinspection CssUnknownTarget */
-  src: url("../../fonts/permian-slab-serif-regular.woff2") format("woff2");
+  src:
+    local("Permian Slab Serif"),
+    url("../../fonts/permian-slab-serif-regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "PermianSlabSerif";
+  font-family: "Permian Slab Serif";
   /* noinspection CssUnknownTarget */
-  src: url("../../fonts/permian-slab-serif-italic.woff2") format("woff2");
+  src:
+    local("Permian Slab Serif Italic"),
+    url("../../fonts/permian-slab-serif-italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
-  font-family: "PermianSlabSerif";
+  font-family: "Permian Slab Serif";
   /* noinspection CssUnknownTarget */
-  src: url("../../fonts/permian-slab-serif-bold.woff2") format("woff2");
+  src:
+    local("Permian Slab Serif Bold"),
+    url("../../fonts/permian-slab-serif-bold.woff2") format("woff2");
   font-weight: bold;
+  font-style: normal;
+}
+
+/* ------------------- font: Linux Libertine ---------------------------------*/
+@font-face {
+  font-family: "Linux Libertine";
+  /* noinspection CssUnknownTarget */
+  src:
+    local("Linux Libertine O"),
+    local("Linux Libertine"),
+    url("../../fonts/linux-libertine-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  /* noinspection CssUnknownTarget */
+  src:
+    local("Linux Libertine Italic O"),
+    local("Linux Libertine Italic"),
+    url("../../fonts/linux-libertine-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  /* noinspection CssUnknownTarget */
+  src:
+    local("Linux Libertine Bold O"),
+    local("Linux Libertine Bold"),
+    url("../../fonts/linux-libertine-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  /* noinspection CssUnknownTarget */
+  src:
+    local("Linux Libertine Bold O"),
+    local("Linux Libertine Bold"),
+    url("../../fonts/linux-libertine-bold-italic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Linux Libertine Mono";
+  /* noinspection CssUnknownTarget */
+  src:
+    local("Linux Libertine Mono O"),
+    local("Linux Libertine Mono"),
+    url("../../fonts/linux-libertine-mono.woff2") format("woff2");
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -39,9 +102,9 @@
 
 body {
   background-color: var(--color-main-background);
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: var(--color-main-text);
-  font-family: "PermianSlabSerif", "Georgia", serif;
+  font-family: "Permian Slab Serif", "Georgia", serif;
   padding: 0;
   margin: 0;
 }

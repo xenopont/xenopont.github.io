@@ -1,3 +1,5 @@
+import "../../assets/fonts/permian-slab-serif.js";
+import "../../assets/fonts/linux-libertine/linux-libertine.js";
 import { globalCssUrl } from "../../assets/styles/global.css.js";
 import { homePageCssUrl } from "../../assets/styles/home-page.css.js";
 import { topBar } from "../../components/top-bar.js";

@@ -1,4 +1,5 @@
 import "../../assets/fonts/permian-slab-serif.js";
+import "../../assets/fonts/linux-libertine/linux-libertine.js";
 import { highlightJsAgateCssUrl } from "../../assets/highlight.js/agate.css.js";
 import { articleCssUrl } from "../../assets/styles/article.css.js";
 import { globalCssUrl } from "../../assets/styles/global.css.js";
