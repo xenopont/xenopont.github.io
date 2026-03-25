@@ -70,7 +70,6 @@
     --padding-side: 2rem;
   }
   #title-section {
-    background-color: transparent;
     padding: 0 var(--padding-side);
   }
   #title-wrapper {
