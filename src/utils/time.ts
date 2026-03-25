@@ -6,3 +6,5 @@ export const toIso8601 = (date: Date): string =>
 
 export const toLongDate = (date: Date, language: string = "en-DE"): string =>
   new Intl.DateTimeFormat(language, { dateStyle: "full" }).format(date);
+
+export const toYear = (date: Date): number => date.getFullYear();

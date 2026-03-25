@@ -82,6 +82,13 @@ export const embed = (attributes: THtmlElementAttributes): IHtmlElement => {
   return new VoidElement("embed", attributes);
 };
 
+export const footer = (
+  attributes: THtmlElementAttributes,
+  children: THtmlEntity[],
+): IHtmlElement => {
+  return new Element("footer", attributes, children);
+};
+
 export const h1 = (
   attributes: THtmlElementAttributes,
   children: THtmlEntity[],
