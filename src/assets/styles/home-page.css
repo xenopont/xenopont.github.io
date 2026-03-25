@@ -3,7 +3,12 @@
   display: block;
   padding: 0;
   margin: 0;
+}
+#home-page-header #title-section {
   background-color: var(--color-accent);
+}
+#home-page-header #header-space {
+  min-height: 3rem;
 }
 #home-page-header h1 {
   display: block;
