@@ -29,7 +29,7 @@ export const cardArticleLarge = (
             class: "illustration",
             style: `background-color: ${accentColor(page.colors)};`,
           },
-          [imgIfExists(page.socialCardImageUri)],
+          [a({ href: page.uri }, [imgIfExists(page.socialCardImageUri)])],
         ),
         a({ href: page.uri }, [h1({}, [page.title])]),
       ]),

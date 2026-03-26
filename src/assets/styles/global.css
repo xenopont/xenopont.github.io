@@ -212,3 +212,18 @@ body {
     padding: var(--top-bar-gap);
   }
 }
+/* ------------------------- Footer ------------------------- */
+footer {
+  background-color: #222222;
+  color: #bbbbbb;
+  font-family: "Calibri", sans-serif;
+  font-size: 1rem;
+  min-height: 13rem;
+  margin: auto 0 0 0;
+  padding: 0;
+}
+footer #copyright {
+  display: block;
+  padding: var(--padding-side);
+  margin: 0;
+}

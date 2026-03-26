@@ -5,10 +5,21 @@ import { articleCssUrl } from "../../assets/styles/article.css.js";
 import { globalCssUrl } from "../../assets/styles/global.css.js";
 import { pageHeader } from "../../components/page-header.js";
 import { topBar } from "../../components/top-bar.js";
-import { article, body, main } from "../../html/elements.js";
+import { domainDisplayName } from "../../config/constants.js";
+import {
+  article,
+  body,
+  footer,
+  main,
+  safe,
+  section,
+  unsafe,
+} from "../../html/elements.js";
 import type { THtmlEntity } from "../../html/entities.js";
 import type { IPublishable } from "../../publishing/publishable.js";
+import { toYear } from "../../utils/time.js";
 import { THtmlTemplate } from "../html-template.js";
+import { bottomLine } from "./bottom-line.js";
 
 class TArticleTemplate extends THtmlTemplate {
   protected override buildBody(page: IPublishable): THtmlEntity {
@@ -17,6 +28,13 @@ class TArticleTemplate extends THtmlTemplate {
       article({ id: "article" }, [
         pageHeader(page),
         main({ id: "article-content" }, page.content),
+      ]),
+      bottomLine,
+      footer({}, [
+        section({ id: "copyright" }, [
+          unsafe("&copy;&nbsp;"),
+          safe(`${domainDisplayName}, ${toYear(new Date())}`),
+        ]),
       ]),
     ]);
   }
