@@ -35,11 +35,14 @@
 .card-article-large {
   display: block;
   padding: 0;
-  margin: 1rem 0;
+  margin: 3rem 0;
 }
 
 .card-article-large a {
   text-decoration: none;
+}
+.card-article-large a:visited {
+  color: inherit;
 }
 
 .card-article-large .illustration {
@@ -83,23 +86,65 @@
 .card-article-medium {
   display: flex;
   flex-direction: row;
-  padding: 0;
-  margin: 1rem 0;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0 var(--padding-side);
+  margin: 2rem 0;
 }
 
 .card-article-medium a {
   text-decoration: none;
 }
+.card-article-medium a:visited {
+  color: inherit;
+}
 
 .card-article-medium .illustration {
   display: block;
-  width: 40vw;
+  min-width: 50vw;
   min-height: 17.14vw;
   height: auto;
+  flex: 1 1 0;
 }
 .card-article-medium .illustration img {
   display: block;
   width: 100%;
+}
+
+.card-article-medium .description {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  font-size: 1rem;
+  flex: 1 1 0;
+}
+
+.card-article-medium .description header a {
+  display: block;
+}
+
+.card-article-medium .description header h1 {
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
+  font-weight: lighter;
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  text-align: left;
+}
+
+.card-article-medium .description time {
+  display: block;
+  padding: 0;
+  color: var(--color-accent-secondary);
+}
+.card-article-medium .description .article-summary {
+  display: block;
+  padding: 0;
+  margin: 0;
 }
 
 /* ---------------------- Desktop View -------------------------------------- */
