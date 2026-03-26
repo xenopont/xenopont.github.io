@@ -38,7 +38,7 @@ const buildFeed = (
   while (article || blogPost) {
     card = undefined;
     if (article && blogPost) {
-      // a fresh article always go first
+      // a fresh article always goes first
       if (article.publishedAt >= blogPost.publishedAt) {
         card =
           mediumArticleCardCount > mediumArticleCardMax

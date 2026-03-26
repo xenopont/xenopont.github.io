@@ -79,6 +79,29 @@
   margin: 0;
 }
 
+/* ------------------------- Card Article Medium ---------------------------- */
+.card-article-medium {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.card-article-medium a {
+  text-decoration: none;
+}
+
+.card-article-medium .illustration {
+  display: block;
+  width: 40vw;
+  min-height: 17.14vw;
+  height: auto;
+}
+.card-article-medium .illustration img {
+  display: block;
+  width: 100%;
+}
+
 /* ---------------------- Desktop View -------------------------------------- */
 @media (min-width: 756px) {
   :root {
@@ -102,7 +125,7 @@
 
   .card-article-large {
     max-width: var(--max-width);
-    min-width: calc(var(--max-width) * 0.4285);
+    min-height: calc(var(--max-width) * 0.4285);
     margin: 1rem auto;
   }
   .card-article-large header {

@@ -31,18 +31,25 @@ export const cardArticleLarge = (
           },
           [a({ href: page.uri }, [imgIfExists(page.socialCardImageUri)])],
         ),
-        a({ href: page.uri }, [h1({}, [page.title])]),
+        section({ class: "article-title" }, [
+          a({ href: page.uri }, [h1({}, [page.title])]),
+        ]),
       ]),
       section({ class: "description" }, [
-        time(
-          {
-            pubdate: "pubdate",
-            datetime: toIso8601(page.publishedAt),
-            title: toLongDate(page.publishedAt),
-          },
-          [safe(toIso8601(page.publishedAt))],
-        ),
-        div({ class: "article-summary" }, [page.description]),
+        a({ href: page.uri }, [
+          time(
+            {
+              pubdate: "pubdate",
+              datetime: toIso8601(page.publishedAt),
+              title: toLongDate(page.publishedAt),
+            },
+            [safe(toIso8601(page.publishedAt))],
+          ),
+        ]),
+
+        div({ class: "article-summary" }, [
+          a({ href: page.uri }, [page.description]),
+        ]),
       ]),
     ]),
   ];

@@ -23,7 +23,7 @@ class THomePageTemplate extends THtmlTemplate {
     return body({}, [
       topBar(true),
       pageHeader,
-      main({}, [page.content]),
+      main({}, page.content),
       footer({}, [
         section({ id: "copyright" }, [
           unsafe("&copy;&nbsp;"),

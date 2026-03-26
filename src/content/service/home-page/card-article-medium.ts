@@ -24,8 +24,8 @@ export const cardArticleMedium = (page: IPublishable): THtmlEntity[] => {
         },
         [imgIfExists(page.socialCardImageUri)],
       ),
-      header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
       section({ class: "description" }, [
+        header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
         time(
           {
             pubdate: "pubdate",
