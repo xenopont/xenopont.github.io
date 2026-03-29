@@ -28,7 +28,7 @@
   font-size: 2.5rem;
 }
 #home-page-header #header-space {
-  min-height: 3rem;
+  min-height: 0.8rem;
 }
 
 /* ------------------------- Card Article Large ----------------------------- */
@@ -56,9 +56,14 @@
   min-height: 42.85vw;
   height: auto;
 }
+.card-article-large .illustration a {
+  display: block;
+  overflow: hidden;
+}
 .card-article-large .illustration img {
   display: block;
   width: 100%;
+  transition: 0.2s ease-in-out;
 }
 
 .card-article-large header .article-title a {
@@ -189,8 +194,12 @@
   .card-article-large .illustration {
     min-height: calc(var(--max-width) / 21 * 9);
   }
+  .card-article-large .illustration img:hover {
+    transition: 7s ease-out;
+    transform: scale(1.25);
+  }
   .card-article-large header .article-title a {
-    padding: var(--padding-side) 0;
+    padding: calc(var(--padding-side) * 0.5) 0;
   }
   .card-article-large .description time {
     padding: 0;
