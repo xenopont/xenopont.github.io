@@ -35,7 +35,13 @@
 .card-article-large {
   display: block;
   padding: 0;
-  margin: 3rem 0;
+  margin: 3rem auto;
+}
+
+.car-article-large-wrapper {
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .card-article-large a {
@@ -55,20 +61,21 @@
   width: 100%;
 }
 
-.card-article-large header h1 {
+.card-article-large header .article-title a {
   display: block;
-  padding: 0 var(--padding-side);
-  margin: 0.75rem 0;
+  padding: var(--padding-side);
+}
+.card-article-large header .article-title h1 {
+  display: block;
+  margin: 0;
   font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-accent);
   text-align: left;
 }
 
-.card-article-large .description {
+.card-article-large .description a {
   display: block;
-  padding: 0;
-  margin: 0;
 }
 
 .card-article-large .description time {
@@ -78,18 +85,24 @@
 }
 .card-article-large .description .article-summary {
   display: block;
-  padding: 0 var(--padding-side);
   margin: 0;
+}
+.card-article-large .description .article-summary a {
+  display: block;
+  padding: 0 var(--padding-side);
 }
 
 /* ------------------------- Card Article Medium ---------------------------- */
 .card-article-medium {
+  margin: 0.1rem auto;
+}
+.card-article-medium-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 0.5rem;
-  padding: 0 var(--padding-side);
-  margin: 2rem 0;
+  padding: var(--padding-side);
+  background-color: #f0f0f0;
 }
 
 .card-article-medium a {
@@ -101,9 +114,7 @@
 
 .card-article-medium .illustration {
   display: block;
-  min-width: 50vw;
-  min-height: 17.14vw;
-  height: auto;
+  min-height: 3.75rem;
   flex: 1 1 0;
 }
 .card-article-medium .illustration img {
@@ -168,18 +179,36 @@
     box-shadow: 0 0.2rem 0.2rem 0 var(--color-light-shadow);
   }
 
+  /* --- Card Article Large --- */
   .card-article-large {
     max-width: var(--max-width);
-    min-height: calc(var(--max-width) * 0.4285);
-    margin: 1rem auto;
   }
-  .card-article-large header {
+  .card-article-large-wrapper {
     padding: 0 var(--padding-side);
   }
   .card-article-large .illustration {
-    min-height: calc(var(--max-width) * 0.4285);
+    min-height: calc(var(--max-width) / 21 * 9);
   }
-  .card-article-large header h1 {
+  .card-article-large header .article-title a {
+    padding: var(--padding-side) 0;
+  }
+  .card-article-large .description time {
     padding: 0;
+  }
+  .card-article-large .description .article-summary a {
+    padding: 0;
+  }
+
+  /* --- Card Article Medium --- */
+  .card-article-medium {
+    max-width: var(--max-width);
+  }
+  .card-article-medium-wrapper {
+    margin: 0 var(--padding-side);
+    border: 0.1rem solid var(--color-main-background);
+    box-shadow: 0 0 0.4rem 0 var(--color-light-shadow);
+  }
+  .card-article-medium .illustration {
+    /* */
   }
 }

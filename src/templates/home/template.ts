@@ -2,6 +2,7 @@ import "../../assets/fonts/permian-slab-serif.js";
 import "../../assets/fonts/linux-libertine/linux-libertine.js";
 import { globalCssUrl } from "../../assets/styles/global.css.js";
 import { homePageCssUrl } from "../../assets/styles/home-page.css.js";
+import { bottomLine } from "../../components/bottom-line.js";
 import { topBar } from "../../components/top-bar.js";
 import { domainDisplayName } from "../../config/constants.js";
 import {
@@ -24,6 +25,7 @@ class THomePageTemplate extends THtmlTemplate {
       topBar(true),
       pageHeader,
       main({}, page.content),
+      bottomLine([]),
       footer({}, [
         section({ id: "copyright" }, [
           unsafe("&copy;&nbsp;"),

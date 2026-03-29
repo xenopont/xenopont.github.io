@@ -102,7 +102,7 @@
 
 body {
   background-color: var(--color-main-background);
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--color-main-text);
   font-family: "Permian Slab Serif", "Georgia", serif;
   padding: 0;
@@ -110,6 +110,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+@media (min-width: 550px) {
+  body {
+    font-size: 1.25rem;
+  }
 }
 
 /* ------------------------- Top Bar Menu ----------------------------------- */
@@ -212,7 +218,14 @@ body {
     padding: var(--top-bar-gap);
   }
 }
-/* ------------------------- Footer ------------------------- */
+/* ------------------------------- Bottom Line -------------------------------*/
+#bottom-line {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* ---------------------------------- Footer -------------------------------- */
 footer {
   background-color: #222222;
   color: #bbbbbb;

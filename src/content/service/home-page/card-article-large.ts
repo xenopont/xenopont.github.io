@@ -23,32 +23,34 @@ export const cardArticleLarge = (
 
   return [
     article({ class: "card-article-large" }, [
-      header({}, [
-        section(
-          {
-            class: "illustration",
-            style: `background-color: ${accentColor(page.colors)};`,
-          },
-          [a({ href: page.uri }, [imgIfExists(page.socialCardImageUri)])],
-        ),
-        section({ class: "article-title" }, [
-          a({ href: page.uri }, [h1({}, [page.title])]),
-        ]),
-      ]),
-      section({ class: "description" }, [
-        a({ href: page.uri }, [
-          time(
+      div({ class: "card-article-large-wrapper" }, [
+        header({}, [
+          section(
             {
-              pubdate: "pubdate",
-              datetime: toIso8601(page.publishedAt),
-              title: toLongDate(page.publishedAt),
+              class: "illustration",
+              style: `background-color: ${accentColor(page.colors)};`,
             },
-            [safe(toIso8601(page.publishedAt))],
+            [a({ href: page.uri }, [imgIfExists(page.socialCardImageUri)])],
           ),
+          section({ class: "article-title" }, [
+            a({ href: page.uri }, [h1({}, [page.title])]),
+          ]),
         ]),
+        section({ class: "description" }, [
+          a({ href: page.uri }, [
+            time(
+              {
+                pubdate: "pubdate",
+                datetime: toIso8601(page.publishedAt),
+                title: toLongDate(page.publishedAt),
+              },
+              [safe(toIso8601(page.publishedAt))],
+            ),
+          ]),
 
-        div({ class: "article-summary" }, [
-          a({ href: page.uri }, [page.description]),
+          div({ class: "article-summary" }, [
+            a({ href: page.uri }, [page.description]),
+          ]),
         ]),
       ]),
     ]),

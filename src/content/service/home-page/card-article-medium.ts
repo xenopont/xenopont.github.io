@@ -17,24 +17,30 @@ import { imgIfExists } from "./img-if-exists.js";
 export const cardArticleMedium = (page: IPublishable): THtmlEntity[] => {
   return [
     article({ class: "card-article-medium" }, [
-      section(
-        {
-          class: "illustration",
-          style: `background-color: ${accentColor(page.colors)};`,
-        },
-        [imgIfExists(page.socialCardImageUri)],
-      ),
-      section({ class: "description" }, [
-        header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
-        time(
+      div({ class: "card-article-medium-wrapper" }, [
+        section(
           {
-            pubdate: "pubdate",
-            datetime: toIso8601(page.publishedAt),
-            title: toLongDate(page.publishedAt),
+            class: "illustration",
+            style: `background-color: ${accentColor(page.colors)};`,
           },
-          [safe(toIso8601(page.publishedAt))],
+          [a({ href: page.uri }, [imgIfExists(page.socialCardImageUri)])],
         ),
-        div({ class: "article-summary" }, [page.description]),
+        section({ class: "description" }, [
+          header({}, [a({ href: page.uri }, [h1({}, [page.title])])]),
+          a({ href: page.uri }, [
+            time(
+              {
+                pubdate: "pubdate",
+                datetime: toIso8601(page.publishedAt),
+                title: toLongDate(page.publishedAt),
+              },
+              [safe(toIso8601(page.publishedAt))],
+            ),
+          ]),
+          a({ href: page.uri }, [
+            div({ class: "article-summary" }, [page.description]),
+          ]),
+        ]),
       ]),
     ]),
   ];
