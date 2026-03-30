@@ -9,28 +9,27 @@ import {
   toPublicFileName,
   toWebUri,
 } from "../../../utils/paths.js";
-import { past } from "../../../utils/time.js";
-import { content } from "./content.js";
 
-const directory: TPublicDirectory = toPublicDirectory("");
+const publicDirectory: TPublicDirectory = toPublicDirectory("sergei-kovalenko");
 const publicFileName: TPublicFileName = toPublicFileName(
-  directory,
+  publicDirectory,
   "index.html",
 );
 
-export const homePage: IPublishable = {
+export const sergeiKovalenko: IPublishable = {
   author: authors.SERGEI_KOVALENKO,
   colors: null,
-  content,
-  description: safe("Home Page"),
+  content: [],
+  description: safe("Sergei Kovalenko"),
   language: "en",
-  publicDirectory: directory,
+  publicDirectory,
   publicFileName: toValidHtmlFileName(publicFileName),
-  publishedAt: past(),
+  publishedAt: new Date("2026-03-30"),
   scripts: [],
   socialCardImageUri: null,
   styles: [],
-  template: "home-page",
-  title: safe("Home Page"),
+  template: "article",
+  title: safe("Sergei Kovalenko"),
   uri: toWebUri(publicFileName),
+  //
 };

@@ -1,6 +1,6 @@
+import { authors } from "../../../config/authors.js";
 import { p, safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
-import { baseUrl } from "../../../utils/base-url.js";
 import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
@@ -19,10 +19,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const testArticle2: IPublishable = {
-  author: {
-    name: "Sergei Kovalenko",
-    url: `${baseUrl}/sergei-kovalenko/`,
-  },
+  author: authors.SERGEI_KOVALENKO,
   colors: { accent: "#c8824b", accentSecondary: "#4b82c8" },
   content: [
     p({}, [

@@ -1,6 +1,6 @@
+import { authors } from "../../../config/authors.js";
 import { em, h1, hr, safe } from "../../../html/elements.js";
 import type { IPublishable } from "../../../publishing/publishable.js";
-import { baseUrl } from "../../../utils/base-url.js";
 import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
   type TPublicDirectory,
@@ -18,10 +18,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const notFound: IPublishable = {
-  author: {
-    name: "Sergei Kovalenko",
-    url: `${baseUrl}/sergei-kovalenko/`,
-  },
+  author: authors.SERGEI_KOVALENKO,
   colors: null,
   content: [
     h1({}, [safe("404 Not Found")]),
