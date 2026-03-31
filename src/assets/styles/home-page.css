@@ -59,8 +59,6 @@
 .card-article-large .illustration a {
   display: block;
   overflow: hidden;
-  box-shadow: 0 0 0.4rem 0 var(--color-light-shadow);
-  border: 0.1rem solid var(--color-main-background);
 }
 .card-article-large .illustration img {
   display: block;
@@ -193,6 +191,10 @@
   }
   .card-article-large .illustration {
     min-height: calc(var(--max-width) / 21 * 9);
+  }
+  .card-article-large .illustration a {
+    box-shadow: 0 0 0.4rem 0 var(--color-light-shadow);
+    border: 0.1rem solid var(--color-main-background);
   }
   .card-article-large .illustration img:hover {
     transition: 7s ease-out;
