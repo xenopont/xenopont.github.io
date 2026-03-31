@@ -126,6 +126,7 @@ body {
   display: flex;
   background-color: var(--color-accent);
   list-style: none;
+  z-index: 1000;
 }
 #top-bar li {
   padding: var(--padding-side);

@@ -63,6 +63,7 @@
 .card-article-large .illustration img {
   display: block;
   width: 100%;
+  object-fit: cover;
   transition: 0.2s ease-in-out;
 }
 
@@ -93,7 +94,6 @@
   margin: 0;
 }
 .card-article-large .description .article-summary a {
-  display: block;
   padding: 0 var(--padding-side);
 }
 
@@ -111,10 +111,8 @@
 }
 
 .card-article-medium a {
-  text-decoration: none;
-}
-.card-article-medium a:visited {
   color: inherit;
+  text-decoration: none;
 }
 
 .card-article-medium .illustration {
