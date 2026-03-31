@@ -17,7 +17,9 @@ export const cardBlogPostMedium = (page: IPublishable): THtmlEntity[] => {
   return [
     article({ class: "card-blog-post-medium" }, [
       div({ class: "card-blog-post-medium-wrapper" }, [
-        section({ class: "blog-post-color" }, []),
+        section({ class: "blog-post-color" }, [
+          a({ href: page.uri }, [safe("")]),
+        ]),
         section({ class: "blog-post-title" }, [
           a({ href: page.uri }, [
             time(
@@ -29,11 +31,7 @@ export const cardBlogPostMedium = (page: IPublishable): THtmlEntity[] => {
               [safe(toIso8601(page.publishedAt))],
             ),
           ]),
-          header({}, [
-            a({ href: page.uri }, [
-              h1({}, [unsafe(`${toIso8601(page.publishedAt)}: ${page.title}`)]),
-            ]),
-          ]),
+          header({}, [a({ href: page.uri }, [h1({}, [unsafe(page.title)])])]),
         ]),
       ]),
     ]),

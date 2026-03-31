@@ -105,7 +105,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--padding-side);
   padding: var(--padding-side);
   background-color: #f0f0f0;
 }
@@ -131,7 +131,6 @@
   margin: 0;
   padding: 0;
   gap: 0;
-  font-size: 1rem;
   flex: 1 1 0;
 }
 
@@ -145,7 +144,7 @@
   margin: 0;
   font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
-  font-size: 1.25rem;
+  font-size: 125%;
   color: var(--color-accent);
   text-align: left;
 }
@@ -154,11 +153,62 @@
   display: block;
   padding: 0;
   color: var(--color-accent-secondary);
+  font-size: 1rem;
 }
 .card-article-medium .description .article-summary {
   display: block;
   padding: 0;
   margin: 0;
+  font-size: 1rem;
+}
+
+/* ------------------------- Card Blog Post Medium -------------------------- */
+.card-blog-post-medium {
+  display: block;
+  margin: 0.1rem auto;
+}
+
+.card-blog-post-medium a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-blog-post-medium-wrapper {
+  display: flex;
+  gap: var(--padding-side);
+  align-items: center;
+  margin: 0;
+  padding: var(--padding-side);
+}
+
+.card-blog-post-medium .blog-post-color a {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+}
+
+.card-blog-post-medium .blog-post-title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.card-blog-post-medium .blog-post-title time {
+  color: var(--color-accent-secondary);
+}
+.card-blog-post-medium .blog-post-title h1 {
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
+  font-weight: lighter;
+  font-size: 125%;
+  color: var(--color-accent);
+  text-align: left;
 }
 
 /* ---------------------- Desktop View -------------------------------------- */
@@ -219,7 +269,9 @@
     border: 0.1rem solid var(--color-main-background);
     box-shadow: 0 0 0.4rem 0 var(--color-light-shadow);
   }
-  .card-article-medium .illustration {
-    /* */
+
+  /* --- Card Blog Post Medium --- */
+  .card-blog-post-medium {
+    max-width: var(--max-width);
   }
 }
