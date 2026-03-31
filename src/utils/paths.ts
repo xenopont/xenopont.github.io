@@ -190,6 +190,9 @@ export function toWebUri(filename: TPublicFileName): TWebUri {
   return `${baseUrl}/${uri}` as TWebUri;
 }
 
-export const pathToWebUri = (path: string): TWebUri => {
-  return toWebUri(toPublicFileName(toPublicDirectory(path), "index.html"));
+export const pathToWebUri = (
+  path: string,
+  filename: string = "index.html",
+): TWebUri => {
+  return toWebUri(toPublicFileName(toPublicDirectory(path), filename));
 };
