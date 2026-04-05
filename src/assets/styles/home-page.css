@@ -4,29 +4,31 @@
   padding: 0;
   margin: 0;
 }
+
 #home-page-header #title-section {
   margin: 0;
   padding: 0;
 }
+
 #title-wrapper {
   display: block;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--title-padding-top) var(--padding-side)
-    var(--title-padding-bottom) var(--padding-side);
+  padding: var(--title-padding-top) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
   background-color: var(--color-accent);
 }
+
 #home-page-header h1 {
   display: block;
   text-align: center;
-  padding: var(--title-padding-top) var(--padding-side)
-    var(--title-padding-bottom) var(--padding-side);
+  padding: var(--title-padding-top) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
   margin: 0 auto;
   font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
   color: var(--color-light-text);
   font-size: 2.5rem;
 }
+
 #home-page-header #header-space {
   min-height: 0.8rem;
 }
@@ -47,6 +49,7 @@
 .card-article-large a {
   text-decoration: none;
 }
+
 .card-article-large a:visited {
   color: inherit;
 }
@@ -56,10 +59,12 @@
   min-height: 42.85vw;
   height: auto;
 }
+
 .card-article-large .illustration a {
   display: block;
   overflow: hidden;
 }
+
 .card-article-large .illustration img {
   display: block;
   width: 100%;
@@ -71,6 +76,7 @@
   display: block;
   padding: var(--padding-side);
 }
+
 .card-article-large header .article-title h1 {
   display: block;
   margin: 0;
@@ -89,10 +95,12 @@
   padding: 0 var(--padding-side);
   color: var(--color-accent-secondary);
 }
+
 .card-article-large .description .article-summary {
   display: block;
   margin: 0;
 }
+
 .card-article-large .description .article-summary a {
   padding: 0 var(--padding-side);
 }
@@ -101,6 +109,7 @@
 .card-article-medium {
   margin: 0.1rem auto;
 }
+
 .card-article-medium-wrapper {
   display: flex;
   flex-direction: row;
@@ -120,6 +129,7 @@
   min-height: 3.75rem;
   flex: 1 1 0;
 }
+
 .card-article-medium .illustration img {
   display: block;
   width: 100%;
@@ -155,6 +165,7 @@
   color: var(--color-accent-secondary);
   font-size: 1rem;
 }
+
 .card-article-medium .description .article-summary {
   display: block;
   padding: 0;
@@ -184,8 +195,8 @@
 
 .card-blog-post-medium .blog-post-color a {
   display: block;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   background-color: var(--color-accent);
   border-radius: 50%;
 }
@@ -200,6 +211,7 @@
 .card-blog-post-medium .blog-post-title time {
   color: var(--color-accent-secondary);
 }
+
 .card-blog-post-medium .blog-post-title h1 {
   display: block;
   padding: 0;
@@ -216,18 +228,19 @@
   :root {
     --padding-side: 2rem;
   }
+
   #home-page-header #title-section {
     padding: 0 var(--padding-side);
   }
+
   #title-wrapper {
     align-content: end;
     padding: calc(
-        var(--top-bar-gap) *
-        2 +
-        var(--home-link-size) +
-        var(--title-padding-bottom)
-      )
-      var(--padding-side) var(--title-padding-bottom) var(--padding-side);
+      var(--top-bar-gap) *
+      2 +
+      var(--home-link-size) +
+      var(--title-padding-bottom)
+    ) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
     border: 0.1rem solid var(--color-main-background);
     box-shadow: 0 0.2rem 0.2rem 0 var(--color-light-shadow);
   }
@@ -236,26 +249,33 @@
   .card-article-large {
     max-width: var(--max-width);
   }
+
   .card-article-large-wrapper {
     padding: 0 var(--padding-side);
   }
+
   .card-article-large .illustration {
     min-height: calc(var(--max-width) / 21 * 9);
   }
+
   .card-article-large .illustration a {
     box-shadow: 0 0 0.4rem 0 var(--color-light-shadow);
     border: 0.1rem solid var(--color-main-background);
   }
+
   .card-article-large .illustration img:hover {
-    transition: 7s ease-out;
+    transition: 7s ease-out 0.4s;
     transform: scale(1.25);
   }
+
   .card-article-large header .article-title a {
     padding: calc(var(--padding-side) * 0.5) 0;
   }
+
   .card-article-large .description time {
     padding: 0;
   }
+
   .card-article-large .description .article-summary a {
     padding: 0;
   }
@@ -264,6 +284,7 @@
   .card-article-medium {
     max-width: var(--max-width);
   }
+
   .card-article-medium-wrapper {
     margin: 0 var(--padding-side);
     border: 0.1rem solid var(--color-main-background);
