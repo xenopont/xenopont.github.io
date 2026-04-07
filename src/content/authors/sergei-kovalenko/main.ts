@@ -17,7 +17,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const sergeiKovalenko: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+  author: authors.SergeiKovalenko,
   colors: null,
   content: [],
   description: safe("Sergei Kovalenko"),

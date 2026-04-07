@@ -19,7 +19,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const homePage: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+  author: authors.SergeiKovalenko,
   colors: null,
   content,
   description: safe("Home Page"),

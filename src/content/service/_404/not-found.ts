@@ -18,7 +18,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const notFound: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+  author: authors.SergeiKovalenko,
   colors: null,
   content: [
     h1({}, [safe("404 Not Found")]),

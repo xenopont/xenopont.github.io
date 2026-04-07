@@ -19,7 +19,7 @@ const publicFileName: TPublicFileName = toPublicFileName(
 );
 
 export const testArticle2: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+  author: authors.SergeiKovalenko,
   colors: { accent: "#c8824b", accentSecondary: "#4b82c8" },
   content: [
     p({}, [

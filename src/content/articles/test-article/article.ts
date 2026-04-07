@@ -1,26 +1,18 @@
 import { authors } from "../../../config/authors.js";
 import { p, safe } from "../../../html/elements.js";
-import type { IPublishable } from "../../../publishing/publishable.js";
-import { toValidHtmlFileName } from "../../../utils/filenames.js";
 import {
-  type TPublicDirectory,
-  type TPublicFileName,
-  toPublicDirectory,
-  toPublicFileName,
-  toWebUri,
-} from "../../../utils/paths.js";
+  articleToIPublishable,
+  type TArticle,
+} from "../../../publishing/article.js";
+import type { IPublishable } from "../../../publishing/publishable.js";
 import { future } from "../../../utils/time.js";
 import { coverImageUrl } from "./cover-image.webp.js";
 
-const publicDirectory: TPublicDirectory = toPublicDirectory("test-article");
-const publicFileName: TPublicFileName = toPublicFileName(
-  publicDirectory,
-  "index.html",
-);
-
-export const testArticle: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+const article: TArticle = {
+  author: authors.SergeiKovalenko,
   colors: { accent: "#c8824b", accentSecondary: "#4b82c8" },
+
+  title: safe("The Article"),
   content: [
     p({}, [
       safe(
@@ -122,14 +114,10 @@ export const testArticle: IPublishable = {
     ]),
   ],
   description: safe("This article is created for testing purposes only."),
-  language: "en",
-  publicDirectory,
-  publicFileName: toValidHtmlFileName(publicFileName),
+
+  path: "test-article",
   publishedAt: future(),
-  scripts: [],
   socialCardImageUri: coverImageUrl,
-  styles: [],
-  template: "article",
-  title: safe("The Article"),
-  uri: toWebUri(publicFileName),
 };
+
+export const testArticle: IPublishable = articleToIPublishable(article);

@@ -13,7 +13,7 @@ import {
 const publicDirectory: TPublicDirectory = toPublicDirectory("blog/test-post");
 
 export const testBlogPost: IPublishable = {
-  author: authors.SERGEI_KOVALENKO,
+  author: authors.SergeiKovalenko,
   colors: null,
   content: [],
   description: safe(""),
