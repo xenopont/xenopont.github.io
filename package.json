@@ -24,15 +24,15 @@
   },
   "homepage": "https://github.com/xenopont/xenopont.github.io#readme",
   "devDependencies": {
-    "@biomejs/biome": "2.4.4",
+    "@biomejs/biome": "2.4.10",
     "@tsconfig/node24": "24.0.4",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "25.3.2",
-    "esbuild": "0.27.3",
+    "@types/node": "25.5.2",
+    "esbuild": "0.28.0",
     "highlight.js": "11.11.1",
-    "htmlfy": "^1.0.1",
+    "htmlfy": "1.0.1",
     "http-server": "14.1.1",
     "tsx": "4.21.0",
-    "typescript": "5.9.3"
+    "typescript": "6.0.2"
   }
 }

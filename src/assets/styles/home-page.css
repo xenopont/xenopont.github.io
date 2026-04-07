@@ -14,14 +14,16 @@
   display: block;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--title-padding-top) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
+  padding: var(--title-padding-top) var(--padding-side)
+    var(--title-padding-bottom) var(--padding-side);
   background-color: var(--color-accent);
 }
 
 #home-page-header h1 {
   display: block;
   text-align: center;
-  padding: var(--title-padding-top) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
+  padding: var(--title-padding-top) var(--padding-side)
+    var(--title-padding-bottom) var(--padding-side);
   margin: 0 auto;
   font-family: "Linux Libertine", "Open Sans", "Segoe UI Light", sans-serif;
   font-weight: lighter;
@@ -236,11 +238,12 @@
   #title-wrapper {
     align-content: end;
     padding: calc(
-      var(--top-bar-gap) *
-      2 +
-      var(--home-link-size) +
-      var(--title-padding-bottom)
-    ) var(--padding-side) var(--title-padding-bottom) var(--padding-side);
+        var(--top-bar-gap) *
+        2 +
+        var(--home-link-size) +
+        var(--title-padding-bottom)
+      )
+      var(--padding-side) var(--title-padding-bottom) var(--padding-side);
     border: 0.1rem solid var(--color-main-background);
     box-shadow: 0 0.2rem 0.2rem 0 var(--color-light-shadow);
   }
