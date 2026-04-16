@@ -20,6 +20,7 @@ import type { THtmlEntity } from "../../html/entities.js";
 import type { IPublishable } from "../../publishing/publishable.js";
 import { toYear } from "../../utils/time.js";
 import { THtmlTemplate } from "../html-template.js";
+import "../../assets/images/top-bar-texture/texture.webp.js";
 
 class TArticleTemplate extends THtmlTemplate {
   protected override buildBody(page: IPublishable): THtmlEntity {
