@@ -50,9 +50,6 @@
 
 .card-article-large a {
   text-decoration: none;
-}
-
-.card-article-large a:visited {
   color: inherit;
 }
 

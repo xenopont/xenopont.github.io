@@ -47,9 +47,8 @@ export const cardArticleLarge = (
               [safe(toIso8601(page.publishedAt))],
             ),
           ]),
-
-          div({ class: "article-summary" }, [
-            a({ href: page.uri }, [page.description]),
+          a({ href: page.uri }, [
+            div({ class: "article-summary" }, [page.description]),
           ]),
         ]),
       ]),
